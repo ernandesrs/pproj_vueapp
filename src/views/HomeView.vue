@@ -1,9 +1,15 @@
 <script setup>
-import TheWelcome from "../components/TheWelcome.vue";
+
+import DefaultLayout from "../layouts/DefaultLayout.vue";
+
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <default-layout>
+    <template v-slot:content>
+      <main>
+        <h1>This is a home page</h1>
+      </main>
+    </template>
+  </default-layout>
 </template>
