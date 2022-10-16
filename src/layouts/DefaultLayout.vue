@@ -107,7 +107,15 @@ export default {
             </div>
 
             <div class="content">
-                <slot name="content" />
+                <div class="content-inner">
+                    <slot name="content" />
+                </div>
+            </div>
+
+            <div class="footer text-center py-2 text-gray-600 dark:text-gray-300">
+                <small>
+                    2022 &copy; <a href="https://github.com/ernandesrs/pproj_vueapp" title="Perfil no Github" target="_blank">Ernandes</a>
+                </small>
             </div>
         </div>
     </div>
@@ -138,6 +146,14 @@ export default {
 }
 
 .main {
-    @apply w-full bg-gray-300 dark:bg-gray-600 col-span-12 md:col-span-9 xl:col-span-10;
+    @apply w-full bg-gray-300 dark:bg-gray-600 flex flex-col col-span-12 md:col-span-9 xl:col-span-10;
+}
+
+.main>.content>.content-inner{
+    @apply bg-gray-200 dark:bg-gray-500 border border-gray-400 dark:border-gray-600 px-3 py-3;
+}
+
+.main>.footer{
+    @apply mt-auto;
 }
 </style>
