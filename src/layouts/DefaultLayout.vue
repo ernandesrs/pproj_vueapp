@@ -6,6 +6,7 @@ const MOBILE_WIDTH = 768;
 
 export default {
     name: "DefaultLayout",
+    components: { },
 
     setup() {
         let darkMode = ref(false);
@@ -85,6 +86,7 @@ export default {
 
             <div class="py-3 text-center">
                 <RouterLink :to="{name: 'home'}">
+                    <span :class="['text-4xl text-gray-300', $helpers.icon.get('pieChartFill')]"></span>
                     <h1 class="text-xl">
                         <span class="font-bold text-gray-300">NAME</span>
                         <span class="font-semibold text-gray-500">PANEL</span>
@@ -97,13 +99,11 @@ export default {
         <div class="main">
             <div class="topbar">
                 <button v-show="inMobile" @click="sidebarToggler" class="btn-sidebar-toggler">
-                    MENU
+                    <span :class="$helpers.icon.get('menu')"></span>
                 </button>
 
-                <div class="ml-auto">
-                    <button @click="darkToggler" v-text=" darkMode ? 'Claro'  :'Escuro'"
-                        class="btn-sidebar-toggler"></button>
-                </div>
+                <button @click="darkToggler" class="ml-auto btn-theme-toggler" :class="$helpers.icon.get(darkMode ? 'togglerRightFill' : 'togglerLeft')">
+                </button>
             </div>
 
             <div class="content">
@@ -123,6 +123,11 @@ export default {
 </template>
 
 <style scoped>
+button>span,
+a>span{
+    pointer-events: none;
+}
+
 .wrapper {
     @apply w-screen h-screen bg-gray-300 dark:bg-gray-600 dark:text-gray-300 grid grid-cols-12;
 }
@@ -141,8 +146,16 @@ export default {
     @apply w-full flex items-center;
 }
 
+.topbar>button{
+    @apply text-slate-700 dark:text-slate-300 rounded-md;
+}
+
 .topbar>.btn-sidebar-toggler {
-    @apply text-slate-700 dark:text-slate-300 border border-slate-500 px-2 py-1 rounded-md;
+    @apply text-2xl;
+}
+
+.topbar>.btn-theme-toggler {
+    @apply !text-3xl;
 }
 
 .main {
