@@ -8,16 +8,18 @@ export default {
     name: "DefaultLayout",
 
     setup() {
+        let darkMode = ref(false);
         let inMobile = ref(false);
         let sidebar = ref({
             visible: false
         });
 
-        return { inMobile, sidebar };
+        return { darkMode, inMobile, sidebar };
     },
 
     created() {
-        if (this.isMobileWindowSize())
+        this.inMobile = this.isMobileWindowSize();
+        if (this.inMobile)
             this.sidebar.visible = false;
         else this.sidebar.visible = true;
     },
@@ -36,6 +38,13 @@ export default {
         sidebarToggler() {
             this.inMobile = this.isMobileWindowSize();
             this.sidebar.visible = !this.sidebar.visible;
+        },
+
+        darkToggler() {
+            this.darkMode = !this.darkMode;
+
+            if (this.darkMode) document.documentElement.classList.add('dark');
+            else document.documentElement.classList.remove('dark')
         },
 
         getCurrentWindowWidth() {
@@ -77,8 +86,8 @@ export default {
             <div class="py-3 text-center">
                 <RouterLink :to="{name: 'home'}">
                     <h1 class="text-xl">
-                        <span class="font-bold text-gray-200">NAME</span>
-                        <span class="font-semibold text-gray-400">PANEL</span>
+                        <span class="font-bold text-gray-300">NAME</span>
+                        <span class="font-semibold text-gray-500">PANEL</span>
                     </h1>
                 </RouterLink>
             </div>
@@ -87,9 +96,14 @@ export default {
 
         <div class="main">
             <div class="topbar">
-                <button @click="sidebarToggler" class="btn-sidebar-toggler">
+                <button v-show="inMobile" @click="sidebarToggler" class="btn-sidebar-toggler">
                     MENU
                 </button>
+
+                <div class="ml-auto">
+                    <button @click="darkToggler" v-text=" darkMode ? 'Claro'  :'Escuro'"
+                        class="btn-sidebar-toggler"></button>
+                </div>
             </div>
 
             <div class="content">
@@ -102,7 +116,7 @@ export default {
 
 <style scoped>
 .wrapper {
-    @apply w-screen h-screen bg-gray-200 bg-gradient-to-b from-gray-200 to-slate-200 grid grid-cols-12;
+    @apply w-screen h-screen bg-gray-300 dark:bg-gray-600 dark:text-gray-300 grid grid-cols-12;
 }
 
 .sidebar,
@@ -112,18 +126,18 @@ export default {
 }
 
 .sidebar {
-    @apply w-full max-w-xs h-full bg-slate-800 col-span-3 xl:col-span-2 hidden md:block;
+    @apply w-full max-w-xs h-full bg-slate-700 dark:bg-slate-700 col-span-3 xl:col-span-2 hidden md:block;
 }
 
 .topbar {
-    @apply w-full;
+    @apply w-full flex items-center;
 }
 
 .topbar>.btn-sidebar-toggler {
-    @apply text-slate-700 border border-slate-500 px-2 py-1 rounded-md;
+    @apply text-slate-700 dark:text-slate-300 border border-slate-500 px-2 py-1 rounded-md;
 }
 
 .main {
-    @apply w-full bg-gray-200 bg-gradient-to-b from-gray-200 to-slate-200 col-span-12 md:col-span-9 xl:col-span-10;
+    @apply w-full bg-gray-300 dark:bg-gray-600 col-span-12 md:col-span-9 xl:col-span-10;
 }
 </style>
