@@ -11,6 +11,7 @@ export default {
 
     props: {
         icon: { type: String, default: null },
+        hideArrow: { type: Boolean, default: false },
         text: { type: String, default: "Toggler texto" },
         collapsed: { type: Boolean, default: false },
         dark: { type: Boolean, default: false },

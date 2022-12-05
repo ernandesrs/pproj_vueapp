@@ -2,6 +2,10 @@ import './../../node_modules/boxicons/css/boxicons.min.css';
 
 const icons = {
     app: 'bx bxs-square-rounded',
+    arrowRight: 'bx bx-chevron-right',
+    arrowLeft: 'bx bx-chevron-left',
+    arrowTop: 'bx bx-chevron-top',
+    arrowDown: 'bx bx-chevron-down',
 
     menu: 'bx bx-menu',
 

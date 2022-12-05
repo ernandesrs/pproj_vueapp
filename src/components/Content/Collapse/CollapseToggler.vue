@@ -10,6 +10,7 @@ export default {
     props: {
         text: { type: String, default: "Toggler text" },
         icon: { type: String, default: null },
+        hideArrow: { type: Boolean, default: false },
         dark: { type: Boolean, default: false },
         light: { type: Boolean, default: false },
         primaryColorClass: { type: String, default: "slate-600" },
@@ -40,15 +41,18 @@ export default {
         'collapse-toggler',
         customColor
     ]">
-        <span v-if="icon" class="align-middle" :class="[
+        <span v-if="icon" :class="[
             $helpers.icon.get(icon)
-        ]"></span> <span class="align-middle">{{ text }}</span>
+        ]"></span>
+        <span class="ml-2">{{ text }}</span>
+        <span v-if="!hideArrow" class="ml-auto text-xl"
+            :class="$helpers.icon.get(contentShowed ? 'arrowDown' : 'arrowRight')"></span>
     </a>
 </template>
 
 <style scoped>
 .collapse-toggler {
-    @apply block z-50 px-3 py-2 rounded cursor-pointer duration-200 font-medium hover:duration-200 hover:opacity-90;
+    @apply flex items-center z-50 px-3 py-2 rounded cursor-pointer duration-200 font-medium hover:duration-200 hover:opacity-90;
 
     /* lg */
     @apply lg:px-4;

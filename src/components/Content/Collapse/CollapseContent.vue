@@ -42,7 +42,7 @@ export default {
 
 .drop-enter-from,
 .drop-leave-to {
-    @apply -translate-y-full opacity-0;
+    @apply -translate-y-5 opacity-0;
 }
 
 .drop-leave-from,
