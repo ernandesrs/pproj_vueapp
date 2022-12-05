@@ -6,7 +6,6 @@ const MOBILE_WIDTH = 1024;
 
 export default {
     name: "DefaultLayout",
-    components: {},
 
     setup() {
         let darkMode = ref(false);
@@ -75,7 +74,7 @@ export default {
                 if (this.isMobileWindowSize() && !this.inMobile) {
                     this.inMobile = true;
                     this.sidebar.visible = false;
-                } else if(!this.isMobileWindowSize() && this.inMobile){
+                } else if (!this.isMobileWindowSize() && this.inMobile) {
                     this.inMobile = true;
                     this.sidebar.visible = true;
                 }
@@ -111,6 +110,10 @@ export default {
                             <span class="font-semibold text-gray-500">PANEL</span>
                         </h1>
                     </RouterLink>
+                </div>
+
+                <div class="py-3">
+
                 </div>
 
             </div>
@@ -170,9 +173,6 @@ a>span {
 
     /* lg */
     @apply lg:max-w-full lg:relative lg:col-span-3 lg:translate-x-0 lg:block;
-
-    /* xl */
-    @apply xl:col-span-2
 }
 
 .topbar {
@@ -196,9 +196,6 @@ a>span {
 
     /* lg */
     @apply lg:col-span-9;
-
-    /* xl */
-    @apply xl:col-span-10
 }
 
 .main>.content>.content-inner {
