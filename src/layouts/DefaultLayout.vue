@@ -6,7 +6,7 @@ const MOBILE_WIDTH = 768;
 
 export default {
     name: "DefaultLayout",
-    components: { },
+    components: {},
 
     setup() {
         let darkMode = ref(false);
@@ -81,28 +81,33 @@ export default {
 <template>
 
     <div class="wrapper">
-        <div v-show="sidebar.visible" ref="refSidebar" class="sidebar"
-            :class="computedStyle">
+        <Transition enter-from-class="-translate-x-full" enter-active-class="duration-500 ease-in-out" enter-to-class="translate-x-0" leave-from-class="translate-x-0" leave-active-class="duration-300 ease-out" leave-to-class="-translate-x-full">
+            <div v-show="sidebar.visible" ref="refSidebar" class="sidebar"
+                :class="computedStyle">
 
-            <div class="py-3 text-center">
-                <RouterLink :to="{name: 'home'}">
-                    <span :class="['text-4xl text-gray-300', $helpers.icon.get('pieChartFill')]"></span>
-                    <h1 class="text-xl">
-                        <span class="font-bold text-gray-300">NAME</span>
-                        <span class="font-semibold text-gray-500">PANEL</span>
-                    </h1>
-                </RouterLink>
+                <div class="py-3 text-center">
+                    <RouterLink :to="{ name: 'home' }">
+                        <span
+                            :class="['text-4xl text-gray-300', $helpers.icon.get('pieChartFill')]"></span>
+                        <h1 class="text-xl">
+                            <span class="font-bold text-gray-300">NAME</span>
+                            <span class="font-semibold text-gray-500">PANEL</span>
+                        </h1>
+                    </RouterLink>
+                </div>
+
             </div>
-
-        </div>
+        </Transition>
 
         <div class="main">
             <div class="topbar">
-                <button v-show="inMobile" @click="sidebarToggler" class="btn-sidebar-toggler">
+                <button v-show="inMobile" @click="sidebarToggler"
+                    class="btn-sidebar-toggler">
                     <span :class="$helpers.icon.get('menu')"></span>
                 </button>
 
-                <button @click="darkToggler" class="ml-auto btn-theme-toggler" :class="$helpers.icon.get(darkMode ? 'togglerRightFill' : 'togglerLeft')">
+                <button @click="darkToggler" class="ml-auto btn-theme-toggler"
+                    :class="$helpers.icon.get(darkMode ? 'togglerRightFill' : 'togglerLeft')">
                 </button>
             </div>
 
@@ -114,7 +119,8 @@ export default {
 
             <div class="footer text-center py-2 text-gray-600 dark:text-gray-300">
                 <small>
-                    2022 &copy; <a href="https://github.com/ernandesrs/pproj_vueapp" title="Perfil no Github" target="_blank">Ernandes</a>
+                    2022 &copy; <a href="https://github.com/ernandesrs/pproj_vueapp"
+                        title="Perfil no Github" target="_blank">Ernandes</a>
                 </small>
             </div>
         </div>
@@ -123,6 +129,7 @@ export default {
 </template>
 
 <style scoped>
+
 button>span,
 a>span{
     pointer-events: none;
@@ -139,7 +146,7 @@ a>span{
 }
 
 .sidebar {
-    @apply w-full max-w-xs h-full bg-slate-700 dark:bg-slate-700 col-span-3 xl:col-span-2 hidden md:block;
+    @apply w-full max-w-[80vw] sm:max-w-[275px] h-full bg-slate-700 dark:bg-slate-700 fixed top-0 left-0;
 }
 
 .topbar {
@@ -159,7 +166,7 @@ a>span{
 }
 
 .main {
-    @apply w-full bg-gray-300 dark:bg-gray-600 flex flex-col col-span-12 md:col-span-9 xl:col-span-10;
+    @apply w-full bg-gray-300 dark:bg-gray-600 flex flex-col col-span-12;
 }
 
 .main>.content>.content-inner{
