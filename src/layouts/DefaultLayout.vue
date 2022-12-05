@@ -2,7 +2,7 @@
 
 import { ref } from 'vue';
 
-const MOBILE_WIDTH = 768;
+const MOBILE_WIDTH = 1024;
 
 export default {
     name: "DefaultLayout",
@@ -20,9 +20,11 @@ export default {
 
     created() {
         this.inMobile = this.isMobileWindowSize();
-        if (this.inMobile)
-            this.sidebar.visible = false;
+
+        if (this.inMobile) this.sidebar.visible = false;
         else this.sidebar.visible = true;
+
+        this.setWindowResizeMonitor();
     },
 
     watch: {
@@ -67,11 +69,23 @@ export default {
                 }
             });
         },
+
+        setWindowResizeMonitor() {
+            window.addEventListener("resize", () => {
+                if (this.isMobileWindowSize() && !this.inMobile) {
+                    this.inMobile = true;
+                    this.sidebar.visible = false;
+                } else if(!this.isMobileWindowSize() && this.inMobile){
+                    this.inMobile = true;
+                    this.sidebar.visible = true;
+                }
+            });
+        }
     },
 
     computed: {
         computedStyle() {
-            return this.sidebar.visible ? (this.inMobile ? "!block fixed z-index-50" : "") : null;
+            return this.sidebar.visible ? (this.inMobile ? "!block" : "") : null;
         }
     }
 };
@@ -81,7 +95,10 @@ export default {
 <template>
 
     <div class="wrapper">
-        <Transition enter-from-class="-translate-x-full" enter-active-class="duration-500 ease-in-out" enter-to-class="translate-x-0" leave-from-class="translate-x-0" leave-active-class="duration-300 ease-out" leave-to-class="-translate-x-full">
+        <Transition enter-from-class="-translate-x-full"
+            enter-active-class="duration-500 ease-in-out" enter-to-class="translate-x-0"
+            leave-from-class="translate-x-0" leave-active-class="duration-300 ease-out"
+            leave-to-class="-translate-x-full">
             <div v-show="sidebar.visible" ref="refSidebar" class="sidebar"
                 :class="computedStyle">
 
@@ -129,9 +146,8 @@ export default {
 </template>
 
 <style scoped>
-
 button>span,
-a>span{
+a>span {
     pointer-events: none;
 }
 
@@ -146,14 +162,24 @@ a>span{
 }
 
 .sidebar {
-    @apply w-full max-w-[80vw] sm:max-w-[275px] h-full bg-slate-700 dark:bg-slate-700 fixed top-0 left-0;
+    /* base */
+    @apply w-full max-w-[80vw] h-full bg-slate-700 dark:bg-slate-700 fixed top-0 left-0 z-50;
+
+    /* sm */
+    @apply sm:max-w-[275px];
+
+    /* lg */
+    @apply lg:max-w-full lg:relative lg:col-span-3 lg:translate-x-0 lg:block;
+
+    /* xl */
+    @apply xl:col-span-2
 }
 
 .topbar {
     @apply w-full flex items-center;
 }
 
-.topbar>button{
+.topbar>button {
     @apply text-slate-700 dark:text-slate-300 rounded-md;
 }
 
@@ -167,13 +193,19 @@ a>span{
 
 .main {
     @apply w-full bg-gray-300 dark:bg-gray-600 flex flex-col col-span-12;
+
+    /* lg */
+    @apply lg:col-span-9;
+
+    /* xl */
+    @apply xl:col-span-10
 }
 
-.main>.content>.content-inner{
+.main>.content>.content-inner {
     @apply bg-gray-200 dark:bg-gray-500 border border-gray-400 dark:border-gray-600 px-3 py-3;
 }
 
-.main>.footer{
+.main>.footer {
     @apply mt-auto;
 }
 </style>
