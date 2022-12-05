@@ -39,7 +39,7 @@ export default {
 
     <div class="collapse">
         <CollapseToggler @hasClicked="toggler" :icon="icon" :text="text" :dark="dark"
-            :light="light" />
+            :light="light" :hide-arrow="hideArrow" />
 
         <CollapseContent :show="show">
             <slot />

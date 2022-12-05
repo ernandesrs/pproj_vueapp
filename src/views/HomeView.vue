@@ -23,7 +23,7 @@ export default {
 					</div>
 
 					<div class="col-span-12 md:col-span-6">
-						<Collapse icon="pieChartFill" light text="Collapse light">
+						<Collapse text="Collapse light" icon="pieChartFill" light>
 							<h1>Lorem ipsum dolor sit</h1>
 							<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.
 								Sunt
@@ -36,7 +36,7 @@ export default {
 					</div>
 
 					<div class="col-span-12 md:col-span-6">
-						<Collapse icon="pieChartFill" dark text="Collapse dark">
+						<Collapse text="Collapse dark" dark hide-arrow>
 							<h1>Lorem ipsum dolor sit2</h1>
 							<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.
 								Sunt
