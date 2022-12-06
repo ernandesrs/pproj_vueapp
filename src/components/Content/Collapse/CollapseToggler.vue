@@ -1,12 +1,12 @@
 <script>
+import Icon from '../../Ui/Icon.vue';
+
 
 export default {
     name: "CollapseToggler",
-
     emits: {
         "hasClicked": null
     },
-
     props: {
         text: { type: String, default: "Toggler text" },
         icon: { type: String, default: null },
@@ -16,22 +16,20 @@ export default {
         primaryColorClass: { type: String, default: "slate-600" },
         secondaryColorClass: { type: String, default: "slate-300" },
     },
-
     methods: {
         hasClicked(event) {
             this.$emit("hasClicked", event);
         }
     },
-
     computed: {
         contentShowed() {
             return this.$parent.show;
         },
-
         customColor() {
-            return this.dark ? 'collapse-toggler-dark' : (this.light ? 'collapse-toggler-light' : 'collapse-toggler-light');
+            return this.dark ? "collapse-toggler-dark" : (this.light ? "collapse-toggler-light" : "collapse-toggler-light");
         }
-    }
+    },
+    components: { Icon }
 };
 
 </script>
@@ -41,12 +39,9 @@ export default {
         'collapse-toggler',
         customColor
     ]">
-        <span v-if="icon" :class="[
-            $helpers.icon.get(icon)
-        ]"></span>
+        <Icon v-if="icon" :icon="icon" />
         <span class="ml-2">{{ text }}</span>
-        <span v-if="!hideArrow" class="ml-auto text-xl"
-            :class="$helpers.icon.get(contentShowed ? 'arrowDown' : 'arrowRight')"></span>
+        <Icon v-if="!hideArrow" :icon="contentShowed ? 'arrowDown' : 'arrowRight'" class="ml-auto text-xl" />
     </a>
 </template>
 

@@ -1,11 +1,14 @@
 <script>
 
 import { ref } from 'vue';
+import Icon from '../components/Ui/Icon.vue';
 
 const MOBILE_WIDTH = 1024;
 
 export default {
     name: "DefaultLayout",
+    
+    components: { Icon },
 
     setup() {
         let darkMode = ref(false);
@@ -13,75 +16,69 @@ export default {
         let sidebar = ref({
             visible: false
         });
-
         return { darkMode, inMobile, sidebar };
     },
-
     created() {
         this.inMobile = this.isMobileWindowSize();
-
-        if (this.inMobile) this.sidebar.visible = false;
-        else this.sidebar.visible = true;
-
+        if (this.inMobile)
+            this.sidebar.visible = false;
+        else
+            this.sidebar.visible = true;
         this.setWindowResizeMonitor();
     },
-
     watch: {
         sidebar: {
             handler(nv) {
-                if (!nv.visible) return;
-                else this.monitorClickOut();
+                if (!nv.visible)
+                    return;
+                else
+                    this.monitorClickOut();
             },
             deep: true,
         }
     },
-
     methods: {
         sidebarToggler() {
             this.inMobile = this.isMobileWindowSize();
             this.sidebar.visible = !this.sidebar.visible;
         },
-
         darkToggler() {
             this.darkMode = !this.darkMode;
-
-            if (this.darkMode) document.documentElement.classList.add('dark');
-            else document.documentElement.classList.remove('dark')
+            if (this.darkMode)
+                document.documentElement.classList.add("dark");
+            else
+                document.documentElement.classList.remove("dark");
         },
-
         getCurrentWindowWidth() {
             return window.innerWidth;
         },
-
         isMobileWindowSize() {
             return this.getCurrentWindowWidth() <= MOBILE_WIDTH ? true : false;
         },
-
         monitorClickOut() {
-            if (!this.inMobile) return;
-
+            if (!this.inMobile)
+                return;
             document.addEventListener("click", event => {
-                if (event.target.classList.contains("btn-sidebar-toggler")) return;
-
+                if (event.target.classList.contains("btn-sidebar-toggler"))
+                    return;
                 if (!this.$refs.refSidebar.contains(event.target)) {
                     this.sidebar.visible = false;
                 }
             });
         },
-
         setWindowResizeMonitor() {
             window.addEventListener("resize", () => {
                 if (this.isMobileWindowSize() && !this.inMobile) {
                     this.inMobile = true;
                     this.sidebar.visible = false;
-                } else if (!this.isMobileWindowSize() && this.inMobile) {
+                }
+                else if (!this.isMobileWindowSize() && this.inMobile) {
                     this.inMobile = true;
                     this.sidebar.visible = true;
                 }
             });
         }
     },
-
     computed: {
         computedStyle() {
             return this.sidebar.visible ? (this.inMobile ? "!block" : "") : null;
@@ -103,8 +100,7 @@ export default {
 
                 <div class="py-3 text-center">
                     <RouterLink :to="{ name: 'home' }">
-                        <span
-                            :class="['text-4xl text-gray-300', $helpers.icon.get('pieChartFill')]"></span>
+                        <Icon icon="pieChartFill" class="text-gray-300 text-4xl" />
                         <h1 class="text-xl">
                             <span class="font-bold text-gray-300">NAME</span>
                             <span class="font-semibold text-gray-500">PANEL</span>
