@@ -1,16 +1,16 @@
 <script>
 
-import { ref } from 'vue';
+import { ref, Transition } from 'vue';
 import ButtonUi from '../../Ui/Buttons/ButtonUi.vue';
 
 export default {
     name: "Modal",
 
-    components: { ButtonUi },
+    components: { ButtonUi, Transition },
 
     emits: {
         "showModal": null,
-        "hideModal": null,
+        "hiddenModal": null,
     },
 
     props: {
@@ -18,10 +18,11 @@ export default {
     },
 
     setup(props) {
+        let showWrapp = ref(false);
         let showModal = ref(false);
 
         return {
-            showModal
+            showWrapp, showModal
         };
     },
 
@@ -30,23 +31,43 @@ export default {
             immediate: true,
             handler(nv) {
                 if (nv) {
-                    this.showModalEmitEvent();
+                    this.showModalWrapp();
                 } else {
-                    this.hideModalEmitEvent();
+                    this.hideModalWrapp();
                 }
             }
         }
     },
 
     methods: {
-        showModalEmitEvent() {
+        showModalWrapp() {
+            this.showWrapp = true;
+        },
+
+        hideModalWrapp() {
+            this.showWrapp = false;
+            this.emitModalHiddenEvent();
+        },
+
+        showModalModal() {
             this.showModal = true;
+            this.emitModalShowedEvent();
+        },
+
+        hideModalModal() {
+            this.showModal = false;
+        },
+
+        wrappIsShowed() {
+            this.showModalModal();
+        },
+
+        emitModalShowedEvent() {
             this.$emit("showModal", this);
         },
 
-        hideModalEmitEvent() {
-            this.showModal = false;
-            this.$emit("hideModal", this);
+        emitModalHiddenEvent() {
+            this.$emit("hiddenModal", this);
         }
     },
 };
@@ -55,24 +76,31 @@ export default {
 
 <template>
 
-    <div v-if="showModal" class="modal-wrapp">
-        <div class="modal">
-            <div class="modal-actions">
-                <ButtonUi @click="hideModalEmitEvent" icon="x" no-shadow
-                    class="!px-0 !text-slate-200" />
-            </div>
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. In asperiores
-                    perspiciatis, numquam alias, velit voluptas accusamus magnam, nostrum
-                    eveniet
-                    architecto aliquid eum dolorem rerum. Consequuntur, distinctio magni.
-                    Assumenda,
-                    ratione excepturi?
+    <Transition @afterEnter="wrappIsShowed" name="fadebkdp">
+        <div v-if="showWrapp" class="modal-wrapp">
+            <Transition @afterLeave="hideModalWrapp" name="showmodal">
+                <div v-if="showModal" class="modal">
+                    <div class="modal-actions">
+                        <ButtonUi @click="hideModalModal" icon="x" no-shadow
+                            class="!px-0 !text-slate-200" />
+                    </div>
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. In
+                            asperiores
+                            perspiciatis, numquam alias, velit voluptas accusamus magnam,
+                            nostrum
+                            eveniet
+                            architecto aliquid eum dolorem rerum. Consequuntur, distinctio
+                            magni.
+                            Assumenda,
+                            ratione excepturi?
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </Transition>
         </div>
-    </div>
+    </Transition>
 
 </template>
 
@@ -91,5 +119,36 @@ export default {
 
 .modal>.modal-dialog {
     @apply bg-slate-200 relative rounded py-4 px-5;
+}
+
+/**
+ * TRANSITIONS
+ */
+.fadebkdp-enter-active,
+.fadebkdp-leave-active {
+    @apply duration-300;
+}
+
+.fadebkdp-enter-from,
+.fadebkdp-leave-to {
+    @apply opacity-0;
+}
+
+.showmodal-enter-active {
+    @apply duration-200 ease-in-out;
+}
+
+.showmodal-leave-active {
+    @apply duration-300 ease-in;
+}
+
+.showmodal-enter-from,
+.showmodal-leave-to {
+    @apply opacity-0 scale-90;
+}
+
+.showmodal-leave-from,
+.showmodal-enter-to {
+    @apply opacity-100 scale-100;
 }
 </style>
