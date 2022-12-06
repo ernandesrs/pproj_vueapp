@@ -13,6 +13,9 @@ const icons = {
 
     togglerLeft: 'bx bx-toggle-left',
     togglerRightFill: 'bx bxs-toggle-right',
+
+    x: 'bx bx-x',
+    xCircle: 'bx bx-x-circle',
 };
 
 const get = (name = null) => {
