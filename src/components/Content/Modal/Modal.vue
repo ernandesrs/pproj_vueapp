@@ -180,19 +180,19 @@ export default {
 }
 
 .modal>.modal-dialog {
-    @apply bg-slate-200 relative rounded;
+    @apply bg-slate-200 relative rounded overflow-hidden shadow-lg dark:bg-gray-600;
 }
 
 .modal>.modal-dialog>.modal-header {
-    @apply flex items-center px-4 pt-4 pb-2 lg:px-6 text-right text-3xl;
+    @apply flex items-center p-4 md:px-6 text-right text-3xl border-b border-slate-400 dark:border-gray-500 border-opacity-25;
 }
 
 .modal>.modal-dialog>.modal-header>.modal-title {
-    @apply flex items-center font-semibold text-lg lg:text-xl text-gray-600;
+    @apply flex items-center font-semibold text-lg lg:text-xl text-slate-600 dark:text-gray-300;
 }
 
 .modal>.modal-dialog>.modal-content {
-    @apply px-4 pb-4 pt-2 md:px-6 md:pb-6 md:pt-2;
+    @apply bg-slate-100 dark:bg-gray-400 p-4 md:p-6;
 }
 
 /**
