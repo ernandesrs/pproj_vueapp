@@ -151,7 +151,7 @@ a>span {
 }
 
 .wrapper {
-    @apply w-full h-screen bg-gray-300 dark:bg-gray-600 dark:text-gray-300 grid grid-cols-12;
+    @apply w-full h-screen bg-gray-300 dark:bg-gray-600 dark:text-gray-300 grid grid-cols-12 text-slate-700 font-normal;
 }
 
 .sidebar,
