@@ -17,7 +17,8 @@ export default {
         show: { type: Boolean, default: false },
         noCloseOnClickOut: { type: Boolean, default: false },
         top: { type: Boolean, default: false },
-        size: { type: String, default: null }
+        size: { type: String, default: null },
+        title: { type: String, default: null },
     },
 
     setup(props) {
@@ -116,9 +117,12 @@ export default {
                     this.size ? 'modal-' + this.size : null
                 ]">
                     <div class="modal-dialog">
-                        <div class="modal-actions">
+                        <div class="modal-header">
+                            <h4 v-if="title" class="modal-title">
+                                {{ title }}
+                            </h4>
                             <ButtonUi @click="hideModalModal" icon="x" no-shadow
-                                class="!px-0" />
+                                class="!p-0 ml-auto" />
                         </div>
                         <div class="modal-content">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. In
@@ -173,11 +177,19 @@ export default {
 }
 
 .modal>.modal-dialog {
-    @apply bg-slate-200 relative rounded py-4 px-5;
+    @apply bg-slate-200 relative rounded;
 }
 
-.modal>.modal-dialog>.modal-actions {
-    @apply pb-2 text-right text-2xl;
+.modal>.modal-dialog>.modal-header {
+    @apply flex items-center px-4 pt-4 pb-2 lg:px-6 text-right text-3xl;
+}
+
+.modal>.modal-dialog>.modal-header>.modal-title {
+    @apply font-semibold text-lg lg:text-xl text-gray-600;
+}
+
+.modal>.modal-dialog>.modal-content {
+    @apply px-4 pb-4 pt-2 md:px-6 md:pb-6 md:pt-2;
 }
 
 /**
