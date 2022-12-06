@@ -18,6 +18,7 @@ export default {
         size: { type: String, default: null },
         full: { type: Boolean, default: false },
         noRounded: { type: Boolean, default: false },
+        noShadow: { type: Boolean, default: false },
         disabled: { type: Boolean, default: false },
     },
 
@@ -39,7 +40,8 @@ export default {
         },
         'button-' + this.variant,
         {
-            'rounded': !this.noRounded
+            'rounded': !this.noRounded,
+            'shadow-md shadow-slate-300 hover:shadow-lg focus:shadow-lg': !this.noShadow,
         },
         this.size ? 'button-' + this.size : ''
     ]" :disabled="disabled">

@@ -56,7 +56,7 @@ export default {
 						<h1 class="font-semibold text-xl">Buttons</h1>
 					</div>
 
-					<div class="col-span-12 space-x-2 space-y-2">
+					<div class="col-span-12 space-x-2 space-y-4">
 						<ButtonUi text="Botão padrão" icon="app" />
 						<ButtonUi text="Botão dark" icon="app" variant="dark" />
 						<ButtonUi text="Botão light" icon="app" as="a" variant="light" />
@@ -72,6 +72,7 @@ export default {
 						<ButtonUi text="Botão ícone no final" icon="app" variant="dark" icon-end />
 						<ButtonUi text="Botão sem ícone" variant="dark" />
 						<ButtonUi text="Botão desativado" variant="dark" icon="pieChartFill" disabled />
+						<ButtonUi text="Botão padrão sem sombra" icon="pieChartFill" no-shadow />
 					</div>
 				</div>
 
