@@ -2,11 +2,12 @@
 
 import { ref, Transition } from 'vue';
 import ButtonUi from '../../Ui/Buttons/ButtonUi.vue';
+import Icon from '../../Ui/Icon.vue';
 
 export default {
     name: "Modal",
 
-    components: { ButtonUi, Transition },
+    components: { ButtonUi, Transition, Icon },
 
     emits: {
         "showModal": null,
@@ -18,6 +19,7 @@ export default {
         noCloseOnClickOut: { type: Boolean, default: false },
         top: { type: Boolean, default: false },
         size: { type: String, default: null },
+        icon: { type: String, default: null },
         title: { type: String, default: null },
     },
 
@@ -119,6 +121,7 @@ export default {
                     <div class="modal-dialog">
                         <div class="modal-header">
                             <h4 v-if="title" class="modal-title">
+                                <Icon v-if="icon" :icon="icon" class="mr-2 text-xl lg:text-2xl" />
                                 {{ title }}
                             </h4>
                             <ButtonUi @click="hideModalModal" icon="x" no-shadow
@@ -185,7 +188,7 @@ export default {
 }
 
 .modal>.modal-dialog>.modal-header>.modal-title {
-    @apply font-semibold text-lg lg:text-xl text-gray-600;
+    @apply flex items-center font-semibold text-lg lg:text-xl text-gray-600;
 }
 
 .modal>.modal-dialog>.modal-content {
