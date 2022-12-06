@@ -71,7 +71,7 @@ export default {
 						<ButtonUi text="Botão grande" icon="app" variant="dark" size="lg" />
 						<ButtonUi text="Botão ícone no final" icon="app" variant="dark" icon-end />
 						<ButtonUi text="Botão sem ícone" variant="dark" />
-						<ButtonUi text="Botão desativado" variant="dark" disabled />
+						<ButtonUi text="Botão desativado" variant="dark" icon="pieChartFill" disabled />
 					</div>
 				</div>
 
