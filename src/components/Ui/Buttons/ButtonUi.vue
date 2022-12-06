@@ -41,7 +41,7 @@ export default {
         'button-' + this.variant,
         {
             'rounded': !this.noRounded,
-            'shadow-md shadow-slate-300 hover:shadow-lg focus:shadow-lg': !this.noShadow,
+            'shadow-md shadow-slate-300 dark:shadow-slate-500 hover:shadow-lg focus:shadow-lg': !this.noShadow,
         },
         this.size ? 'button-' + this.size : ''
     ]" :disabled="disabled">
