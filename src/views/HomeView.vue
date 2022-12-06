@@ -2,7 +2,7 @@
 
 import DefaultLayout from "../layouts/DefaultLayout.vue";
 import Collapse from "../components/Content/Collapse/Collapse.vue";
-import ButtonUi from "../components/Ui/ButtonUi.vue";
+import ButtonUi from "../components/Ui/Buttons/ButtonUi.vue";
 
 export default {
 	name: "HomeView",
