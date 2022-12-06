@@ -24,7 +24,7 @@ export default {
 </script>
 
 <template>
-	<Modal top :show="showModal" @hiddenModal="showModal = false" />
+	<Modal top :show="showModal" @hiddenModal="showModal = false" size="lg" />
 
 	<DefaultLayout>
 		<template v-slot:content>

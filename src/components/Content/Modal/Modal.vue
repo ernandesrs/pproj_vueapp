@@ -17,6 +17,7 @@ export default {
         show: { type: Boolean, default: false },
         noCloseOnClickOut: { type: Boolean, default: false },
         top: { type: Boolean, default: false },
+        size: { type: String, default: null }
     },
 
     setup(props) {
@@ -110,12 +111,15 @@ export default {
             }
         ]">
             <Transition @afterLeave="hideModalWrapp" name="showmodal">
-                <div v-if="showModal" ref="modal" class="modal">
-                    <div class="modal-actions">
-                        <ButtonUi @click="hideModalModal" icon="x" no-shadow
-                            class="!px-0 !text-slate-200" />
-                    </div>
+                <div v-if="showModal" ref="modal" :class="[
+                    'modal',
+                    this.size ? 'modal-' + this.size : null
+                ]">
                     <div class="modal-dialog">
+                        <div class="modal-actions">
+                            <ButtonUi @click="hideModalModal" icon="x" no-shadow
+                                class="!px-0" />
+                        </div>
                         <div class="modal-content">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. In
                             asperiores
@@ -137,7 +141,7 @@ export default {
 
 <style scoped>
 .modal-wrapp {
-    @apply flex items-center justify-center w-full h-screen bg-black bg-opacity-75 fixed top-0 left-0 z-[999] p-2;
+    @apply flex items-center justify-center w-full h-screen bg-black bg-opacity-75 fixed top-0 left-0 z-[999] p-2 lg:p-4;
 }
 
 .modal-top {
@@ -148,12 +152,32 @@ export default {
     @apply w-full max-w-md;
 }
 
-.modal>.modal-actions {
-    @apply py-1 text-right text-2xl;
+.modal.modal-md {
+    @apply max-w-lg;
+}
+
+.modal.modal-lg {
+    @apply max-w-2xl
+}
+
+.modal.modal-xl {
+    @apply max-w-4xl
+}
+
+.modal.modal-full {
+    @apply max-w-screen-xl h-[97vh] lg:h-[95vh];
+}
+
+.modal.modal-full>.modal-dialog {
+    @apply h-full;
 }
 
 .modal>.modal-dialog {
     @apply bg-slate-200 relative rounded py-4 px-5;
+}
+
+.modal>.modal-dialog>.modal-actions {
+    @apply pb-2 text-right text-2xl;
 }
 
 /**
