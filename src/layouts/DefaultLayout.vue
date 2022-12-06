@@ -155,7 +155,7 @@ a>span {
 }
 
 .wrapper {
-    @apply w-screen h-screen bg-gray-300 dark:bg-gray-600 dark:text-gray-300 grid grid-cols-12;
+    @apply w-full h-screen bg-gray-300 dark:bg-gray-600 dark:text-gray-300 grid grid-cols-12;
 }
 
 .sidebar,
@@ -166,7 +166,7 @@ a>span {
 
 .sidebar {
     /* base */
-    @apply w-full max-w-[80vw] h-full bg-slate-700 dark:bg-slate-700 fixed top-0 left-0 z-50;
+    @apply w-full max-w-[80vw] h-full bg-slate-700 dark:bg-slate-800 fixed top-0 left-0 z-50;
 
     /* sm */
     @apply sm:max-w-[275px];

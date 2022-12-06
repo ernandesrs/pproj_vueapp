@@ -63,10 +63,10 @@ export default {
 }
 
 .collapse-toggler.collapse-toggler-light {
-    @apply bg-slate-300 text-slate-600;
+    @apply bg-slate-300 text-slate-600 dark:bg-slate-600 dark:text-slate-300;
 }
 
 .collapse-toggler.collapse-toggler-dark {
-    @apply bg-slate-600 text-slate-300;
+    @apply bg-slate-600 text-slate-300 dark:bg-slate-700;
 }
 </style>

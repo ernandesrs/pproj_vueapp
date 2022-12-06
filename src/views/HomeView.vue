@@ -17,7 +17,7 @@ export default {
 		<template v-slot:content>
 			<main>
 
-				<div class="grid grid-cols-12 space-x-5 mb-4">
+				<div class="grid grid-cols-12 space-x-5 space-y-5 mb-4">
 					<div class="col-span-12 mb-3">
 						<h1 class="font-semibold text-xl">Collapses</h1>
 					</div>
