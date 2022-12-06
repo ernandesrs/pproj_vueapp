@@ -14,7 +14,8 @@ export default {
     },
 
     props: {
-        show: { type: Boolean, default: false }
+        show: { type: Boolean, default: false },
+        noCloseOnClickOut: { type: Boolean, default: false }
     },
 
     setup(props) {
@@ -64,10 +65,32 @@ export default {
 
         emitModalShowedEvent() {
             this.$emit("showModal", this);
+
+            this.addClickOutEvent();
         },
 
         emitModalHiddenEvent() {
             this.$emit("hiddenModal", this);
+
+            this.removeClickOutEvent();
+        },
+
+        addClickOutEvent() {
+            if (this.noCloseOnClickOut) return;
+
+            document.addEventListener("click", this.clickOutListener);
+        },
+
+        removeClickOutEvent() {
+            document.removeEventListener("click", this.clickOutListener);
+        },
+
+        clickOutListener(event) {
+            if (!this.$refs.modal) return;
+
+            if (!this.$refs.modal.contains(event.target)) {
+                this.hideModalModal();
+            }
         }
     },
 };
@@ -79,7 +102,7 @@ export default {
     <Transition @afterEnter="wrappIsShowed" name="fadebkdp">
         <div v-if="showWrapp" class="modal-wrapp">
             <Transition @afterLeave="hideModalWrapp" name="showmodal">
-                <div v-if="showModal" class="modal">
+                <div v-if="showModal" ref="modal" class="modal">
                     <div class="modal-actions">
                         <ButtonUi @click="hideModalModal" icon="x" no-shadow
                             class="!px-0 !text-slate-200" />
@@ -135,11 +158,11 @@ export default {
 }
 
 .showmodal-enter-active {
-    @apply duration-200 ease-in-out;
+    @apply duration-300 ease-in-out;
 }
 
 .showmodal-leave-active {
-    @apply duration-300 ease-in;
+    @apply duration-200 ease-in;
 }
 
 .showmodal-enter-from,
