@@ -15,7 +15,8 @@ export default {
 
     props: {
         show: { type: Boolean, default: false },
-        noCloseOnClickOut: { type: Boolean, default: false }
+        noCloseOnClickOut: { type: Boolean, default: false },
+        top: { type: Boolean, default: false },
     },
 
     setup(props) {
@@ -102,7 +103,12 @@ export default {
 <template>
 
     <Transition @afterEnter="wrappIsShowed" name="fadebkdp">
-        <div v-if="showWrapp" class="modal-wrapp">
+        <div v-if="showWrapp" :class="[
+            'modal-wrapp',
+            {
+                'modal-top': this.top
+            }
+        ]">
             <Transition @afterLeave="hideModalWrapp" name="showmodal">
                 <div v-if="showModal" ref="modal" class="modal">
                     <div class="modal-actions">
@@ -132,6 +138,10 @@ export default {
 <style scoped>
 .modal-wrapp {
     @apply flex items-center justify-center w-full h-screen bg-black bg-opacity-75 fixed top-0 left-0 z-[999] p-2;
+}
+
+.modal-top {
+    @apply items-start;
 }
 
 .modal {
