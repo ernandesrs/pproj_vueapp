@@ -18,6 +18,11 @@ export default {
         light: { type: Boolean, default: false }
     },
 
+    emits: {
+        "showed": null,
+        "hidden": null
+    },
+
     setup(props) {
         let show = ref(props.collapsed);
 
@@ -26,10 +31,28 @@ export default {
         };
     },
 
+    watch: {
+        show(nv) {
+            if (nv) {
+                this.emitShowedEvent();
+            } else {
+                this.emitHiddenEvent();
+            }
+        }
+    },
+
     methods: {
         toggler() {
             this.show = !this.show;
-        }
+        },
+
+        emitShowedEvent() {
+            this.$emit("showed", this);
+        },
+
+        emitHiddenEvent() {
+            this.$emit("hidden", this);
+        },
     }
 };
 
@@ -50,6 +73,6 @@ export default {
 
 <style scoped>
 .collapse {
-    @apply relative overflow-hidden mb-1;
+    @apply relative overflow-hidden;
 }
 </style>
