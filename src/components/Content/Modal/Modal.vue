@@ -82,6 +82,8 @@ export default {
         },
 
         removeClickOutEvent() {
+            if (this.noCloseOnClickOut) return;
+
             document.removeEventListener("click", this.clickOutListener);
         },
 
