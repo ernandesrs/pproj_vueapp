@@ -24,7 +24,22 @@ export default {
 </script>
 
 <template>
-	<Modal title="Top example modal" icon="pieChartFill" top :show="showModal" @hiddenModal="showModal = false" size="lg" />
+	<Modal title="Top example modal" icon="pieChartFill" top :show="showModal"
+		@hiddenModal="showModal = false" size="lg">
+		<template v-slot:content>
+			<h1>Lorem, ipsum dolor.</h1>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. In asperiores
+				perspiciatis, numquam alias, velit voluptas accusamus magnam, nostrum
+				eveniet architecto aliquid eum dolorem rerum. Consequuntur, distinctio
+				magni. Assumenda, ratione excepturi?
+			</p>
+
+			<div class="pt-3">
+				<ButtonUi icon="xCircle" text="Lorem ipsum dolor" variant="dark" />
+			</div>
+		</template>
+	</Modal>
 
 	<DefaultLayout>
 		<template v-slot:content>

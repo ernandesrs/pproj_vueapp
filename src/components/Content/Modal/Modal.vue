@@ -128,15 +128,7 @@ export default {
                                 class="!p-0 ml-auto" />
                         </div>
                         <div class="modal-content">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. In
-                            asperiores
-                            perspiciatis, numquam alias, velit voluptas accusamus magnam,
-                            nostrum
-                            eveniet
-                            architecto aliquid eum dolorem rerum. Consequuntur, distinctio
-                            magni.
-                            Assumenda,
-                            ratione excepturi?
+                            <slot name="content" />
                         </div>
                     </div>
                 </div>
