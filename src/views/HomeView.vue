@@ -107,6 +107,8 @@ export default {
 						<ButtonUi text="Botão sem ícone" variant="dark" />
 						<ButtonUi text="Botão desativado" variant="dark"
 							icon="pieChartFill" disabled />
+						<ButtonUi text="Botão carregando" variant="dark"
+							icon="pieChartFill" loading disabled />
 						<ButtonUi text="Botão padrão sem sombra" icon="pieChartFill"
 							no-shadow />
 					</div>

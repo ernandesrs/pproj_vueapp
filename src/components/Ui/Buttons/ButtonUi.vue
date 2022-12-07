@@ -20,6 +20,7 @@ export default {
         noRounded: { type: Boolean, default: false },
         noShadow: { type: Boolean, default: false },
         disabled: { type: Boolean, default: false },
+        loading: { type: Boolean, default: false },
     },
 
     computed: {
@@ -43,9 +44,16 @@ export default {
             'rounded': !this.noRounded,
             'shadow-md shadow-slate-300 dark:shadow-slate-500 hover:shadow-lg focus:shadow-lg': !this.noShadow,
         },
-        this.size ? 'button-' + this.size : ''
+        this.size ? 'button-' + this.size : '',
+        {
+            'animate-pulse': loading
+        }
     ]" :disabled="disabled">
-        <Icon v-if="(icon && !iconEnd)" :icon="icon" />
+        <Icon v-if="(icon && !iconEnd)" :icon="(loading ? 'loaderAlt' : icon)" :class="[
+            {
+                'animate-spin': loading
+            }
+        ]" />
         <span v-if="text" :class="[
             'text',
             {
@@ -55,7 +63,11 @@ export default {
         ]">
             {{ text }}
         </span>
-        <Icon v-if="(icon && iconEnd)" :icon="icon" />
+        <Icon v-if="(icon && iconEnd)" :icon="(loading ? 'loaderAlt' : icon)" :class="[
+            {
+                'animate-spin': loading
+            }
+        ]" />
     </Component>
 </template>
 

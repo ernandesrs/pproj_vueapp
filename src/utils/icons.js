@@ -7,6 +7,10 @@ const icons = {
     arrowTop: 'bx bx-chevron-top',
     arrowDown: 'bx bx-chevron-down',
 
+    loader: 'bx bx-loader',
+    loaderCircle: 'bx bx-loader-circle',
+    loaderAlt: 'bx bx-loader-alt',
+
     menu: 'bx bx-menu',
 
     pieChartFill: 'bx bxs-pie-chart-alt-2',
