@@ -61,6 +61,7 @@ export default {
         },
 
         emitCancelEvent() {
+            this.$emit("canceled", this);
             console.log("canceled");
         },
     }
