@@ -18,6 +18,12 @@ export default {
 		return {
 			showModal
 		};
+	},
+
+	methods: {
+		alert(a) {
+			window.alert(a);
+		}
 	}
 
 }
@@ -112,7 +118,9 @@ export default {
 							icon="pieChartFill" loading disabled />
 						<ButtonUi text="Botão padrão sem sombra" icon="pieChartFill"
 							no-shadow />
-						<ButttonConfirmationUi text="Botão com confirmação" icon="app" variant="dark" />
+						<ButttonConfirmationUi @confirmed="alert('Confirmado')"
+							@canceled="alert('Cancelado')" text="Botão com confirmação"
+							icon="app" variant="dark" />
 					</div>
 				</div>
 
