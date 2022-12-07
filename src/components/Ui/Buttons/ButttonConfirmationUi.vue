@@ -39,10 +39,14 @@ export default {
     methods: {
         showConfirmationButtonsPopup() {
             this.showConfirmationButtons = true;
+            setTimeout(() => {
+                this.setClickOutMonitor();
+            }, 0);
         },
 
         hideConfirmationButtonsGroup() {
             this.showConfirmationButtons = false;
+            this.removeClickOutMonitor();
         },
 
         confirmAction() {
@@ -57,13 +61,27 @@ export default {
 
         emitConfirmEvent() {
             this.$emit("confirmed", this);
-            console.log("confirmed");
         },
 
         emitCancelEvent() {
             this.$emit("canceled", this);
-            console.log("canceled");
         },
+
+        setClickOutMonitor() {
+            document.addEventListener("click", this.clickOutListener);
+        },
+
+        removeClickOutMonitor() {
+            document.removeEventListener("click", this.clickOutListener);
+        },
+
+        clickOutListener(event) {
+            if (!this.$refs?.confirmationPopup) return;
+
+            if (!this.$refs.confirmationPopup.contains(event.target)) {
+                this.cancelAction();
+            }
+        }
     }
 }
 
@@ -76,7 +94,7 @@ export default {
             :variant="variant" :size="size" :full="full" :no-rounded="noRounded"
             :iconEnd="iconEnd" :disabled="disabled" />
 
-        <div v-if="showConfirmationButtons"
+        <div v-if="showConfirmationButtons" ref="confirmationPopup"
             class="flex justify-center w-full h-100 bg-slate-100 bg-opacity-95 shadow-md absolute border rounded border-slate-400 border-opacity-50 space-x-2 p-2 z-10">
             <ButtonUi @click="cancelAction" icon="x" variant="danger" />
             <ButtonUi @click="confirmAction" icon="check" variant="success" />
