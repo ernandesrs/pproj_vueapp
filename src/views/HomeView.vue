@@ -5,11 +5,12 @@ import DefaultLayout from "../layouts/DefaultLayout.vue";
 import Collapse from "../components/Content/Collapse/Collapse.vue";
 import ButtonUi from "../components/Ui/Buttons/ButtonUi.vue";
 import Modal from "../components/Content/Modal/Modal.vue";
+import ButttonConfirmationUi from "../components/Ui/Buttons/ButttonConfirmationUi.vue";
 
 export default {
 	name: "HomeView",
 
-	components: { Collapse, Collapse, DefaultLayout, ButtonUi, Modal },
+	components: { Collapse, Collapse, DefaultLayout, ButtonUi, Modal, ButttonConfirmationUi },
 
 	setup(props) {
 		let showModal = ref(false);
@@ -111,6 +112,7 @@ export default {
 							icon="pieChartFill" loading disabled />
 						<ButtonUi text="Botão padrão sem sombra" icon="pieChartFill"
 							no-shadow />
+						<ButttonConfirmationUi text="Botão com confirmação" icon="app" variant="dark" />
 					</div>
 				</div>
 

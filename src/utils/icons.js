@@ -7,6 +7,8 @@ const icons = {
     arrowTop: 'bx bx-chevron-top',
     arrowDown: 'bx bx-chevron-down',
 
+    check: 'bx bx-check',
+
     loader: 'bx bx-loader',
     loaderCircle: 'bx bx-loader-circle',
     loaderAlt: 'bx bx-loader-alt',
@@ -17,6 +19,8 @@ const icons = {
 
     togglerLeft: 'bx bx-toggle-left',
     togglerRightFill: 'bx bxs-toggle-right',
+    
+    trash: 'bx bxs-trash',
 
     x: 'bx bx-x',
     xCircle: 'bx bx-x-circle',
