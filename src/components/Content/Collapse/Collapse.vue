@@ -15,7 +15,8 @@ export default {
         text: { type: String, default: "Toggler texto" },
         collapsed: { type: Boolean, default: false },
         dark: { type: Boolean, default: false },
-        light: { type: Boolean, default: false }
+        light: { type: Boolean, default: false },
+        transparent: { type: Boolean, default: false }
     },
 
     emits: {
@@ -62,7 +63,7 @@ export default {
 
     <div class="collapse">
         <CollapseToggler @hasClicked="toggler" :icon="icon" :text="text" :dark="dark"
-            :light="light" :hide-arrow="hideArrow" />
+            :light="light" :hide-arrow="hideArrow" :transparent="transparent" />
 
         <CollapseContent :show="show">
             <slot />

@@ -13,8 +13,7 @@ export default {
         hideArrow: { type: Boolean, default: false },
         dark: { type: Boolean, default: false },
         light: { type: Boolean, default: false },
-        primaryColorClass: { type: String, default: "slate-600" },
-        secondaryColorClass: { type: String, default: "slate-300" },
+        transparent: { type: Boolean, default: false }
     },
     methods: {
         hasClicked(event) {
@@ -26,7 +25,7 @@ export default {
             return this.$parent.show;
         },
         customColor() {
-            return this.dark ? "collapse-toggler-dark" : (this.light ? "collapse-toggler-light" : "collapse-toggler-light");
+            return (this.dark ? "collapse-toggler-dark" : (this.light ? "collapse-toggler-light" : "collapse-toggler-light")) + (this.transparent ? " collapse-transparent" : "");
         }
     },
     components: { Icon }
@@ -41,7 +40,8 @@ export default {
     ]">
         <Icon v-if="icon" :icon="icon" />
         <span class="ml-2">{{ text }}</span>
-        <Icon v-if="!hideArrow" :icon="contentShowed ? 'arrowDown' : 'arrowRight'" class="ml-auto text-xl" />
+        <Icon v-if="!hideArrow" :icon="contentShowed ? 'arrowDown' : 'arrowRight'"
+            class="ml-auto text-xl" />
     </a>
 </template>
 
@@ -63,5 +63,10 @@ export default {
 
 .collapse-toggler.collapse-toggler-dark {
     @apply bg-slate-600 text-slate-300 dark:bg-slate-700;
+}
+
+.collapse-toggler.collapse-toggler-light.collapse-transparent,
+.collapse-toggler.collapse-toggler-dark.collapse-transparent {
+    @apply !bg-transparent;
 }
 </style>

@@ -57,7 +57,7 @@ export default {
 						<h1 class="font-semibold text-xl">Collapses</h1>
 					</div>
 
-					<div class="col-span-12 md:col-span-6">
+					<div class="col-span-12 md:col-span-4">
 						<Collapse text="Collapse light" icon="pieChartFill" light>
 							<h1>Lorem ipsum dolor sit</h1>
 							<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.
@@ -70,8 +70,21 @@ export default {
 						</Collapse>
 					</div>
 
-					<div class="col-span-12 md:col-span-6">
+					<div class="col-span-12 md:col-span-4">
 						<Collapse text="Collapse dark" dark hide-arrow>
+							<h1>Lorem ipsum dolor sit2</h1>
+							<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+								Sunt
+								animi eos
+								deleniti quas sequi facilis a fugit assumenda error porro,
+								necessitatibus quis
+								itaque beatae! Aspernatur laudantium hic explicabo? Nemo,
+								quae?</p>
+						</Collapse>
+					</div>
+
+					<div class="col-span-12 md:col-span-4">
+						<Collapse text="Collapse transparent" icon="pieChartFill" light transparent>
 							<h1>Lorem ipsum dolor sit2</h1>
 							<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.
 								Sunt
