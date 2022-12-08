@@ -168,7 +168,7 @@ a>span {
     @apply sm:max-w-[275px];
 
     /* lg */
-    @apply lg:max-w-full lg:relative lg:col-span-3 lg:translate-x-0 lg:block;
+    @apply lg:max-w-full lg:relative lg:col-span-3 xl:col-span-2 lg:translate-x-0 lg:block;
 }
 
 .topbar {
@@ -191,7 +191,7 @@ a>span {
     @apply w-full bg-gray-300 dark:bg-gray-600 flex flex-col col-span-12;
 
     /* lg */
-    @apply lg:col-span-9;
+    @apply lg:col-span-9 xl:col-span-10;
 }
 
 .main>.content>.content-inner {
