@@ -16,8 +16,10 @@ export default {
         let sidebar = ref({
             visible: false
         });
+
         return { darkMode, inMobile, sidebar };
     },
+
     created() {
         this.inMobile = this.isMobileWindowSize();
         if (this.inMobile)
@@ -26,6 +28,7 @@ export default {
             this.sidebar.visible = true;
         this.setWindowResizeMonitor();
     },
+
     watch: {
         sidebar: {
             handler(nv) {
@@ -37,6 +40,7 @@ export default {
             deep: true,
         }
     },
+
     methods: {
         sidebarToggler() {
             this.inMobile = this.isMobileWindowSize();
@@ -79,6 +83,7 @@ export default {
             });
         }
     },
+
     computed: {
         computedStyle() {
             return this.sidebar.visible ? (this.inMobile ? "!block" : "") : null;
