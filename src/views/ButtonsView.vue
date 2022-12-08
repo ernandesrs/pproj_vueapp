@@ -3,11 +3,12 @@
 import DefaultLayout from "../layouts/DefaultLayout.vue";
 import VueButton from "../components/Ui/Buttons/VueButton.vue";
 import VueButtonConfirmation from "../components/Ui/Buttons/VueButtonConfirmation.vue";
+import VueLink from "../components/VueLink.vue";
 
 export default {
 	name: "ButtonsView",
 
-	components: { DefaultLayout, VueButton, VueButtonConfirmation },
+	components: { DefaultLayout, VueButton, VueButtonConfirmation, VueLink },
 
 	methods: {
 		alert(a) {
@@ -60,6 +61,9 @@ export default {
 						<vue-button-confirmation @confirmed="alert('Confirmado')"
 							@canceled="alert('Cancelado')" text="Botão com confirmação"
 							icon="app" variant="dark" />
+						<vue-link text="VueLink com ícone" :to="{name: 'home'}" icon="pieChartFill" />
+						<vue-link text="VueLink é RouterLink" :to="{name: 'home'}" />
+						<vue-link text="VueLink é link normal" href="https://www.google.com.br" target="_blank" external />
 					</div>
 				</div>
 
