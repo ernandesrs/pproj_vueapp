@@ -61,8 +61,8 @@ export default {
 						<vue-button-confirmation @confirmed="alert('Confirmado')"
 							@canceled="alert('Cancelado')" text="Botão com confirmação"
 							icon="app" variant="dark" />
-						<vue-link text="VueLink com ícone" :to="{name: 'home'}" icon="pieChartFill" />
-						<vue-link text="VueLink é RouterLink" :to="{name: 'home'}" />
+						<vue-link text="VueLink com ícone" :href="{name: 'home'}" icon="pieChartFill" />
+						<vue-link text="VueLink é RouterLink" :href="{name: 'home'}" />
 						<vue-link text="VueLink é link normal" href="https://www.google.com.br" target="_blank" external />
 					</div>
 				</div>

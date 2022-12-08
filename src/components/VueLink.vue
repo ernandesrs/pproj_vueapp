@@ -8,21 +8,25 @@ export default {
     components: { VueIcon },
 
     props: {
-        external: { type: Boolean, default: false },
         text: { type: String, default: "Link text" },
         icon: { type: String, default: null },
-        href: { type: String, default: null },
-        to: { type: Object, default: null },
+        href: { type: [String, Object], default: null },
         target: { type: String, default: "_self" },
         customClass: { type: String, default: null }
-    }
+    },
+
+    computed: {
+        isExternalLink() {
+            return typeof this.href === "string";
+        }
+    },
 };
 
 </script>
 
 <template>
 
-    <a v-if="external" :class="[
+    <a v-if="isExternalLink" :class="[
         {
             'link': !customClass
         },
@@ -35,7 +39,7 @@ export default {
             'link': !customClass
         },
         customClass
-    ]" :to="to" :title="text">
+    ]" :to="href" :title="text">
         <vue-icon v-if="icon" :icon="icon" /> {{ text }}
     </router-link>
 
