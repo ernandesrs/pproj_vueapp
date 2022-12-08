@@ -1,14 +1,15 @@
 <script>
 
 import { ref } from 'vue';
+import VueNav from '../components/Ui/Nav/VueNav.vue';
 import VueIcon from '../components/Ui/VueIcon.vue';
 
 const MOBILE_WIDTH = 1024;
 
 export default {
     name: "DefaultLayout",
-    
-    components: { VueIcon },
+
+    components: { VueIcon, VueNav },
 
     setup() {
         let darkMode = ref(false);
@@ -17,30 +18,34 @@ export default {
             visible: false,
             navs: [
                 {
-                    name: 'home',
                     text: 'Dashboard',
-                    href: null,
+                    href: {
+                        name: 'home',
+                    },
                     target: '_self',
                     icon: 'pieChartFill'
                 },
                 {
-                    name: 'buttons',
                     text: 'Botões',
-                    href: null,
+                    href: {
+                        name: 'buttons',
+                    },
                     target: '_self',
                     icon: 'app'
                 },
                 {
-                    name: 'collapses',
                     text: 'Colapsáveis',
-                    href: null,
+                    href: {
+                        name: 'collapses',
+                    },
                     target: '_self',
                     icon: 'app'
                 },
                 {
-                    name: 'modals',
                     text: 'Modais',
-                    href: null,
+                    href: {
+                        name: 'modals',
+                    },
                     target: '_self',
                     icon: 'app'
                 }
@@ -144,9 +149,7 @@ export default {
                 </div>
 
                 <div class="py-3 flex flex-col">
-                    <RouterLink v-for="nav in sidebar.navs" :to="{name: nav.name}" class="block px-4 py-2 text-slate-300">
-                        {{ nav.text }}
-                    </RouterLink>
+                    <vue-nav :items="sidebar.navs" vertical activable />
                 </div>
 
             </div>
