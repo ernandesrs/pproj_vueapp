@@ -15,13 +15,7 @@ export default {
         to: { type: Object, default: null },
         target: { type: String, default: "_self" },
         customClass: { type: String, default: null }
-    },
-
-    computed: {
-        tag() {
-            return this.external ? "a" : "router-link";
-        }
-    },
+    }
 };
 
 </script>
