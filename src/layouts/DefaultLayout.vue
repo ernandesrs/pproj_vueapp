@@ -14,7 +14,37 @@ export default {
         let darkMode = ref(false);
         let inMobile = ref(false);
         let sidebar = ref({
-            visible: false
+            visible: false,
+            navs: [
+                {
+                    name: 'home',
+                    text: 'Dashboard',
+                    href: null,
+                    target: '_self',
+                    icon: 'pieChartFill'
+                },
+                {
+                    name: 'buttons',
+                    text: 'Botões',
+                    href: null,
+                    target: '_self',
+                    icon: 'app'
+                },
+                {
+                    name: 'collapses',
+                    text: 'Colapsáveis',
+                    href: null,
+                    target: '_self',
+                    icon: 'app'
+                },
+                {
+                    name: 'modals',
+                    text: 'Modais',
+                    href: null,
+                    target: '_self',
+                    icon: 'app'
+                }
+            ]
         });
 
         return { darkMode, inMobile, sidebar };
@@ -113,8 +143,10 @@ export default {
                     </RouterLink>
                 </div>
 
-                <div class="py-3">
-
+                <div class="py-3 flex flex-col">
+                    <RouterLink v-for="nav in sidebar.navs" :to="{name: nav.name}" class="block px-4 py-2 text-slate-300">
+                        {{ nav.text }}
+                    </RouterLink>
                 </div>
 
             </div>
