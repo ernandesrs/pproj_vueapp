@@ -28,17 +28,32 @@ export default {
 
 <template>
 
-    <Component :class="['link', customClass]" :is="tag" :to="(!external ? to : null)"
-        :href="(external ? href : null)" :title="text"
-        :target="(external ? target : null)">
+    <a v-if="external" :class="[
+        {
+            'link': !customClass
+        },
+        customClass
+    ]" :href="href" :title="text" :target="target">
         <vue-icon v-if="icon" :icon="icon" /> {{ text }}
-    </Component>
+    </a>
+    <router-link v-else :class="[
+        {
+            'link': !customClass
+        },
+        customClass
+    ]" :to="to" :title="text">
+        <vue-icon v-if="icon" :icon="icon" /> {{ text }}
+    </router-link>
 
 </template>
 
 <style scoped>
+a {
+    @apply cursor-pointer hover:opacity-90 duration-200 hover:duration-200 text-base font-normal;
+}
+
 .link {
-    @apply cursor-pointer text-cyan-700 hover:opacity-70 duration-200 hover:duration-200 text-base font-normal;
+    @apply text-cyan-700;
 }
 
 .link>* {
