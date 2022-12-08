@@ -1,7 +1,7 @@
 <script>
 
 export default {
-    name: "CollapseContent",
+    name: "VueCollapseContent",
 
     props: {
         show: { type: Boolean, default: false }

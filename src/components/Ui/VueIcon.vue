@@ -1,7 +1,7 @@
 <script>
 
 export default {
-    name: "Icon",
+    name: "VueIcon",
 
     props: {
         icon: { type: String, default: "app" }

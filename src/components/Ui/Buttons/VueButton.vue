@@ -1,11 +1,11 @@
 <script>
 
-import Icon from "../Icon.vue";
+import VueIcon from "../VueIcon.vue";
 
 export default {
-    name: "ButtonUi",
+    name: "VueButton",
 
-    components: { Icon },
+    components: { VueIcon },
 
     props: {
         as: { type: String, default: "button" },
@@ -49,7 +49,7 @@ export default {
             'animate-pulse': loading
         }
     ]" :disabled="disabled">
-        <Icon v-if="(icon && !iconEnd)" :icon="(loading ? 'loaderAlt' : icon)" :class="[
+        <vue-icon v-if="(icon && !iconEnd)" :icon="(loading ? 'loaderAlt' : icon)" :class="[
             {
                 'animate-spin': loading
             }
@@ -63,7 +63,7 @@ export default {
         ]">
             {{ text }}
         </span>
-        <Icon v-if="(icon && iconEnd)" :icon="(loading ? 'loaderAlt' : icon)" :class="[
+        <vue-icon v-if="(icon && iconEnd)" :icon="(loading ? 'loaderAlt' : icon)" :class="[
             {
                 'animate-spin': loading
             }

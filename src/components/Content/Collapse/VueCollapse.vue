@@ -1,13 +1,13 @@
 <script>
 
 import { ref } from 'vue';
-import CollapseContent from './CollapseContent.vue';
-import CollapseToggler from './CollapseToggler.vue';
+import VueCollapseContent from './VueCollapseContent.vue';
+import VueCollapseToggler from './VueCollapseToggler.vue';
 
 export default {
-    name: "Collapse",
+    name: "VueCollapse",
 
-    components: { CollapseToggler, CollapseContent },
+    components: { VueCollapseToggler, VueCollapseContent },
 
     props: {
         icon: { type: String, default: null },
@@ -62,12 +62,12 @@ export default {
 <template>
 
     <div class="collapse">
-        <CollapseToggler @hasClicked="toggler" :icon="icon" :text="text" :dark="dark"
+        <vue-collapse-toggler @hasClicked="toggler" :icon="icon" :text="text" :dark="dark"
             :light="light" :hide-arrow="hideArrow" :transparent="transparent" />
 
-        <CollapseContent :show="show">
+        <vue-collapse-content :show="show">
             <slot />
-        </CollapseContent>
+        </vue-collapse-content>
     </div>
 
 </template>

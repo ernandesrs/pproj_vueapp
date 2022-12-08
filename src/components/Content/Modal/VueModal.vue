@@ -1,13 +1,13 @@
 <script>
 
 import { ref, Transition } from 'vue';
-import ButtonUi from '../../Ui/Buttons/ButtonUi.vue';
-import Icon from '../../Ui/Icon.vue';
+import VueButton from '../../Ui/Buttons/VueButton.vue';
+import VueIcon from '../../Ui/VueIcon.vue';
 
 export default {
-    name: "Modal",
+    name: "VueModal",
 
-    components: { ButtonUi, Transition, Icon },
+    components: { Transition, VueButton, VueIcon },
 
     emits: {
         "showModal": null,
@@ -121,10 +121,11 @@ export default {
                     <div class="modal-dialog">
                         <div class="modal-header">
                             <h4 v-if="title" class="modal-title">
-                                <Icon v-if="icon" :icon="icon" class="mr-2 text-xl lg:text-2xl" />
+                                <vue-icon v-if="icon" :icon="icon"
+                                    class="mr-2 text-xl lg:text-2xl" />
                                 {{ title }}
                             </h4>
-                            <ButtonUi @click="hideModalModal" icon="x" no-shadow
+                            <vue-button @click="hideModalModal" icon="x" no-shadow
                                 class="!p-0 ml-auto" />
                         </div>
                         <div class="modal-content">

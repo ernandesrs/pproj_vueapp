@@ -1,12 +1,12 @@
 <script>
 
 import { ref } from 'vue';
-import ButtonUi from './ButtonUi.vue';
+import VueButton from './VueButton.vue';
 
 export default {
-    name: "ButtonConfirmationUi",
+    name: "VueButtonConfirmation",
 
-    components: { ButtonUi },
+    components: { VueButton },
 
     emits: {
         "confirmed": null,
@@ -90,15 +90,15 @@ export default {
 <template>
 
     <div class="flex justify-center items-center relative">
-        <ButtonUi @click="showConfirmationButtonsPopup" :text="text" :icon="icon"
+        <vue-button @click="showConfirmationButtonsPopup" :text="text" :icon="icon"
             :variant="variant" :size="size" :full="full" :no-rounded="noRounded"
             :iconEnd="iconEnd" :disabled="disabled" />
 
         <Transition name="showpopup">
             <div v-if="showConfirmationButtons" ref="confirmationPopup"
                 class="flex justify-center w-full h-100 bg-slate-100 dark:bg-gray-400 bg-opacity-95 shadow-md absolute border rounded border-slate-400 border-opacity-50 space-x-2 p-2 z-10">
-                <ButtonUi @click="cancelAction" icon="x" variant="danger" />
-                <ButtonUi @click="confirmAction" icon="check" variant="success" />
+                <vue-button @click="cancelAction" icon="x" variant="danger" />
+                <vue-button @click="confirmAction" icon="check" variant="success" />
             </div>
         </Transition>
     </div>

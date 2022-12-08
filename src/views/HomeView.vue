@@ -2,15 +2,15 @@
 
 import { ref } from "vue";
 import DefaultLayout from "../layouts/DefaultLayout.vue";
-import Collapse from "../components/Content/Collapse/Collapse.vue";
-import ButtonUi from "../components/Ui/Buttons/ButtonUi.vue";
-import Modal from "../components/Content/Modal/Modal.vue";
-import ButttonConfirmationUi from "../components/Ui/Buttons/ButttonConfirmationUi.vue";
+import VueCollapse from "../components/Content/Collapse/VueCollapse.vue";
+import VueButton from "../components/Ui/Buttons/VueButton.vue";
+import VueModal from "../components/Content/Modal/VueModal.vue";
+import VueButtonConfirmation from "../components/Ui/Buttons/VueButtonConfirmation.vue";
 
 export default {
 	name: "HomeView",
 
-	components: { Collapse, Collapse, DefaultLayout, ButtonUi, Modal, ButttonConfirmationUi },
+	components: { VueCollapse, DefaultLayout, VueButton, VueModal, VueButtonConfirmation },
 
 	setup(props) {
 		let showModal = ref(false);
@@ -22,7 +22,7 @@ export default {
 
 	methods: {
 		alert(a) {
-			window.alert(a);
+			console.log(a);
 		}
 	}
 
@@ -31,7 +31,7 @@ export default {
 </script>
 
 <template>
-	<Modal title="Top example modal" icon="pieChartFill" top :show="showModal"
+	<vue-modal title="Top example modal" icon="pieChartFill" top :show="showModal"
 		@hiddenModal="showModal = false" size="lg">
 		<template v-slot:content>
 			<h1>Lorem, ipsum dolor.</h1>
@@ -43,10 +43,10 @@ export default {
 			</p>
 
 			<div class="pt-3">
-				<ButtonUi icon="xCircle" text="Lorem ipsum dolor" variant="dark" />
+				<vue-button icon="xCircle" text="Lorem ipsum dolor" variant="dark" />
 			</div>
 		</template>
-	</Modal>
+	</vue-modal>
 
 	<DefaultLayout>
 		<template v-slot:content>
@@ -58,7 +58,7 @@ export default {
 					</div>
 
 					<div class="col-span-12 md:col-span-4">
-						<Collapse text="Collapse light" icon="pieChartFill" light>
+						<vue-collapse text="Collapse light" icon="pieChartFill" light>
 							<h1>Lorem ipsum dolor sit</h1>
 							<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.
 								Sunt
@@ -67,11 +67,11 @@ export default {
 								necessitatibus quis
 								itaque beatae! Aspernatur laudantium hic explicabo? Nemo,
 								quae?</p>
-						</Collapse>
+						</vue-collapse>
 					</div>
 
 					<div class="col-span-12 md:col-span-4">
-						<Collapse text="Collapse dark" dark hide-arrow>
+						<vue-collapse text="Collapse dark" dark hide-arrow>
 							<h1>Lorem ipsum dolor sit2</h1>
 							<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.
 								Sunt
@@ -80,11 +80,11 @@ export default {
 								necessitatibus quis
 								itaque beatae! Aspernatur laudantium hic explicabo? Nemo,
 								quae?</p>
-						</Collapse>
+						</vue-collapse>
 					</div>
 
 					<div class="col-span-12 md:col-span-4">
-						<Collapse text="Collapse transparent" icon="pieChartFill" light transparent>
+						<vue-collapse text="Collapse transparent" icon="pieChartFill" light transparent>
 							<h1>Lorem ipsum dolor sit2</h1>
 							<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.
 								Sunt
@@ -93,7 +93,7 @@ export default {
 								necessitatibus quis
 								itaque beatae! Aspernatur laudantium hic explicabo? Nemo,
 								quae?</p>
-						</Collapse>
+						</vue-collapse>
 					</div>
 				</div>
 
@@ -104,34 +104,34 @@ export default {
 					</div>
 
 					<div class="col-span-12 space-x-2 space-y-4">
-						<ButtonUi text="Botão padrão" icon="app" />
-						<ButtonUi text="Botão dark" icon="app" variant="dark" />
-						<ButtonUi text="Botão light" icon="app" as="a" variant="light" />
-						<ButtonUi text="Botão success" icon="app" as="a"
+						<vue-button text="Botão padrão" icon="app" />
+						<vue-button text="Botão dark" icon="app" variant="dark" />
+						<vue-button text="Botão light" icon="app" as="a" variant="light" />
+						<vue-button text="Botão success" icon="app" as="a"
 							variant="success" />
-						<ButtonUi text="Botão info" icon="app" as="a" variant="info" />
-						<ButtonUi text="Botão warning" icon="app" as="a"
+						<vue-button text="Botão info" icon="app" as="a" variant="info" />
+						<vue-button text="Botão warning" icon="app" as="a"
 							variant="warning" />
-						<ButtonUi text="Botão danger" icon="app" as="a"
+						<vue-button text="Botão danger" icon="app" as="a"
 							variant="danger" />
-						<ButtonUi text="Botão link" icon="app" as="a" />
-						<ButtonUi text="Botão sem arrendondamento" icon="app"
+						<vue-button text="Botão link" icon="app" as="a" />
+						<vue-button text="Botão sem arrendondamento" icon="app"
 							variant="dark" no-rounded />
-						<ButtonUi text="Botão full" icon="app" variant="dark" full />
-						<ButtonUi text="Botão pequeno" icon="app" variant="dark"
+						<vue-button text="Botão full" icon="app" variant="dark" full />
+						<vue-button text="Botão pequeno" icon="app" variant="dark"
 							size="sm" />
-						<ButtonUi text="Botão grande" icon="app" variant="dark"
+						<vue-button text="Botão grande" icon="app" variant="dark"
 							size="lg" />
-						<ButtonUi text="Botão ícone no final" icon="app" variant="dark"
+						<vue-button text="Botão ícone no final" icon="app" variant="dark"
 							icon-end />
-						<ButtonUi text="Botão sem ícone" variant="dark" />
-						<ButtonUi text="Botão desativado" variant="dark"
+						<vue-button text="Botão sem ícone" variant="dark" />
+						<vue-button text="Botão desativado" variant="dark"
 							icon="pieChartFill" disabled />
-						<ButtonUi text="Botão carregando" variant="dark"
+						<vue-button text="Botão carregando" variant="dark"
 							icon="pieChartFill" loading disabled />
-						<ButtonUi text="Botão padrão sem sombra" icon="pieChartFill"
+						<vue-button text="Botão padrão sem sombra" icon="pieChartFill"
 							no-shadow />
-						<ButttonConfirmationUi @confirmed="alert('Confirmado')"
+						<vue-button-confirmation @confirmed="alert('Confirmado')"
 							@canceled="alert('Cancelado')" text="Botão com confirmação"
 							icon="app" variant="dark" />
 					</div>
@@ -144,7 +144,7 @@ export default {
 					</div>
 
 					<div class="col-span-12 mb-3">
-						<ButtonUi @click="showModal = true" text="Abrir modal" />
+						<vue-button @click="showModal = true" text="Abrir modal" />
 					</div>
 				</div>
 

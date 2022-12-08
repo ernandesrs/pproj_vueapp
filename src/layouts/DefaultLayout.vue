@@ -1,14 +1,14 @@
 <script>
 
 import { ref } from 'vue';
-import Icon from '../components/Ui/Icon.vue';
+import VueIcon from '../components/Ui/VueIcon.vue';
 
 const MOBILE_WIDTH = 1024;
 
 export default {
     name: "DefaultLayout",
     
-    components: { Icon },
+    components: { VueIcon },
 
     setup() {
         let darkMode = ref(false);
@@ -100,7 +100,7 @@ export default {
 
                 <div class="py-3 text-center">
                     <RouterLink :to="{ name: 'home' }">
-                        <Icon icon="pieChartFill" class="text-gray-300 text-4xl" />
+                        <vue-icon icon="pieChartFill" class="text-gray-300 text-4xl" />
                         <h1 class="text-xl">
                             <span class="font-bold text-gray-300">NAME</span>
                             <span class="font-semibold text-gray-500">PANEL</span>
