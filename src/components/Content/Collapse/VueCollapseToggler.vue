@@ -45,8 +45,13 @@ export default {
     ]">
         <vue-icon v-if="icon" :icon="icon" />
         <span class="ml-2">{{ text }}</span>
-        <vue-icon v-if="!hideArrow" :icon="contentShowed ? 'arrowDown' : 'arrowRight'"
-            class="ml-auto text-xl" />
+        <vue-icon v-if="!hideArrow" icon="arrowRight"
+            :class="[
+                'ml-auto text-xl duration-300',
+                {
+                    'rotate-90': contentShowed
+                }
+            ]" />
     </a>
 </template>
 
