@@ -10,7 +10,8 @@ export default {
     props: {
         items: { type: Array, default: [] },
         vertical: { type: Boolean, default: false },
-        activable: { type: Boolean, default: false }
+        activable: { type: Boolean, default: false },
+        dark: { type: Boolean, default: false },
     },
 };
 
@@ -27,13 +28,7 @@ export default {
         <slot />
 
         <vue-nav-item v-for="item in items" :key="item" :data="item"
-            :activable="activable" />
+            :activable="activable" :dark="dark" :vertical="vertical" />
     </nav>
 
 </template>
-
-<style>
-.nav {
-    @apply border border-red-400;
-}
-</style>

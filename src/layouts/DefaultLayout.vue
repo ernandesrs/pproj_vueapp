@@ -149,7 +149,7 @@ export default {
                 </div>
 
                 <div class="py-3 flex flex-col">
-                    <vue-nav :items="sidebar.navs" vertical activable />
+                    <vue-nav :items="sidebar.navs" vertical activable dark />
                 </div>
 
             </div>
@@ -161,8 +161,10 @@ export default {
                     class="btn-sidebar-toggler">
                     <span :class="$helpers.icon.get('menu')"></span>
                 </button>
+                
+                <vue-nav :items="sidebar.navs" activable class="ml-auto" />
 
-                <button @click="darkToggler" class="ml-auto btn-theme-toggler"
+                <button @click="darkToggler" class="btn-theme-toggler"
                     :class="$helpers.icon.get(darkMode ? 'togglerRightFill' : 'togglerLeft')">
                 </button>
             </div>

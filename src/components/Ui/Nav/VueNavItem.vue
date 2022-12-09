@@ -20,7 +20,9 @@ export default {
         icon: { type: String, default: null },
         href: { type: [String, Object], default: null },
         target: { type: String, default: null },
-        activable: { type: Boolean, default: false }
+        activable: { type: Boolean, default: false },
+        dark: { type: Boolean, default: false },
+        vertical: { type: Boolean, default: false },
     },
 };
 
@@ -28,7 +30,8 @@ export default {
 
 <template>
 
-    <vue-link :custom-class="`nav-item${activable ? ' nav-item-activable' : ''}`"
+    <vue-link
+        :custom-class="`nav-item${activable ? ' nav-item-activable' : ''}${dark ? ' nav-item-dark' : ' nav-item-light'}${vertical ? ' nav-vertical' : ''}`"
         :text="(text ?? data.text)" :icon="(icon ?? data.icon)"
         :href="(href ?? data.href)" :target="(target ?? data.target)" />
 
@@ -36,10 +39,22 @@ export default {
 
 <style>
 .nav-item {
-    @apply text-red-500;
+    @apply py-2 px-4;
+}
+
+.nav-item.nav-item-light {
+    @apply text-slate-600 dark:text-slate-200;
+}
+
+.nav-item.nav-item-dark {
+    @apply text-slate-200;
 }
 
 .nav-item-activable.router-link-exact-active {
-    @apply text-yellow-500;
+    @apply text-slate-400 dark:text-opacity-70;
+}
+
+.nav-item.nav-item-activable.nav-vertical.router-link-exact-active {
+    @apply ml-4;
 }
 </style>
