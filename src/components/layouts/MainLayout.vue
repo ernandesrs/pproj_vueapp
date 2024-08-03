@@ -5,7 +5,7 @@
       v-if="appStore.stateData.inMobile && sidebar.show"
       v-on:click="sidebarToggle"
       :showing="sidebar.show"
-      class="fixed z-50 top-6 right-6 bg-transparent shadow-none text-zinc-50"
+      class="fixed z-50 top-6 right-6 shadow-none bg-zinc-950 text-zinc-50"
     />
     <!-- /menu toggler -->
 
