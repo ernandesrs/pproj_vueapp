@@ -77,7 +77,7 @@
 <script setup>
 import { useAppStore } from '@/stores/app'
 import { reactive, watch } from 'vue'
-import MainSidebar from '@/components/layouts/MainSidebar.vue'
+import MainSidebar from '@/components/layouts/main/MainSidebar.vue'
 import SidebarToggler from '@/components/layouts/SidebarToggler.vue'
 import { RouterLink } from 'vue-router'
 import IconElem from '../IconElem.vue'
