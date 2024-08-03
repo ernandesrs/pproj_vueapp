@@ -16,11 +16,7 @@
     ></div>
     <!-- /sidebar backdrop -->
 
-    <main-sidebar :show="sidebar.show" :mini-on="sidebar.miniOn">
-      <template v-slot:sidebarContent>
-        <!--  -->
-      </template>
-    </main-sidebar>
+    <main-sidebar :show="sidebar.show" :mini-on="sidebar.miniOn" />
 
     <!-- header/main -->
     <section class="flex-1 flex flex-col py-6 overflow-hidden">

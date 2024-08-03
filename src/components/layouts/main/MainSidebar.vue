@@ -10,7 +10,16 @@
       <div class="bg-zinc-800 w-full h-full flex flex-col rounded-lg shadow overflow-hidden">
         <!-- sidebar content -->
         <div class="flex-1 w-full overflow-y-auto p-5">
-          <slot name="sidebarContent" />
+          <template v-for="(group, groupIndex) in navigationGroups" :key="groupIndex">
+            <div class="text-zinc-300 mb-5">
+              <div v-show="!props.miniOn" v-html="group.label" class="mb-3"></div>
+              <nav class="rounded-lg flex flex-col">
+                <template v-for="(link, linkIndex) in group.links" :key="linkIndex">
+                  <nav-link :mini-on="props.miniOn" :link="link" />
+                </template>
+              </nav>
+            </div>
+          </template>
         </div>
         <!-- /sidebar content -->
       </div>
@@ -19,6 +28,8 @@
 </template>
 
 <script setup>
+import NavLink from './NavLink.vue'
+
 const props = defineProps({
   show: {
     type: Boolean,
@@ -29,6 +40,46 @@ const props = defineProps({
     default: false
   }
 })
+
+const navigationGroups = [
+  // Group #1
+  {
+    label: 'Dashboard',
+    links: [
+      {
+        label: 'Visão geral',
+        icon: 'pie-chart-fill',
+        activeIn: ['home'],
+        to: { name: 'home' }
+      },
+      {
+        label: 'Meu perfil',
+        icon: 'person-fill',
+        activeIn: ['profile'],
+        to: { name: 'profile' }
+      }
+    ]
+  },
+
+  // Group #2
+  {
+    label: 'Outros',
+    links: [
+      {
+        label: 'Configurações',
+        icon: 'gear-fill',
+        activeIn: [],
+        to: null
+      },
+      {
+        label: 'Other item',
+        icon: 'arrow-right',
+        activeIn: [],
+        to: null
+      }
+    ]
+  }
+]
 </script>
 
 <style lang="css" scoped>
