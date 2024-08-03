@@ -31,10 +31,19 @@ export const useAppStore = defineStore('app', () => {
     });
   };
 
+  /**
+   * Update page title
+   * @param {String} title 
+   */
+  const updatePageTitle = (title) => {
+    document.title = title + ' - Vue App';
+  };
+
   return {
     stateData,
 
     inMobileCheck,
-    windowResizeAddEvent
+    windowResizeAddEvent,
+    updatePageTitle
   }
 });

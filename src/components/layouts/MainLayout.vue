@@ -32,11 +32,18 @@
           <!-- /menu toggler -->
 
           <!-- logo -->
-          <a class="flex gap-x-2 items-center text-xl font-bold text-zinc-700" href="">
+          <router-link
+            :to="{ name: 'home' }"
+            class="flex gap-x-2 items-center text-xl font-bold text-zinc-700"
+          >
             <img class="w-7 h-7" src="@/assets/logo.svg" alt="Vue App" />
             <span>VUEAPP</span>
-          </a>
+          </router-link>
           <!-- /logo -->
+
+          <div class="flex-1 flex">
+            <router-link :to="{ name: 'profile' }" class="ml-auto"> Profile </router-link>
+          </div>
         </div>
       </header>
       <!-- /header -->
@@ -58,6 +65,7 @@ import { useAppStore } from '@/stores/app'
 import { reactive, watch } from 'vue'
 import MainSidebar from '@/components/layouts/MainSidebar.vue'
 import SidebarToggler from '@/components/layouts/SidebarToggler.vue'
+import { RouterLink } from 'vue-router'
 
 const appStore = useAppStore()
 
