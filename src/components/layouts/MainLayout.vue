@@ -1,19 +1,18 @@
 <template>
   <div class="w-full h-screen flex bg-zinc-100">
-    <!-- sidebar toggler -->
-    <button
-      v-show="appStore.stateData.inMobile && sidebar.show"
+    <!-- menu toggler -->
+    <SidebarToggler
+      v-if="appStore.stateData.inMobile && sidebar.show"
       v-on:click="sidebarToggle"
-      class="bg-zinc-100 py-2 px-4 border rounded-lg shadow fixed z-50 right-6 top-6"
-    >
-      X
-    </button>
-    <!-- /sidebar toggler -->
+      :showing="sidebar.show"
+      class="fixed z-50 top-6 right-6 bg-transparent shadow-none text-zinc-50"
+    />
+    <!-- /menu toggler -->
 
     <!-- sidebar backdrop -->
     <div
       v-show="appStore.stateData.inMobile && sidebar.show"
-      class="w-full h-screen fixed z-30 bg-zinc-900 bg-opacity-25"
+      class="w-full h-screen fixed z-30 bg-zinc-900 bg-opacity-75"
     ></div>
     <!-- /sidebar backdrop -->
 
@@ -22,15 +21,14 @@
         <!--  -->
       </template>
     </MainSidebar>
+
     <!-- header/main -->
     <section class="flex-1 flex flex-col py-6 overflow-hidden">
       <!-- header -->
       <header class="w-full h-[65px] px-6 rounded-lg overflow-hidden mb-3">
-        <div class="w-full h-full rounded-lg flex gap-x-3 items-center">
+        <div class="w-full h-full rounded-lg flex items-center gap-x-5">
           <!-- menu toggler -->
-          <button v-on:click="sidebarToggle" class="py-3 px-2 border rounded-lg shadow">
-            MENU
-          </button>
+          <SidebarToggler v-on:click="sidebarToggle" :showing="sidebar.miniOn" />
           <!-- /menu toggler -->
 
           <!-- logo -->
@@ -59,6 +57,7 @@
 import { useAppStore } from '@/stores/app'
 import { reactive, watch } from 'vue'
 import MainSidebar from '@/components/layouts/MainSidebar.vue'
+import SidebarToggler from '@/components/layouts/SidebarToggler.vue'
 
 const appStore = useAppStore()
 
