@@ -25,7 +25,7 @@
     <!-- header/main -->
     <section class="flex-1 flex flex-col py-6 overflow-hidden">
       <!-- header -->
-      <header class="w-full h-[65px] px-6 rounded-lg overflow-hidden mb-3">
+      <header class="w-full h-[65px] px-6 rounded-lg mb-3">
         <div class="w-full h-full rounded-lg flex items-center gap-x-5">
           <!-- menu toggler -->
           <sidebar-toggler v-on:click="sidebarToggle" :showing="sidebar.miniOn" />
@@ -42,7 +42,21 @@
           <!-- /logo -->
 
           <div class="flex-1 flex">
-            <router-link :to="{ name: 'profile' }" class="ml-auto"> Profile </router-link>
+            <dropdown-elem class="ml-auto" location="right">
+              <template #activator>
+                <router-link
+                  :to="{ name: 'profile' }"
+                  class="flex items-center gap-x-2 shadow py-2 px-4 rounded-lg bg-zinc-50"
+                >
+                  <icon-elem name="person-circle" class="text-xl" />
+                  <span class="inline">Username</span>
+                </router-link>
+              </template>
+
+              <template #content>
+                <div class="w-[275px] bg-white shadow-lg p-5 rounded-lg">Dropdown content</div>
+              </template>
+            </dropdown-elem>
           </div>
         </div>
       </header>
@@ -66,6 +80,8 @@ import { reactive, watch } from 'vue'
 import MainSidebar from '@/components/layouts/MainSidebar.vue'
 import SidebarToggler from '@/components/layouts/SidebarToggler.vue'
 import { RouterLink } from 'vue-router'
+import IconElem from '../IconElem.vue'
+import DropdownElem from '../DropdownElem.vue'
 
 const appStore = useAppStore()
 
