@@ -1,11 +1,12 @@
 <template>
   <button class="bg-zinc-100 py-2 px-3 text-2xl shadow rounded-lg">
-    <i v-if="props.showing" class="bi bi-list-nested"></i>
-    <i v-if="!props.showing" class="bi bi-list"></i>
+    <icon-elem :name="props.showing ? 'list-nested' : 'list'" />
   </button>
 </template>
 
 <script setup>
+import IconElem from '../IconElem.vue'
+
 const props = defineProps({
   showing: {
     type: Boolean,
