@@ -17,14 +17,11 @@
     ></div>
     <!-- /sidebar backdrop -->
 
-    <Transition name="sidebar">
-      <MainSidebar v-show="sidebar.show">
-        <template v-slot:sidebarContent>
-          <!--  -->
-        </template>
-      </MainSidebar>
-    </Transition>
-
+    <MainSidebar :show="sidebar.show" :mini-on="sidebar.miniOn">
+      <template v-slot:sidebarContent>
+        <!--  -->
+      </template>
+    </MainSidebar>
     <!-- header/main -->
     <section class="flex-1 flex flex-col py-6 overflow-hidden">
       <!-- header -->
@@ -76,7 +73,15 @@ const sidebar = reactive({
  *
  */
 const sidebarToggle = () => {
-  sidebar.show = !sidebar.show
+  if (appStore.stateData.inMobile) {
+    sidebar.show = !sidebar.show
+  } else {
+    if (!sidebar.show) {
+      sidebar.show = true
+    }
+
+    sidebar.miniOn = !sidebar.miniOn
+  }
 }
 
 /**
@@ -90,6 +95,7 @@ watch(
   () => appStore.stateData.inMobile,
   (n) => {
     if (n) {
+      sidebar.miniOn = false
       sidebar.show = false
     } else {
       sidebar.show = true
