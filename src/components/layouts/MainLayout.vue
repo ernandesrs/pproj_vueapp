@@ -1,27 +1,45 @@
 <template>
   <div class="w-full h-screen flex bg-zinc-100">
-    <!-- aside -->
-    <aside class="w-full max-w-[80vw] sm:max-w-[325px] p-6">
-      <div class="bg-zinc-800 w-full h-full flex flex-col rounded-lg shadow overflow-hidden">
-        <!-- sidebar content -->
-        <div class="flex-1 w-full overflow-y-auto p-5"></div>
-        <!-- /sidebar content -->
-      </div>
-    </aside>
-    <!-- /aside -->
+    <!-- sidebar toggler -->
+    <button
+      v-show="appStore.stateData.inMobile && sidebar.show"
+      v-on:click="sidebarToggle"
+      class="bg-zinc-100 py-2 px-4 border rounded-lg shadow fixed z-50 right-6 top-6"
+    >
+      X
+    </button>
+    <!-- /sidebar toggler -->
+
+    <!-- sidebar backdrop -->
+    <div
+      v-show="appStore.stateData.inMobile && sidebar.show"
+      class="w-full h-screen fixed z-30 bg-zinc-900 bg-opacity-25"
+    ></div>
+    <!-- /sidebar backdrop -->
+
+    <Transition name="sidebar">
+      <MainSidebar v-show="sidebar.show">
+        <template v-slot:sidebarContent>
+          <!--  -->
+        </template>
+      </MainSidebar>
+    </Transition>
 
     <!-- header/main -->
     <section class="flex-1 flex flex-col py-6 overflow-hidden">
       <!-- header -->
-      <header class="w-full h-[65px] pr-6 rounded-lg overflow-hidden mb-3">
+      <header class="w-full h-[65px] px-6 rounded-lg overflow-hidden mb-3">
         <div class="w-full h-full rounded-lg flex gap-x-3 items-center">
           <!-- menu toggler -->
-          <button class="py-3 px-2 border rounded-lg shadow">MENU</button>
+          <button v-on:click="sidebarToggle" class="py-3 px-2 border rounded-lg shadow">
+            MENU
+          </button>
           <!-- /menu toggler -->
 
           <!-- logo -->
           <a class="flex gap-x-2 items-center text-xl font-bold text-zinc-700" href="">
-            <img class="w-7 h-7" src="@/assets/logo.svg" alt="Vue App" /> <span>VUEAPP</span>
+            <img class="w-7 h-7" src="@/assets/logo.svg" alt="Vue App" />
+            <span>VUEAPP</span>
           </a>
           <!-- /logo -->
         </div>
@@ -29,7 +47,7 @@
       <!-- /header -->
 
       <!-- main -->
-      <main class="w-full flex-1 overflow-y-auto pr-6 flex flex-col">
+      <main class="w-full flex-1 overflow-y-auto px-6 flex flex-col">
         <div class="flex-1 rounded-lg p-6 border bg-zinc-50">
           <router-view />
         </div>
@@ -40,6 +58,60 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { useAppStore } from '@/stores/app'
+import { reactive, watch } from 'vue'
+import MainSidebar from '@/components/layouts/MainSidebar.vue'
 
-<style lang="css" scoped></style>
+const appStore = useAppStore()
+
+const sidebar = reactive({
+  show: false,
+  miniOn: false
+})
+
+/**
+ *
+ * Methods
+ *
+ */
+const sidebarToggle = () => {
+  sidebar.show = !sidebar.show
+}
+
+/**
+ *
+ * Watchs
+ *
+ */
+
+// Mobile/Desktop change
+watch(
+  () => appStore.stateData.inMobile,
+  (n) => {
+    if (n) {
+      sidebar.show = false
+    } else {
+      sidebar.show = true
+    }
+  },
+  {
+    immediate: true
+  }
+)
+</script>
+
+<style lang="css" scoped>
+.sidebar-enter-active {
+  @apply duration-300 ease-in-out;
+}
+
+.sidebar-leave-active {
+  @apply duration-100 ease-in;
+}
+
+.sidebar-enter-from,
+.sidebar-leave-to {
+  @apply w-12 -translate-x-1/3;
+}
+</style>
