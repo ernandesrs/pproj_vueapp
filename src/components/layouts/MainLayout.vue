@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-screen flex bg-zinc-100">
     <!-- menu toggler -->
-    <SidebarToggler
+    <sidebar-toggler
       v-if="appStore.stateData.inMobile && sidebar.show"
       v-on:click="sidebarToggle"
       :showing="sidebar.show"
@@ -16,11 +16,11 @@
     ></div>
     <!-- /sidebar backdrop -->
 
-    <MainSidebar :show="sidebar.show" :mini-on="sidebar.miniOn">
+    <main-sidebar :show="sidebar.show" :mini-on="sidebar.miniOn">
       <template v-slot:sidebarContent>
         <!--  -->
       </template>
-    </MainSidebar>
+    </main-sidebar>
 
     <!-- header/main -->
     <section class="flex-1 flex flex-col py-6 overflow-hidden">
@@ -28,7 +28,7 @@
       <header class="w-full h-[65px] px-6 rounded-lg overflow-hidden mb-3">
         <div class="w-full h-full rounded-lg flex items-center gap-x-5">
           <!-- menu toggler -->
-          <SidebarToggler v-on:click="sidebarToggle" :showing="sidebar.miniOn" />
+          <sidebar-toggler v-on:click="sidebarToggle" :showing="sidebar.miniOn" />
           <!-- /menu toggler -->
 
           <!-- logo -->
