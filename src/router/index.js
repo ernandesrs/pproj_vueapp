@@ -20,6 +20,17 @@ const router = createRouter({
           component: () => import('../views/ProfileView.vue')
         }
       ]
+    },
+    {
+      path: '/development',
+      component: MainLayout,
+      children: [
+        {
+          path: 'content-cards',
+          name: 'contentCard',
+          component: () => import('../views/development/ContentCardView.vue')
+        }
+      ]
     }
   ]
 })

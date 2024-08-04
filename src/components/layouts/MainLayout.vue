@@ -60,7 +60,7 @@
 
       <!-- main -->
       <main class="w-full flex-1 overflow-y-auto px-6 flex flex-col">
-        <div class="flex-1 rounded-lg">
+        <div class="flex-1 rounded-lg pb-3">
           <router-view />
         </div>
       </main>

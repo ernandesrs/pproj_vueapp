@@ -51,20 +51,33 @@ const navigationGroups = [
         icon: 'pie-chart-fill',
         activeIn: ['home'],
         to: { name: 'home' }
-      },
-      {
-        label: 'Meu perfil',
-        icon: 'person-fill',
-        activeIn: ['profile'],
-        to: { name: 'profile' }
       }
     ]
   },
 
   // Group #2
   {
+    label: 'Development',
+    links: [
+      {
+        label: 'Content Cards',
+        icon: 'window',
+        activeIn: ['contentCard'],
+        to: { name: 'contentCard' }
+      }
+    ]
+  },
+
+  // Group #3
+  {
     label: 'Outros',
     links: [
+      {
+        label: 'Meu perfil',
+        icon: 'person-fill',
+        activeIn: ['profile'],
+        to: { name: 'profile' }
+      },
       {
         label: 'Configurações',
         icon: 'gear-fill',

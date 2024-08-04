@@ -1,7 +1,5 @@
 <template>
-  <div class="flex flex-col rounded-lg relative">
-    <backdrop-elem v-if="props.loading" spin spinSize="base" />
-
+  <div class="flex flex-col rounded-lg">
     <!-- header -->
     <div v-if="showHeader" class="flex items-center gap-x-6 py-5">
       <!-- icon/title/subtitle -->
@@ -16,16 +14,18 @@
       </div>
 
       <!-- right header content -->
-      <div class="flex-1">
+      <div class="flex-1 flex justify-end items-center gap-2">
         <slot name="headerAppend" />
       </div>
     </div>
 
     <!-- content/footer -->
     <div
-      class="flex-1 flex flex-col rounded-lg"
+      class="flex-1 flex flex-col rounded-lg relative"
       :class="{ shadow: !props.noContainer && !props.noShadow }"
     >
+      <backdrop-elem v-if="props.loading" spin spinSize="base" />
+
       <div
         class="rounded-lg flex-1 flex flex-col"
         :class="{ 'rounded-bl-none rounded-br-none': showFooter }"
