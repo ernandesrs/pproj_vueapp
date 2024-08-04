@@ -1,8 +1,33 @@
 <template>
-  <main>Profile View</main>
+  <content-card
+    icon="person-circle"
+    title="Profile"
+    subtitle="Lorem ipsum dolor sit amet consectetur adipisicing elit."
+    no-shadow
+  >
+    <div class="grid grid-cols-12 gap-6">
+      <content-card class="col-span-12 md:col-span-5 xl:col-span-4">
+        <card-section first title="Avatar" subtitle="Your profile avatar">
+          <template #content> Content </template>
+        </card-section>
+        <hr />
+        <card-section middle title="Details" subtitle="Your profile details">
+          <template #content> Content </template>
+        </card-section>
+      </content-card>
+
+      <content-card class="col-span-12 md:col-span-7 xl:col-span-8">
+        <card-section title="Basic data" subtitle="Your profile basic data">
+          <template #content> Content </template>
+        </card-section>
+      </content-card>
+    </div>
+  </content-card>
 </template>
 
 <script setup>
+import ContentCard from '@/components/card/ContentCard.vue'
+import CardSection from '@/components/card/CardSection.vue'
 import { useAppStore } from '@/stores/app'
 
 const appStore = useAppStore()

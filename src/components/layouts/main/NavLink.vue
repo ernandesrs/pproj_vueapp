@@ -11,7 +11,7 @@
     }"
   >
     <icon-elem :name="link?.icon" />
-    <span v-show="!props.miniOn" class="inline truncate" v-html="link?.label"></span>
+    <span v-show="!props.miniOn" class="inline truncate" v-html="link?.title ?? link?.label"></span>
   </router-link>
 </template>
 

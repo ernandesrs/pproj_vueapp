@@ -6,9 +6,11 @@
       subtitle="This is a subtitle for the home page"
       class="col-span-12"
     >
-      <template #content>
-        <p>Content #1</p>
-      </template>
+      <card-section>
+        <template #content>
+          <p>Content #1</p>
+        </template>
+      </card-section>
     </content-card>
 
     <content-card
@@ -17,9 +19,11 @@
       subtitle="This is a subtitle for the home page"
       class="col-span-12 sm:col-span-6"
     >
-      <template #content>
-        <p>Content #1</p>
-      </template>
+      <card-section>
+        <template #content>
+          <p>Content #1</p>
+        </template>
+      </card-section>
     </content-card>
 
     <content-card
@@ -27,15 +31,19 @@
       subtitle="This is a subtitle for the home page"
       class="col-span-12 sm:col-span-6"
     >
-      <template #content>
-        <p>Content #1</p>
-      </template>
+      <card-section>
+        <template #content>
+          <p>Content #1</p>
+        </template>
+      </card-section>
     </content-card>
 
     <content-card class="col-span-12 sm:col-span-6">
-      <template #content>
-        <p>Content #1</p>
-      </template>
+      <card-section>
+        <template #content>
+          <p>Content #1</p>
+        </template>
+      </card-section>
     </content-card>
 
     <content-card
@@ -43,9 +51,11 @@
       subtitle="This is a subtitle for the with footer"
       class="col-span-12 sm:col-span-6"
     >
-      <template #content>
-        <p>Content #1</p>
-      </template>
+      <card-section>
+        <template #content>
+          <p>Content #1</p>
+        </template>
+      </card-section>
 
       <template #prependFooter>Prepend</template>
       <template #middleFooter>Middle</template>
@@ -55,6 +65,7 @@
 </template>
 
 <script setup>
+import CardSection from '@/components/card/CardSection.vue'
 import ContentCard from '@/components/card/ContentCard.vue'
 import { useAppStore } from '@/stores/app'
 

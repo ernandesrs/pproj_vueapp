@@ -1,15 +1,12 @@
 <template>
-  <div class="flex flex-col bg-zinc-100 shadow rounded-lg relative">
+  <div class="flex flex-col rounded-lg relative">
     <backdrop-elem v-if="props.loading" spin spinSize="base" />
 
     <!-- header -->
-    <div v-if="showHeader" class="rounded-tl-lg rounded-tr-lg flex items-center gap-x-6 px-6 py-5">
+    <div v-if="showHeader" class="flex items-center gap-x-6 py-5">
       <!-- icon/title/subtitle -->
       <div class="flex flex-col cursor-default">
-        <div
-          v-if="props.title"
-          class="flex items-center gap-x-2 text-xl lg:text-2xl font-medium text-zinc-700 mb-1"
-        >
+        <div v-if="props.title" class="flex items-center gap-x-2" :class="getTitleClass">
           <icon-elem v-if="props.icon" :name="props.icon" />
           <component :is="props.titleTag">{{ props.title }}</component>
         </div>
@@ -24,30 +21,32 @@
       </div>
     </div>
 
-    <!-- content -->
+    <!-- content/footer -->
     <div
-      class="flex-1 bg-zinc-50 px-6 py-5"
-      :class="{
-        'rounded-tl-lg rounded-tr-lg': !showHeader,
-        'rounded-bl-lg rounded-br-lg': !showFooter
-      }"
+      class="flex-1 flex flex-col rounded-lg"
+      :class="{ shadow: !props.noContainer && !props.noShadow }"
     >
-      <slot name="content" />
-    </div>
+      <div
+        class="rounded-lg flex-1 flex flex-col"
+        :class="{ 'rounded-bl-none rounded-br-none': showFooter }"
+      >
+        <slot />
+      </div>
 
-    <!-- footer -->
-    <div
-      v-if="showFooter"
-      class="flex-1 flex items-center bg-zinc-100 px-6 py-5 rounded-bl-lg rounded-br-lg"
-    >
-      <div v-if="$slots?.prependFooter" class="flex-1 flex justify-start items-center mr-2">
-        <slot name="prependFooter" />
-      </div>
-      <div v-if="$slots?.middleFooter" class="flex-1 flex justify-center items-center">
-        <slot name="middleFooter" />
-      </div>
-      <div v-if="$slots?.appendFooter" class="flex-1 flex justify-end items-center ml-2">
-        <slot name="appendFooter" />
+      <!-- footer -->
+      <div
+        v-if="showFooter"
+        class="flex-1 flex items-center bg-zinc-100 px-6 py-5 rounded-bl-lg rounded-br-lg"
+      >
+        <div v-if="$slots?.prependFooter" class="flex-1 flex justify-start items-center mr-2">
+          <slot name="prependFooter" />
+        </div>
+        <div v-if="$slots?.middleFooter" class="flex-1 flex justify-center items-center">
+          <slot name="middleFooter" />
+        </div>
+        <div v-if="$slots?.appendFooter" class="flex-1 flex justify-end items-center ml-2">
+          <slot name="appendFooter" />
+        </div>
       </div>
     </div>
   </div>
@@ -105,17 +104,41 @@ const props = defineProps({
   subtitleTag: {
     type: String,
     default: 'div'
+  },
+
+  /**
+   * If true, remove content container shadow
+   */
+  noShadow: {
+    type: Boolean,
+    default: false
   }
 })
 
 const slots = useSlots()
 
+/**
+ *
+ * Computeds
+ *
+ */
 const showHeader = computed(() => {
   return props.title != null || props.subtitle != null
 })
 
 const showFooter = computed(() => {
   return slots?.prependFooter || slots?.middleFooter || slots?.appendFooter
+})
+
+const getTitleClass = computed(() => {
+  const titleStyles = {
+    h1: 'text-xl lg:text-2xl font-medium text-zinc-700',
+    h2: 'text-lg lg:text-xl font-medium text-zinc-500',
+    h3: 'text-base lg:text-lg font-medium text-zinc-400',
+    h4: 'text-sm lg:text-base font-semibold text-zinc-300'
+  }
+
+  return titleStyles[props.titleTag] + (props?.subtitle ? ' mb-1' : '')
 })
 </script>
 
