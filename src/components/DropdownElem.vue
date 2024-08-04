@@ -15,7 +15,7 @@
       <div
         ref="content"
         v-show="compData.show"
-        class="absolute z-0 top-full"
+        class="absolute z-50 top-full"
         :class="{ 'right-0': props.location == 'right', 'left-0': props.location == 'left' }"
       >
         <slot name="content" />
