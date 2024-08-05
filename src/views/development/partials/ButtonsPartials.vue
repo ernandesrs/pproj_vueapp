@@ -57,6 +57,14 @@
           :size="props.size"
           loading
         />
+        <button-elem
+          append-icon="arrow-right"
+          text="Square button"
+          :color="props.color"
+          :variant="props.variant"
+          :size="props.size"
+          square
+        />
       </div>
     </template>
   </card-section>

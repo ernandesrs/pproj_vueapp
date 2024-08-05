@@ -87,6 +87,14 @@ const props = defineProps({
   },
 
   /**
+   * Button square
+   */
+  square: {
+    type: Boolean,
+    default: false
+  },
+
+  /**
    * Button loading
    */
   loading: {
@@ -149,7 +157,7 @@ const getClass = computed(() => {
     sizes[props.size] +
     ' ' +
     colors[props.color][props.variant] +
-    (props.circle ? ' rounded-full' : ' rounded-lg') +
+    (props.circle ? ' rounded-full' : props.square ? '' : ' rounded-lg') +
     (props.loading ? ' animate-pulse pointer-events-none' : '') +
     (props.variant != 'filled' ? ' disabled:border-opacity-50' : ' disabled:bg-opacity-75 shadow')
   )
