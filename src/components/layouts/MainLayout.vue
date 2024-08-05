@@ -37,8 +37,18 @@
           </router-link>
           <!-- /logo -->
 
-          <div class="flex-1 flex">
-            <dropdown-elem class="ml-auto" location="right">
+          <div class="flex-1 flex items-center gap-x-4">
+            <button-elem
+              v-on:click="darkModeToggle"
+              :icon="appStore.isDarkTheme ? 'sun-fill' : 'moon-fill'"
+              color="dark"
+              size="sm"
+              variant="filled"
+              circle
+              class="ml-auto"
+            />
+
+            <dropdown-elem location="right">
               <template #activator>
                 <router-link
                   :to="{ name: 'profile' }"
@@ -73,11 +83,12 @@
 <script setup>
 import { useAppStore } from '@/stores/app'
 import { reactive, watch } from 'vue'
+import { RouterLink } from 'vue-router'
 import MainSidebar from '@/components/layouts/main/MainSidebar.vue'
 import SidebarToggler from '@/components/layouts/SidebarToggler.vue'
-import { RouterLink } from 'vue-router'
 import IconElem from '../IconElem.vue'
 import DropdownElem from '../DropdownElem.vue'
+import ButtonElem from '../ButtonElem.vue'
 
 const appStore = useAppStore()
 
@@ -103,6 +114,10 @@ const sidebarToggle = () => {
   }
 }
 
+const darkModeToggle = () => {
+  appStore.darkModeToggle()
+}
+
 /**
  *
  * Watchs
@@ -124,6 +139,12 @@ watch(
     immediate: true
   }
 )
+
+/**
+ *
+ * Calls
+ */
+appStore.setTheme()
 </script>
 
 <style lang="css" scoped>
