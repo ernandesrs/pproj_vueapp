@@ -11,7 +11,7 @@
           <template #content> Content </template>
         </card-section>
         <hr />
-        <card-section middle title="Details" subtitle="Your profile details">
+        <card-section last title="Details" subtitle="Your profile details">
           <template #content> Content </template>
         </card-section>
       </content-card>

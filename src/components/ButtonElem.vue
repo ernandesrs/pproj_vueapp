@@ -106,44 +106,49 @@ const props = defineProps({
 const getClass = computed(() => {
   const colors = {
     primary: {
-      filled: 'bg-purple-700 text-zinc-100 hover:bg-purple-800',
+      filled:
+        'bg-purple-700 text-zinc-100 hover:bg-purple-800 dark:bg-purple-900 dark:hover:bg-purple-950',
       outlined: 'border-purple-700 text-purple-700 hover:border-purple-900 hover:text-purple-900',
       text: 'text-purple-500 hover:text-purple-800'
     },
     secondary: {
-      filled: 'bg-fuchsia-700 text-zinc-100 hover:bg-fuchsia-800',
+      filled:
+        'bg-fuchsia-700 text-zinc-100 hover:bg-fuchsia-800 dark:bg-fuchsia-900 dark:hover:bg-fuchsia-950',
       outlined:
         'border-fuchsia-700 text-fuchsia-700 hover:border-fuchsia-900 hover:text-fuchsia-900',
       text: 'text-fuchsia-500 hover:text-fuchsia-800'
     },
     success: {
-      filled: 'bg-emerald-700 text-zinc-100 hover:bg-emerald-800',
+      filled:
+        'bg-emerald-700 text-zinc-100 hover:bg-emerald-800 dark:bg-emerald-900 dark:hover:bg-emerald-950',
       outlined:
         'border-emerald-700 text-emerald-700 hover:border-emerald-900 hover:text-emerald-900',
       text: 'text-emerald-500 hover:text-emerald-800'
     },
     info: {
-      filled: 'bg-sky-700 text-zinc-100 hover:bg-sky-800',
+      filled: 'bg-sky-700 text-zinc-100 hover:bg-sky-800 dark:bg-sky-900 dark:hover:bg-sky-950',
       outlined: 'border-sky-700 text-sky-700 hover:border-sky-900 hover:text-sky-900',
       text: 'text-sky-500 hover:text-sky-800'
     },
     danger: {
-      filled: 'bg-rose-700 text-zinc-100 hover:bg-rose-800',
+      filled: 'bg-rose-700 text-zinc-100 hover:bg-rose-800 dark:bg-rose-900 dark:hover:bg-rose-950',
       outlined: 'border-rose-700 text-rose-700 hover:border-rose-900 hover:text-rose-900',
       text: 'text-rose-500 hover:text-rose-800'
     },
     warning: {
-      filled: 'bg-yellow-600 text-zinc-100 hover:bg-yellow-700',
+      filled:
+        'bg-yellow-600 text-zinc-100 hover:bg-yellow-700 dark:bg-yellow-900 dark:hover:bg-yellow-950',
       outlined: 'border-yellow-600 text-yellow-600 hover:border-yellow-900 hover:text-yellow-900',
       text: 'text-yellow-500 hover:text-yellow-600'
     },
     dark: {
-      filled: 'bg-zinc-700 text-zinc-100 hover:bg-zinc-800',
+      filled: 'bg-zinc-700 text-zinc-100 hover:bg-zinc-800 dark:bg-zinc-900 dark:hover:bg-zinc-950',
       outlined: 'border-zinc-500 text-zinc-500 hover:border-zinc-800 hover:text-zinc-800',
       text: 'text-zinc-600 hover:text-zinc-800'
     },
     light: {
-      filled: 'bg-zinc-100 text-zinc-500 hover:bg-zinc-200',
+      filled:
+        'bg-zinc-100 text-zinc-500 hover:bg-zinc-200 dark:bg-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-700',
       outlined: 'border-zinc-300 text-zinc-400 hover:border-zinc-400 hover:text-zinc-500',
       text: 'text-zinc-500 hover:text-zinc-600'
     }
