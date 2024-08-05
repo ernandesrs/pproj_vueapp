@@ -64,6 +64,12 @@ const navigationGroups = [
         icon: 'window',
         activeIn: ['contentCard'],
         to: { name: 'contentCard' }
+      },
+      {
+        label: 'Buttons',
+        icon: 'collection-fill',
+        activeIn: ['buttons'],
+        to: { name: 'buttons' }
       }
     ]
   },

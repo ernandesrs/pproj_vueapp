@@ -29,6 +29,11 @@ const router = createRouter({
           path: 'content-cards',
           name: 'contentCard',
           component: () => import('../views/development/ContentCardView.vue')
+        },
+        {
+          path: 'buttons',
+          name: 'buttons',
+          component: () => import('../views/development/ButtonsView.vue')
         }
       ]
     }
