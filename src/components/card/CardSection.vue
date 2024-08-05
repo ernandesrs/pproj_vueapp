@@ -38,14 +38,36 @@ const props = defineProps({
     default: false
   },
 
+  /**
+   * Title
+   */
   title: {
     type: [null, String],
     default: null
   },
 
+  /**
+   * Subtitle
+   */
   subtitle: {
     type: [null, String],
     default: null
+  },
+
+  /**
+   * Bordered
+   */
+  bordered: {
+    type: Boolean,
+    default: false
+  },
+
+  /**
+   * Shadow
+   */
+  shadow: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -55,13 +77,17 @@ const props = defineProps({
  *
  */
 const getRoundClass = computed(() => {
-  return props.first
-    ? 'rounded-tl-lg rounded-tr-lg'
-    : props.last
-      ? 'rounded-bl-lg rounded-br-lg'
-      : props.middle
-        ? 'rounded-none'
-        : 'rounded-lg'
+  return (
+    (props.first
+      ? 'rounded-tl-lg rounded-tr-lg'
+      : props.last
+        ? 'rounded-bl-lg rounded-br-lg'
+        : props.middle
+          ? 'rounded-none'
+          : 'rounded-lg') +
+    (props.bordered ? ' border' : '') +
+    (props.shadow ? ' shadow' : '')
+  )
 })
 </script>
 
