@@ -3,6 +3,7 @@
     <content-card
       icon="window"
       title="Header title"
+      titleTag="h1"
       subtitle="This is a header subtitle"
       class="col-span-12"
     >
@@ -41,11 +42,11 @@
       <card-section first title="Section title" subtitle="This is a section subtitle">
         <template #content> This is a content card </template>
       </card-section>
-      <hr />
+      <separator-elem />
       <card-section middle title="Section title" subtitle="This is a section subtitle">
         <template #content> This is a content card </template>
       </card-section>
-      <hr />
+      <separator-elem />
       <card-section last title="Section title" subtitle="This is a section subtitle">
         <template #content> This is a content card </template>
       </card-section>
@@ -80,6 +81,7 @@
 <script setup>
 import CardSection from '@/components/card/CardSection.vue'
 import ContentCard from '@/components/card/ContentCard.vue'
+import SeparatorElem from '@/components/SeparatorElem.vue'
 import { useAppStore } from '@/stores/app'
 
 const appStore = useAppStore()

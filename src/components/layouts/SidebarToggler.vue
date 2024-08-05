@@ -1,5 +1,5 @@
 <template>
-  <button class="bg-zinc-100 py-2 px-3 text-2xl shadow rounded-lg">
+  <button class="bg-transparent py-1 px-2 text-3xl shadow rounded-lg">
     <icon-elem :name="props.showing ? 'list-nested' : 'list'" />
   </button>
 </template>

@@ -1,8 +1,16 @@
 <template>
-  <div class="flex-1 flex flex-col px-6 py-5 bg-zinc-50" :class="getRoundClass">
+  <div class="flex-1 flex flex-col px-6 py-5 bg-zinc-50 dark:bg-zinc-800" :class="getRoundClass">
     <div v-if="props.title || props.subtitle" class="mb-2">
-      <div v-if="props.title" v-html="props.title" class="text-base lg:text-lg text-zinc-600"></div>
-      <div v-if="props.subtitle" v-html="props.subtitle" class="text-sm text-zinc-400"></div>
+      <div
+        v-if="props.title"
+        v-html="props.title"
+        class="text-base lg:text-lg text-zinc-600 dark:text-zinc-300"
+      ></div>
+      <div
+        v-if="props.subtitle"
+        v-html="props.subtitle"
+        class="text-sm text-zinc-400 dark:text-zinc-400"
+      ></div>
     </div>
     <div class="flex-1">
       <slot name="content" />
@@ -85,7 +93,7 @@ const getRoundClass = computed(() => {
         : props.middle
           ? 'rounded-none'
           : 'rounded-lg') +
-    (props.bordered ? ' border' : '') +
+    (props.bordered ? ' border border-zinc-200 dark:border-zinc-700' : '') +
     (props.shadow ? ' shadow' : '')
   )
 })

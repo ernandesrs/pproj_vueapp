@@ -8,7 +8,7 @@
           <icon-elem v-if="props.icon" :name="props.icon" />
           <component :is="props.titleTag">{{ props.title }}</component>
         </div>
-        <component :is="props.subtitleTag" class="text-sm text-zinc-500">{{
+        <component :is="props.subtitleTag" class="text-sm text-zinc-500 dark:text-zinc-500">{{
           props.subtitle
         }}</component>
       </div>
@@ -132,10 +132,10 @@ const showFooter = computed(() => {
 
 const getTitleClass = computed(() => {
   const titleStyles = {
-    h1: 'text-xl lg:text-2xl font-medium text-zinc-700',
-    h2: 'text-lg lg:text-xl font-medium text-zinc-500',
-    h3: 'text-base lg:text-lg font-medium text-zinc-400',
-    h4: 'text-sm lg:text-base font-semibold text-zinc-300'
+    h1: 'text-xl lg:text-2xl font-medium text-zinc-700 dark:text-zinc-300',
+    h2: 'text-lg lg:text-xl font-medium text-zinc-500 dark:text-zinc-400',
+    h3: 'text-base lg:text-lg font-medium text-zinc-400 dark:text-zinc-500',
+    h4: 'text-sm lg:text-base font-semibold text-zinc-300 dark:text-zinc-500'
   }
 
   return titleStyles[props.titleTag] + (props?.subtitle ? ' mb-1' : '')

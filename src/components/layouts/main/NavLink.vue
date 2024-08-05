@@ -2,7 +2,7 @@
   <router-link
     v-bind:to="link?.to ?? {}"
     :title="link?.title ?? link?.label"
-    class="flex items-center gap-2 py-3 px-6 text-zinc-300 bg-zinc-900 hover:bg-purple-950 duration-300 ease-in-out rounded-lg mb-1"
+    class="flex items-center gap-2 py-3 px-6 text-zinc-200 bg-zinc-900 hover:bg-purple-950 duration-300 ease-in-out rounded-lg mb-1"
     :class="{
       'bg-gradient-to-tr from-purple-950 to-purple-900 !gap-4': (link?.activeIn ?? []).includes(
         route.name

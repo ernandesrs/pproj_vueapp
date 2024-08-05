@@ -11,8 +11,12 @@
         <!-- sidebar content -->
         <div class="flex-1 w-full overflow-y-auto p-5">
           <template v-for="(group, groupIndex) in navigationGroups" :key="groupIndex">
-            <div class="text-zinc-300 mb-5">
-              <div v-show="!props.miniOn" v-html="group.label" class="mb-3"></div>
+            <div class="mb-5">
+              <div
+                v-show="!props.miniOn"
+                v-html="group.label"
+                class="mb-3 text-zinc-400 dark:text-zinc-400"
+              ></div>
               <nav class="rounded-lg flex flex-col">
                 <template v-for="(link, linkIndex) in group.links" :key="linkIndex">
                   <nav-link :mini-on="props.miniOn" :link="link" />

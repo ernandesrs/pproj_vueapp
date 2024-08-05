@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-screen flex bg-zinc-100">
+  <div class="w-full h-screen flex text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-900">
     <!-- menu toggler -->
     <sidebar-toggler
       v-if="appStore.stateData.inMobile && sidebar.show"
@@ -30,7 +30,7 @@
           <!-- logo -->
           <router-link
             :to="{ name: 'home' }"
-            class="flex gap-x-2 items-center text-xl font-bold text-zinc-700"
+            class="flex gap-x-2 items-center text-xl font-bold text-zinc-700 dark:text-zinc-200"
           >
             <img class="w-7 h-7" src="@/assets/logo.svg" alt="Vue App" />
             <span>VUEAPP</span>
@@ -52,7 +52,7 @@
               <template #activator>
                 <router-link
                   :to="{ name: 'profile' }"
-                  class="flex items-center gap-x-2 shadow py-2 px-4 rounded-lg bg-zinc-50"
+                  class="flex items-center gap-x-2 shadow py-2 px-4 rounded-lg bg-transparent border dark:border-zinc-800"
                 >
                   <icon-elem name="person-circle" class="text-xl" />
                   <span class="inline">Username</span>
@@ -60,7 +60,9 @@
               </template>
 
               <template #content>
-                <div class="w-[275px] bg-white shadow-lg p-5 rounded-lg">Dropdown content</div>
+                <div class="w-[275px] bg-white dark:bg-zinc-800 shadow-lg p-5 rounded-lg">
+                  Dropdown content
+                </div>
               </template>
             </dropdown-elem>
           </div>

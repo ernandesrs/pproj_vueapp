@@ -1,10 +1,10 @@
 <template>
   <div
-    class="bg-zinc-200 bg-opacity-75 animate-pulse w-full h-full top-0 left-0 rounded-lg absolute flex justify-center items-center"
+    class="bg-zinc-200 dark:bg-zinc-800 bg-opacity-75 dark:bg-opacity-75 animate-pulse w-full h-full top-0 left-0 rounded-lg absolute flex justify-center items-center"
   >
     <div
       v-if="props.spin"
-      class="border-l-purple-900 border-t-purple-900 border-r-purple-300 border-b-purple-300 rounded-full animate-spin"
+      class="border-purple-300 dark:border-purple-200 border-l-purple-700 border-t-purple-700 dark:border-l-purple-600 dark:border-t-purple-600 rounded-full animate-spin"
       :class="getSpinSize"
     ></div>
   </div>

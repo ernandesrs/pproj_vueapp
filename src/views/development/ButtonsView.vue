@@ -32,7 +32,7 @@
         </div>
       </template>
     </card-section>
-    <hr />
+    <separator-elem />
     <card-section last>
       <template #content>
         <div class="grid grid-cols-12 gap-6">
@@ -68,8 +68,9 @@
 <script setup>
 import ContentCard from '@/components/card/ContentCard.vue'
 import CardSection from '@/components/card/CardSection.vue'
-import { reactive } from 'vue'
 import ButtonsPartials from './partials/ButtonsPartials.vue'
+import SeparatorElem from '@/components/SeparatorElem.vue'
+import { reactive } from 'vue'
 
 const compData = reactive({
   color: 'primary',
