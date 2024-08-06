@@ -8,9 +8,13 @@
     <div class="grid grid-cols-12 gap-6">
       <content-card class="col-span-12 md:col-span-5 xl:col-span-4">
         <card-section first title="Avatar" subtitle="Your profile avatar">
-          <template #content> Content </template>
+          <template #content>
+            <div class="flex justify-center items-center p-5">
+              <thumbnail-elem avatar />
+            </div>
+          </template>
         </card-section>
-        <hr />
+        <separator-elem />
         <card-section last title="Details" subtitle="Your profile details">
           <template #content> Content </template>
         </card-section>
@@ -26,9 +30,11 @@
 </template>
 
 <script setup>
+import { useAppStore } from '@/stores/app'
 import ContentCard from '@/components/card/ContentCard.vue'
 import CardSection from '@/components/card/CardSection.vue'
-import { useAppStore } from '@/stores/app'
+import ThumbnailElem from '@/components/ThumbnailElem.vue'
+import SeparatorElem from '@/components/SeparatorElem.vue'
 
 const appStore = useAppStore()
 

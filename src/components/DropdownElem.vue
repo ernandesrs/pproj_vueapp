@@ -3,7 +3,7 @@
     <div
       ref="activator"
       v-on:click="compData.show = !compData.show"
-      class="relative z-10 mb-2"
+      class="relative z-10"
       role="button"
     >
       <div class="pointer-events-none">
@@ -15,7 +15,7 @@
       <div
         ref="content"
         v-show="compData.show"
-        class="absolute z-50 top-full"
+        class="absolute z-50 top-full mt-2"
         :class="{ 'right-0': props.location == 'right', 'left-0': props.location == 'left' }"
       >
         <slot name="content" />

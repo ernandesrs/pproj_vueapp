@@ -52,9 +52,9 @@
               <template #activator>
                 <router-link
                   :to="{ name: 'profile' }"
-                  class="flex items-center gap-x-2 shadow py-2 px-4 rounded-lg bg-transparent border dark:border-zinc-800"
+                  class="flex items-center gap-x-2 shadow border border-zinc-200 dark:border-zinc-800 py-2 px-3 rounded-lg"
                 >
-                  <icon-elem name="person-circle" class="text-xl" />
+                  <thumbnail-elem avatar alternative-text="Username" size="xs" />
                   <span class="inline">Username</span>
                 </router-link>
               </template>
@@ -88,9 +88,9 @@ import { reactive, watch } from 'vue'
 import { RouterLink } from 'vue-router'
 import MainSidebar from '@/components/layouts/main/MainSidebar.vue'
 import SidebarToggler from '@/components/layouts/SidebarToggler.vue'
-import IconElem from '../IconElem.vue'
 import DropdownElem from '../DropdownElem.vue'
 import ButtonElem from '../ButtonElem.vue'
+import ThumbnailElem from '@/components/ThumbnailElem.vue'
 
 const appStore = useAppStore()
 
