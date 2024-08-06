@@ -27,14 +27,9 @@
 </template>
 
 <script setup>
-import { useAppStore } from '@/stores/app'
 import ContentCard from '@/components/card/ContentCard.vue'
 import CardSection from '@/components/card/CardSection.vue'
 import ThumbnailElem from '@/components/ThumbnailElem.vue'
 import SeparatorElem from '@/components/SeparatorElem.vue'
 import MainViewBase from '@/components/layouts/main/MainViewBase.vue'
-
-const appStore = useAppStore()
-
-appStore.updatePageTitle('Profile')
 </script>
