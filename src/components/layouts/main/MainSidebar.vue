@@ -74,6 +74,12 @@ const navigationGroups = [
         icon: 'collection-fill',
         activeIn: ['buttons'],
         to: { name: 'buttons' }
+      },
+      {
+        label: 'Alerts',
+        icon: 'pip-fill',
+        activeIn: ['alerts'],
+        to: { name: 'alerts' }
       }
     ]
   },
