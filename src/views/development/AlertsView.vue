@@ -1,6 +1,4 @@
 <template>
-  <alert-elem />
-
   <main-view-base
     page-icon="pip-fill"
     page-title="Alertas"
@@ -29,7 +27,6 @@
 <script setup>
 import MainViewBase from '@/components/layouts/main/MainViewBase.vue'
 import CardSection from '@/components/card/CardSection.vue'
-import AlertElem from '@/components/AlertElem.vue'
 </script>
 
 <style lang="css" scoped></style>

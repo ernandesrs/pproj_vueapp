@@ -16,6 +16,7 @@
     ></div>
     <!-- /sidebar backdrop -->
 
+    <app-alert />
     <main-sidebar :show="sidebar.show" :mini-on="sidebar.miniOn" />
 
     <!-- header/main -->
@@ -91,6 +92,7 @@ import SidebarToggler from '@/components/layouts/SidebarToggler.vue'
 import DropdownElem from '../DropdownElem.vue'
 import ButtonElem from '../ButtonElem.vue'
 import ThumbnailElem from '@/components/ThumbnailElem.vue'
+import AppAlert from '@/components/layouts/AppAlert.vue'
 
 const appStore = useAppStore()
 
