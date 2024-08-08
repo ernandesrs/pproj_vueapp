@@ -90,9 +90,16 @@
   </Transition>
 </template>
 
+<!-- 
+Bug: ao fechar o alerta clicando no X, o tempo restante e progresso permance
+-->
+
 <script setup>
-import { computed, reactive } from 'vue'
+import { computed, reactive, watch } from 'vue'
+import { useAlertStore } from '@/stores/alert'
 import IconElem from '@/components/IconElem.vue'
+
+const alertStore = useAlertStore()
 
 // Component state
 const compState = reactive({
@@ -120,20 +127,15 @@ const duration = reactive({
  *
  */
 
-const checkAlert = () => {
-  if (hasAlertContent.value) {
-    setTimeout(() => {
-      showAlert()
-    }, 1)
-  }
-}
-
 const showAlert = () => {
-  compState.show = true
+  // Sem o setTimeout, o alerta é renderizado sem a animação(Verificar para corrigir)
+  setTimeout(() => {
+    compState.show = true
 
-  if (compState.duration) {
-    startTimer()
-  }
+    if (compState.duration) {
+      startTimer()
+    }
+  }, 1)
 }
 
 const closeAlert = () => {
@@ -143,13 +145,8 @@ const closeAlert = () => {
     clearTimer()
   }
 
-  if (compState.data?.duration) {
-    setTimeout(() => {
-      compState.data = {}
-    }, 100)
-  } else {
-    compState.data = {}
-  }
+  compState.data = {}
+  alertStore.clear()
 }
 
 const mouseEnter = () => {
@@ -167,6 +164,8 @@ const mouseLeave = () => {
 
 const startTimer = () => {
   duration.runnedTimeIntervalId = setInterval(() => {
+    console.log('runnedTimeIntervalId')
+
     if (duration.runnedTime < compState.duration - 1000) {
       duration.runnedTime += 1000
     } else {
@@ -175,6 +174,8 @@ const startTimer = () => {
   }, 1000)
 
   duration.timeProgressIntervalId = setInterval(() => {
+    console.log('timeProgressIntervalId')
+
     duration.timeProgress++
     if (duration.runnedTime >= compState.duration) {
       closeAlert()
@@ -204,10 +205,6 @@ const clearIntervalIds = () => {
  * Computeds
  *
  */
-const hasAlertContent = computed(() => {
-  return compState.data?.text?.length > 0
-})
-
 const getProgress = computed(() => {
   return 'width: ' + duration.timeProgress + '%'
 })
@@ -218,11 +215,37 @@ const getProgress = computed(() => {
  *
  */
 
+//  Watch for 'alertStore.hasNewAlert', get and show if has new alert
+watch(
+  () => alertStore.hasNewAlert,
+  (n) => {
+    if (n) {
+      const updateAndShow = () => {
+        compState.data = alertStore.get()
+        compState.duration = compState.data?.duration
+        showAlert()
+      }
+
+      if (compState.show) {
+        closeAlert()
+        setTimeout(() => {
+          updateAndShow()
+        }, 100)
+      } else {
+        updateAndShow()
+      }
+    }
+  },
+  { immediate: true }
+)
+
 /**
  *
  * Calls
+ *
  */
-checkAlert()
+
+//
 </script>
 
 <style lang="css" scoped>
