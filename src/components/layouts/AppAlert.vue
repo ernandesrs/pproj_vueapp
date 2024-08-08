@@ -90,6 +90,16 @@
   </Transition>
 </template>
 
+<!-- 
+
+Problema conhecido:
+  - Em um alerta com timer, ao colocar e retirar o cursor do mouse sobre o alerta, há um problema em que
+    o progresso do timer possui uma diferença para mais, que varia acima de 10 décimos de segundos, fazendo
+    com que a barra de progresso preencha 100% antes do tempo final do alerta.
+    - Possível origem: o setInterval
+
+-->
+
 <script setup>
 import { computed, reactive, watch } from 'vue'
 import { useAlertStore } from '@/stores/alert'
