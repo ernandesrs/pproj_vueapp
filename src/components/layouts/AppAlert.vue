@@ -90,10 +90,6 @@
   </Transition>
 </template>
 
-<!-- 
-Bug: ao fechar o alerta clicando no X, o tempo restante e progresso permance
--->
-
 <script setup>
 import { computed, reactive, watch } from 'vue'
 import { useAlertStore } from '@/stores/alert'
@@ -128,7 +124,7 @@ const duration = reactive({
  */
 
 const showAlert = () => {
-  // Sem o setTimeout, o alerta é renderizado sem a animação(Verificar para corrigir)
+  // Sem o setTimeout, ao carregar/recarregar a página o alerta é renderizado sem a animação(Verificar para corrigir)
   setTimeout(() => {
     compState.show = true
 
@@ -141,7 +137,7 @@ const showAlert = () => {
 const closeAlert = () => {
   compState.show = false
 
-  if (duration.runnedTimeIntervalId != null) {
+  if (compState.duration != null) {
     clearTimer()
   }
 
