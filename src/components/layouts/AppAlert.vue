@@ -1,6 +1,7 @@
 <template>
   <Transition name="alert">
     <div
+      ref="alertEl"
       v-show="compState.show"
       v-on:mouseenter="mouseEnter"
       v-on:mouseleave="mouseLeave"
@@ -10,14 +11,14 @@
         class="flex gap-x-3 px-4 py-3 shadow rounded-lg relative cursor-default overflow-hidden"
         :class="
           {
-            success: 'bg-emerald-50 text-emerald-500 dark:bg-emerald-600 dark:text-emerald-100',
-            info: 'bg-sky-50 text-sky-500 dark:bg-sky-500 dark:text-sky-100',
-            warning: 'bg-yellow-50 text-yellow-500 dark:bg-yellow-500 dark:text-yellow-100',
+            success: 'bg-emerald-600 text-emerald-100',
+            info: 'bg-sky-500 text-sky-100',
+            warning: 'bg-yellow-500 text-yellow-100',
 
-            danger: 'bg-rose-50 text-rose-500 dark:bg-rose-500 dark:text-rose-100',
-            error: 'bg-rose-50 text-rose-500 dark:bg-rose-500 dark:text-rose-100',
-            fail: 'bg-rose-50 text-rose-500 dark:bg-rose-500 dark:text-rose-100',
-            denied: 'bg-rose-50 text-rose-500 dark:bg-rose-500 dark:text-rose-100'
+            danger: 'bg-rose-500 text-rose-100',
+            error: 'bg-rose-500 text-rose-100',
+            fail: 'bg-rose-500 text-rose-100',
+            denied: 'bg-rose-500 text-rose-100'
           }[compState.data?.color]
         "
       >
@@ -30,14 +31,14 @@
             class="h-[2px] rounded-lg duration-100"
             :class="
               {
-                success: 'bg-emerald-300 dark:bg-emerald-800',
-                info: 'bg-sky-300 dark:bg-sky-800',
-                warning: 'bg-yellow-300 dark:bg-yellow-800',
+                success: 'bg-emerald-700',
+                info: 'bg-sky-600',
+                warning: 'bg-yellow-600',
 
-                danger: 'bg-rose-300 dark:bg-rose-800',
-                error: 'bg-rose-300 dark:bg-rose-800',
-                fail: 'bg-rose-300 dark:bg-rose-800',
-                denied: 'bg-rose-300 dark:bg-rose-800'
+                danger: 'bg-rose-600',
+                error: 'bg-rose-600',
+                fail: 'bg-rose-600',
+                denied: 'bg-rose-600'
               }[compState.data?.color]
             "
             :style="getProgress"
@@ -49,14 +50,14 @@
           class="w-10 h-10 rounded-full flex items-center justify-center"
           :class="
             {
-              success: 'bg-emerald-200 text-emerald-600 dark:bg-emerald-500 dark:text-emerald-100',
-              info: 'bg-sky-200 text-sky-600 dark:bg-sky-400 dark:text-sky-100',
-              warning: 'bg-yellow-200 text-yellow-600 dark:bg-yellow-600 dark:text-yellow-100',
+              success: 'bg-emerald-500 text-emerald-100',
+              info: 'bg-sky-400 text-sky-100',
+              warning: 'bg-yellow-600 text-yellow-100',
 
-              danger: 'bg-rose-200 text-rose-600 dark:bg-rose-400 dark:text-rose-100',
-              error: 'bg-rose-200 text-rose-600 dark:bg-rose-400 dark:text-rose-100',
-              fail: 'bg-rose-200 text-rose-600 dark:bg-rose-400 dark:text-rose-100',
-              denied: 'bg-rose-200 text-rose-600 dark:bg-rose-400 dark:text-rose-100'
+              danger: 'bg-rose-400 text-rose-100',
+              error: 'bg-rose-400 text-rose-100',
+              fail: 'bg-rose-400 text-rose-100',
+              denied: 'bg-rose-400 text-rose-100'
             }[compState.data?.color]
           "
         >
@@ -83,7 +84,7 @@
         <icon-elem
           v-on:click="closeAlert"
           name="x-circle"
-          class="absolute top-2 right-2 text-xl cursor-pointer text-rose-400 dark:text-rose-50"
+          class="absolute top-2 right-2 text-xl cursor-pointer text-rose-50"
         />
       </div>
     </div>
@@ -101,7 +102,7 @@ Problema conhecido:
 -->
 
 <script setup>
-import { computed, reactive, watch } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 import { useAlertStore } from '@/stores/alert'
 import IconElem from '@/components/IconElem.vue'
 
@@ -127,6 +128,8 @@ const duration = reactive({
   timeProgressIntervalId: null
 })
 
+const alertEl = ref(null)
+
 /**
  *
  * Methods
@@ -141,6 +144,14 @@ const showAlert = () => {
     if (compState.duration) {
       startTimer()
     }
+
+    setTimeout(() => {
+      alertEl.value.classList.add('animate-bounce-alert')
+
+      setTimeout(() => {
+        alertEl.value.classList.remove('animate-bounce-alert')
+      }, 375)
+    }, 200)
   }, 1)
 }
 
@@ -270,5 +281,39 @@ watch(
 .alert-enter-from,
 .alert-leave-to {
   @apply translate-x-1/2 scale-105;
+}
+
+.animate-bounce-alert {
+  animation: McustomBounce 0.375s ease-in-out normal;
+}
+
+@keyframes McustomPing {
+  75%,
+  100% {
+    transform: scale(1.05);
+    opacity: 0.95;
+  }
+}
+
+@keyframes McustomBounce {
+  0%,
+  10%,
+  30%,
+  50%,
+  70%,
+  90%,
+  100% {
+    transform: translateX(0);
+  }
+
+  20%,
+  60% {
+    transform: translateX(-20px);
+  }
+
+  40%,
+  80% {
+    transform: translateX(-5px);
+  }
 }
 </style>
