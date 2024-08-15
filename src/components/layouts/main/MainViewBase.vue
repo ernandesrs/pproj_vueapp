@@ -6,6 +6,8 @@
     no-shadow
     title-tag="h1"
     class="col-span-12"
+    :loading="props.loadingContent"
+    pulse
   >
     <div class="grid grid-cols-12 gap-6">
       <slot />
@@ -49,6 +51,14 @@ const props = defineProps({
    * Hidden page header with icon/title/subtitle/actions
    */
   hiddeHeader: {
+    type: Boolean,
+    default: false
+  },
+
+  /**
+   * Loading content
+   */
+  loadingContent: {
     type: Boolean,
     default: false
   }

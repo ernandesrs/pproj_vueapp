@@ -1,6 +1,7 @@
 <template>
   <div
-    class="bg-zinc-200 dark:bg-zinc-800 bg-opacity-75 dark:bg-opacity-75 animate-pulse w-full h-full top-0 left-0 rounded-lg absolute flex justify-center items-center"
+    class="bg-zinc-200 dark:bg-zinc-800 w-full h-full top-0 left-0 rounded-lg absolute flex justify-center items-center z-50"
+    :class="{ 'bg-opacity-75 dark:bg-opacity-75 animate-pulse': props.pulse }"
   >
     <div
       v-if="props.spin"
@@ -14,6 +15,14 @@
 import { computed } from 'vue'
 
 const props = defineProps({
+  /**
+   * Apply pulse effect
+   */
+  pulse: {
+    type: Boolean,
+    default: false
+  },
+
   /**
    * Show loader spin
    */
