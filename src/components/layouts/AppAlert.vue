@@ -181,8 +181,6 @@ const mouseLeave = () => {
 
 const startTimer = () => {
   duration.runnedTimeIntervalId = setInterval(() => {
-    console.log('runnedTimeIntervalId')
-
     if (duration.runnedTime < compState.duration - 1000) {
       duration.runnedTime += 1000
     } else {
@@ -191,8 +189,6 @@ const startTimer = () => {
   }, 1000)
 
   duration.timeProgressIntervalId = setInterval(() => {
-    console.log('timeProgressIntervalId')
-
     duration.timeProgress++
     if (duration.runnedTime >= compState.duration) {
       closeAlert()

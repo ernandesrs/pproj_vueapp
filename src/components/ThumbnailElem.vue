@@ -3,7 +3,7 @@
     class="flex justify-center items-center shadow-md dark:shadow-zinc-900 overflow-hidden relative border-zinc-100 bg-zinc-300 dark:border-zinc-700 dark:bg-zinc-800"
     :class="
       {
-        xs: 'w-10 border-2' + (!props.avatar ? ' h-8' : ' h-10'),
+        xs: 'w-8 border-2' + (!props.avatar ? ' h-6' : ' h-8'),
         sm: 'w-20 border-2' + (!props.avatar ? ' h-14' : ' h-20'),
         base: 'w-32 border-2' + (!props.avatar ? ' h-24' : ' h-32'),
         lg: 'w-36 md:w-48 border-4' + (!props.avatar ? ' h-28 md:h-32' : ' h-36 md:h-48'),
