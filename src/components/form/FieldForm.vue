@@ -22,8 +22,40 @@
         '!border-emerald-400 !text-emerald-500 dark:!border-emerald-600': hasSuccessFeedback
       }"
     >
+      <!-- custom input file -->
+      <div
+        v-if="props.type == 'file'"
+        class="flex items-center w-full h-full absolute top-0 left-0 pointer-events-none p-1 rounded-lg"
+      >
+        <span class="flex items-center h-full bg-zinc-200 px-4 rounded-tl-lg rounded-bl-lg"
+          >Escolher</span
+        >
+        <span
+          class="flex items-center h-full flex-1 text-center truncate px-4"
+          v-text="getFileName"
+        ></span>
+      </div>
+
+      <input
+        v-if="props.type == 'file'"
+        type="file"
+        v-on:change="inputFileChange"
+        :id="compState.elemId"
+        class="opacity-0"
+      />
+
+      <!-- file input clear -->
+      <icon-elem
+        v-if="showFileInputClear"
+        v-on:click="compState.value = null"
+        name="x-lg"
+        class="bg-zinc-50 dark:bg-zinc-900 absolute right-0 px-3 h-full flex items-center text-rose-500 hover:text-rose-800 duration-75"
+        role="button"
+      />
+      <!-- /custom input file -->
+
       <!--
-        input text, number, password, date
+        input text, file, number, password, date
         -->
       <input
         v-if="['text', 'number', 'password', 'date'].includes(props.type)"
@@ -75,7 +107,6 @@ const emit = defineEmits(['update:modelValue'])
 
 const props = defineProps({
   modelValue: {
-    type: [Number, String, Boolean, Array, null],
     default: null
   },
   id: {
@@ -112,8 +143,18 @@ const compState = reactive({
   passwordShow: false
 })
 
+/**
+ *
+ * Methods
+ *
+ */
+
 const generateUniqueId = () => {
   return Date.now().toString() + Math.random().toString(36).substring(2, 9)
+}
+
+const inputFileChange = (event) => {
+  compState.value = event.target.files[0]
 }
 
 /**
@@ -124,9 +165,11 @@ const generateUniqueId = () => {
 const hasDefaultFeedback = computed(() => {
   return props.feedback?.length > 0
 })
+
 const hasSuccessFeedback = computed(() => {
   return props.successFeedback?.length > 0
 })
+
 const hasFailFeedback = computed(() => {
   return props.failFeedback?.length > 0
 })
@@ -143,6 +186,18 @@ const getFeedbackType = computed(() => {
       : hasFailFeedback.value
         ? 'fail'
         : 'default'
+})
+
+const showFileInputClear = computed(() => {
+  return props.type == 'file' && compState.value != null
+})
+
+const getFileName = computed(() => {
+  return compState?.value
+    ? typeof compState?.value == 'object'
+      ? compState?.value.name
+      : 'Nada selecionado'
+    : 'Nada selecionado'
 })
 
 /**

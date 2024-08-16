@@ -21,6 +21,8 @@
           <field-form v-model="fields.password" label="Password type" type="password" />
 
           <field-form v-model="fields.date" label="Date type" type="date" />
+
+          <field-form v-model="fields.file" label="File type" type="file" />
         </div>
       </template>
     </card-section>
@@ -80,6 +82,7 @@ const fields = reactive({
   password: null,
   date: null,
   number: null,
+  file: null,
 
   errors: {
     text: null,
