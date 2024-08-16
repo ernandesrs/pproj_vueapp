@@ -22,7 +22,11 @@
         '!border-emerald-400 !text-emerald-500 dark:!border-emerald-600': hasSuccessFeedback
       }"
     >
-      <!-- custom input file -->
+      <!--
+      ---------------------------------------
+      custom input file
+      ---------------------------------------
+      -->
       <div
         v-if="props.type == 'file'"
         class="flex items-center w-full h-full absolute top-0 left-0 pointer-events-none p-1 rounded-lg"
@@ -52,10 +56,16 @@
         class="bg-zinc-50 dark:bg-zinc-900 absolute right-0 px-3 h-full flex items-center text-rose-500 hover:text-rose-800 duration-75"
         role="button"
       />
-      <!-- /custom input file -->
+      <!--
+      ---------------------------------------
+      /custom input file
+      ---------------------------------------
+      -->
 
       <!--
+      ---------------------------------------
         input text, file, number, password, date
+      ---------------------------------------
         -->
       <input
         v-if="['text', 'number', 'password', 'date'].includes(props.type)"
@@ -81,7 +91,9 @@
         role="button"
       />
       <!--
+      ---------------------------------------
         /input text, number, password, date
+      ---------------------------------------
       -->
     </div>
 
