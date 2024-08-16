@@ -5,6 +5,7 @@ const MOBILE_SIZE = 1024;
 
 export const useAppStore = defineStore('app', () => {
   const stateData = reactive({
+    appName: import.meta.env.VITE_APP_NAME,
     inMobile: window.innerWidth <= MOBILE_SIZE,
     windowWidth: window.innerWidth,
     theme: 'light',
@@ -38,7 +39,7 @@ export const useAppStore = defineStore('app', () => {
    * @param {String} title 
    */
   const updatePageTitle = (title) => {
-    document.title = title + ' - Vue App';
+    document.title = title + ' - ' + stateData.appName;
   };
 
   /**

@@ -34,8 +34,8 @@
             :to="{ name: 'home' }"
             class="flex gap-x-2 items-center text-xl font-bold text-zinc-700 dark:text-zinc-200"
           >
-            <img class="w-7 h-7" src="@/assets/logo.svg" alt="Vue App" />
-            <span>VUEAPP</span>
+            <img class="w-7 h-7" src="@/assets/logo.svg" :alt="appStore.stateData.appName" />
+            <span>{{ appStore.stateData.appName }}</span>
           </router-link>
           <!-- /logo -->
 
