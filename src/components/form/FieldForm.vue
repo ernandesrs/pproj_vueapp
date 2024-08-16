@@ -95,6 +95,32 @@
         /input text, number, password, date
       ---------------------------------------
       -->
+
+      <!--
+      ---------------------------------------
+        input select
+      ---------------------------------------
+      -->
+      <select
+        v-if="props.type == 'select'"
+        v-model="compState.value"
+        :id="compState.elemId"
+        class="w-full h-full px-4 rounded-lg bg-transparent outline-none"
+      >
+        <option :selected="compState.value == null ? true : false" disabled>Escolha</option>
+        <option
+          v-for="(i, k) in props.options ?? []"
+          :key="k"
+          v-text="i.label"
+          :value="i.value"
+          :selected="compState.value == i.value"
+        ></option>
+      </select>
+      <!--
+      ---------------------------------------
+        /input select
+      ---------------------------------------
+      -->
     </div>
 
     <Transition
@@ -118,29 +144,90 @@ import IconElem from '../IconElem.vue'
 const emit = defineEmits(['update:modelValue'])
 
 const props = defineProps({
+  /**
+   *
+   * Model value
+   *
+   */
   modelValue: {
     default: null
   },
+
+  /**
+   *
+   * Element ID. When null, one will be generated automatically.
+   *
+   */
   id: {
     type: [Number, String, null],
     default: null
   },
+
+  /**
+   *
+   * Field type. Allows: text, number, date, password, file, select
+   */
   type: {
     type: String,
     default: 'text'
   },
+
+  /**
+   *
+   * Field label
+   *
+   */
   label: {
     type: [String, null],
     default: null
   },
+
+  /**
+   *
+   * Options. Required when the field type is 'select'.
+   * Example:
+   * [
+   *     {
+   *         label: 'Option #1',
+   *         value: 'op1'
+   *     },
+   *     {
+   *         label: 'Option #2',
+   *         value: 'op2'
+   *     }
+   * ]
+   *
+   */
+  options: {
+    type: Array,
+    default: null
+  },
+
+  /**
+   *
+   * Field feedback
+   *
+   */
   feedback: {
     type: String,
     default: null
   },
+
+  /**
+   *
+   * Field success feedback
+   *
+   */
   successFeedback: {
     type: String,
     default: null
   },
+
+  /**
+   *
+   * Field fail feedback
+   *
+   */
   failFeedback: {
     type: String,
     default: null

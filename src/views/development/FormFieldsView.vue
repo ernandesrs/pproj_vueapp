@@ -7,8 +7,8 @@
   >
     <card-section
       bordered
-      title="Inputs"
-      subtitle="Types: text, number, password, date"
+      title="Fields"
+      subtitle="Fields types: text, number, password, date, file"
       class="col-span-12 sm:col-span-6 xl:col-span-4"
     >
       <!--  -->
@@ -24,6 +24,40 @@
 
           <field-form v-model="fields.file" label="File type" type="file" />
         </div>
+      </template>
+    </card-section>
+
+    <card-section
+      bordered
+      title="More fields"
+      subtitle="Types: select"
+      class="col-span-12 sm:col-span-6 xl:col-span-4"
+    >
+      <!--  -->
+      <template #content>
+        <field-form
+          v-model="fields.select"
+          label="Select type"
+          type="select"
+          :options="[
+            {
+              label: 'Option #1',
+              value: 'op1'
+            },
+            {
+              label: 'Option #2',
+              value: 'op2'
+            },
+            {
+              label: 'Option #3',
+              value: 'op3'
+            },
+            {
+              label: 'Option #4',
+              value: 'op4'
+            }
+          ]"
+        />
       </template>
     </card-section>
 
@@ -83,6 +117,7 @@ const fields = reactive({
   date: null,
   number: null,
   file: null,
+  select: null,
 
   errors: {
     text: null,
