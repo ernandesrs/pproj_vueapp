@@ -80,6 +80,12 @@ const navigationGroups = [
         icon: 'pip-fill',
         activeIn: ['alerts'],
         to: { name: 'alerts' }
+      },
+      {
+        label: 'Form fields',
+        icon: 'input-cursor-text',
+        activeIn: ['formFields'],
+        to: { name: 'formFields' }
       }
     ]
   },
