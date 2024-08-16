@@ -6,6 +6,7 @@
     :loading-content="loadingContent"
   >
     <card-section
+      bordered
       title="Input text"
       subtitle="Lorem dolor input field text"
       class="col-span-12 sm:col-span-6 xl:col-span-4"
@@ -13,6 +14,7 @@
     </card-section>
 
     <card-section
+      bordered
       title="With feedback"
       subtitle="Lorem dolor input field text"
       class="col-span-12 sm:col-span-6 xl:col-span-4"
@@ -20,6 +22,7 @@
     </card-section>
 
     <card-section
+      bordered
       title="With validation"
       subtitle="Lorem dolor input field text"
       class="col-span-12 sm:col-span-6 xl:col-span-4"
