@@ -1,11 +1,10 @@
 <template>
-  <content-card
-    icon="collection-fill"
-    title="Buttons"
-    subtitle="This is all button options and variations"
-    class="col-span-12"
+  <main-view-base
+    page-icon="collection-fill"
+    page-title="Botões"
+    page-subtitle="Veja exemplos de botões"
   >
-    <card-section first>
+    <card-section first class="col-span-12">
       <template #content>
         <div class="flex justify-center gap-x-3">
           <div class="flex flex-col gap-2">
@@ -33,7 +32,7 @@
       </template>
     </card-section>
     <separator-elem />
-    <card-section last>
+    <card-section last class="col-span-12">
       <template #content>
         <div class="grid grid-cols-12 gap-6">
           <buttons-partials
@@ -62,11 +61,11 @@
         </div>
       </template>
     </card-section>
-  </content-card>
+  </main-view-base>
 </template>
 
 <script setup>
-import ContentCard from '@/components/card/ContentCard.vue'
+import MainViewBase from '@/components/layouts/main/MainViewBase.vue'
 import CardSection from '@/components/card/CardSection.vue'
 import ButtonsPartials from './partials/ButtonsPartials.vue'
 import SeparatorElem from '@/components/SeparatorElem.vue'

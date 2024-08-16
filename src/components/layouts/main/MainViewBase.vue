@@ -6,8 +6,6 @@
     no-shadow
     title-tag="h1"
     class="col-span-12"
-    :loading="props.loadingContent"
-    pulse
   >
     <div class="grid grid-cols-12 gap-6">
       <slot />
@@ -21,6 +19,8 @@
 <script setup>
 import ContentCard from '@/components/card/ContentCard.vue'
 import { useAppStore } from '@/stores/app'
+import { watch } from 'vue'
+import { useRoute } from 'vue-router'
 
 const props = defineProps({
   /**
@@ -65,6 +65,28 @@ const props = defineProps({
 })
 
 const appStore = useAppStore()
+
+const route = useRoute()
+
+watch(
+  () => route,
+  () => {
+    appStore.stateData.loading = false
+  },
+  { immediate: true, deep: true }
+)
+
+watch(
+  () => props.loadingContent,
+  (n) => {
+    if (n) {
+      appStore.stateData.loading = true
+    } else {
+      appStore.stateData.loading = false
+    }
+  },
+  { immediate: true }
+)
 
 appStore.updatePageTitle(props.pageTitle)
 </script>

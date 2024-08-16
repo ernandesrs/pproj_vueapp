@@ -17,6 +17,7 @@
     <!-- /sidebar backdrop -->
 
     <app-alert />
+
     <main-sidebar :show="sidebar.show" :mini-on="sidebar.miniOn" />
 
     <!-- header/main -->
@@ -72,8 +73,19 @@
       <!-- /header -->
 
       <!-- main -->
-      <main class="w-full flex-1 overflow-y-auto px-6 flex flex-col">
-        <div class="flex-1 rounded-lg pb-3">
+      <main class="w-full flex-1 overflow-y-auto px-6 flex flex-col z-0">
+        <div class="flex-1 rounded-lg pb-3 relative">
+          <Transition
+            enter-active-class="duration-100 ease-in-out"
+            leave-active-class="duration-300 ease-in"
+            enter-from-class="opacity-0"
+            enter-to-class="opacity-100"
+            leave-from-class="opacity-100"
+            leave-to-class="opacity-0"
+          >
+            <backdrop-elem v-show="appStore.stateData.loading" spin />
+          </Transition>
+
           <router-view />
         </div>
       </main>
@@ -93,6 +105,7 @@ import DropdownElem from '../DropdownElem.vue'
 import ButtonElem from '../ButtonElem.vue'
 import ThumbnailElem from '@/components/ThumbnailElem.vue'
 import AppAlert from '@/components/layouts/AppAlert.vue'
+import BackdropElem from '../BackdropElem.vue'
 
 const appStore = useAppStore()
 

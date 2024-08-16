@@ -7,7 +7,8 @@ export const useAppStore = defineStore('app', () => {
   const stateData = reactive({
     inMobile: window.innerWidth <= MOBILE_SIZE,
     windowWidth: window.innerWidth,
-    theme: 'light'
+    theme: 'light',
+    loading: false
   });
 
   /**

@@ -1,5 +1,9 @@
 <template>
-  <div class="grid grid-cols-12 gap-6">
+  <main-view-base
+    page-icon="window"
+    page-title="Card de conteúdo"
+    page-subtitle="Veja exemplos de cards de conteúdo"
+  >
     <content-card
       icon="window"
       title="Header title"
@@ -75,10 +79,11 @@
         </template>
       </card-section>
     </content-card>
-  </div>
+  </main-view-base>
 </template>
 
 <script setup>
+import MainViewBase from '@/components/layouts/main/MainViewBase.vue'
 import CardSection from '@/components/card/CardSection.vue'
 import ContentCard from '@/components/card/ContentCard.vue'
 import SeparatorElem from '@/components/SeparatorElem.vue'

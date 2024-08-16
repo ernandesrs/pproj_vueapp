@@ -3,6 +3,7 @@
     page-icon="person-circle"
     page-title="Profile"
     page-subtitle="Lorem ipsum dolor sit amet consectetur adipisicing elit."
+    :loading-content="loadingContent"
   >
     <content-card class="col-span-12 md:col-span-5 xl:col-span-4">
       <card-section first title="Avatar" subtitle="Your profile avatar">
@@ -32,4 +33,11 @@ import CardSection from '@/components/card/CardSection.vue'
 import ThumbnailElem from '@/components/ThumbnailElem.vue'
 import SeparatorElem from '@/components/SeparatorElem.vue'
 import MainViewBase from '@/components/layouts/main/MainViewBase.vue'
+import { ref } from 'vue'
+
+const loadingContent = ref(true)
+
+setTimeout(() => {
+  loadingContent.value = false
+}, 3000)
 </script>
