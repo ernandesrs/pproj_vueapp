@@ -45,6 +45,7 @@
         type="file"
         v-on:change="inputFileChange"
         :id="compState.elemId"
+        :name="compState.elemId"
         class="opacity-0"
       />
 
@@ -80,6 +81,7 @@
           '': compState.focused || !compState.empty
         }"
         :id="compState.elemId"
+        :name="compState.elemId"
       />
 
       <!-- passsword show/hide -->
@@ -105,6 +107,7 @@
         v-if="props.type == 'select'"
         v-model="compState.value"
         :id="compState.elemId"
+        :name="compState.elemId"
         class="w-full h-full px-4 rounded-lg bg-transparent outline-none"
       >
         <option :selected="compState.value == null ? true : false" disabled>Escolha</option>
