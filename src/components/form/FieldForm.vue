@@ -64,11 +64,11 @@
 
       <!--
       ---------------------------------------
-        input text, file, number, password, date
+        input text, file, number, password, date,email
       ---------------------------------------
         -->
       <input
-        v-if="['text', 'number', 'password', 'date'].includes(props.type)"
+        v-if="['text', 'number', 'password', 'date', 'email'].includes(props.type)"
         :type="
           props.type == 'password' ? (compState.passwordShow ? 'text' : 'password') : props.type
         "
