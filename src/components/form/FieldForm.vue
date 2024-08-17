@@ -203,6 +203,11 @@ const props = defineProps({
     default: null
   },
 
+  validators: {
+    type: Array,
+    default: () => []
+  },
+
   /**
    *
    * Field feedback
@@ -238,8 +243,8 @@ const compState = reactive({
   elemId: null,
   focused: null,
   empty: true,
-  value: props.modelValue,
-  passwordShow: false
+  passwordShow: false,
+  value: null
 })
 
 /**
@@ -307,6 +312,8 @@ const getFileName = computed(() => {
 watch(
   () => props.modelValue,
   (n) => {
+    compState.value = n
+
     if (n != null && n?.length) {
       compState.empty = false
     } else {
