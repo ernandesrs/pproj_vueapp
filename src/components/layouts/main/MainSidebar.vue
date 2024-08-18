@@ -86,6 +86,12 @@ const navigationGroups = [
         icon: 'input-cursor-text',
         activeIn: ['formFields'],
         to: { name: 'formFields' }
+      },
+      {
+        label: 'Forms',
+        icon: 'textarea-resize',
+        activeIn: ['forms'],
+        to: { name: 'forms' }
       }
     ]
   },

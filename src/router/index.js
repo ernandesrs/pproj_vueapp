@@ -44,6 +44,11 @@ const router = createRouter({
           path: 'form-fields',
           name: 'formFields',
           component: () => import('../views/development/FormFieldsView.vue')
+        },
+        {
+          path: 'forms',
+          name: 'forms',
+          component: () => import('../views/development/FormView.vue')
         }
       ]
     }
