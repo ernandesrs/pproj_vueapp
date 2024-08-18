@@ -1,5 +1,8 @@
 <template>
   <form v-on:submit.prevent="onFormSubmit">
+    <div class="bg-red-200 border border-red-500 mb-5">
+      {{ errors }}
+    </div>
     <div class="w-full mb-5">
       <slot />
     </div>
@@ -27,8 +30,9 @@
 </template>
 
 <script setup>
-import { reactive, watch } from 'vue'
 import ButtonElem from '../ButtonElem.vue'
+import { reactive, watch } from 'vue'
+import { useForm } from 'vee-validate'
 
 const emit = defineEmits(['form:submit', 'form:clear'])
 
@@ -71,6 +75,14 @@ const props = defineProps({
   onClear: {
     type: Function,
     default: null
+  },
+
+  /**
+   * Validators
+   */
+  validationSchema: {
+    type: Object,
+    default: () => {}
   }
 })
 
@@ -79,28 +91,36 @@ const compState = reactive({
   clearing: false
 })
 
+const { handleSubmit, errors } = useForm({
+  validationSchema: props.validationSchema
+})
+
 /**
  *
  * Methods
  *
  */
-const onFormSubmit = () => {
-  compState.submitting = true
+// const onFormSubmit = () => {
+//   compState.submitting = true
 
-  emit('form:submit')
+//   emit('form:submit')
 
-  if (props.onSubmit) {
-    const promise = props.onSubmit()
+//   if (props.onSubmit) {
+//     const promise = props.onSubmit()
 
-    try {
-      promise.finally(() => {
-        compState.submitting = false
-      })
-    } catch {
-      compState.submitting = false
-    }
-  }
-}
+//     try {
+//       promise.finally(() => {
+//         compState.submitting = false
+//       })
+//     } catch {
+//       compState.submitting = false
+//     }
+//   }
+// }
+
+const onFormSubmit = handleSubmit((values) => {
+  console.log('Form Submitted:', values)
+})
 
 const onFormClear = () => {
   compState.clearing = true

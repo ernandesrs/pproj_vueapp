@@ -64,7 +64,11 @@
     >
       <template #content>
         <div class="py-3">
-          <base-form :on-submit="submitPromise" :on-clear="clearPromise">
+          <base-form
+            :on-submit="submitPromise"
+            :on-clear="clearPromise"
+            :validation-schema="validatedFormSchema"
+          >
             <div class="grid grid-cols-12 gap-5">
               <field-form
                 class="col-span-12 sm:col-span-6"
@@ -134,6 +138,7 @@ import FieldForm from '@/components/form/FieldForm.vue'
 import BaseForm from '@/components/form/BaseForm.vue'
 import { useAppStore } from '@/stores/app'
 import { reactive, ref } from 'vue'
+import * as yup from 'yup'
 
 const appStore = useAppStore()
 
@@ -153,6 +158,11 @@ const validatedForm = reactive({
   age: null,
   gender: null,
   avatar: null
+})
+
+const validatedFormSchema = yup.object({
+  name: yup.string().required(),
+  email: yup.string().email()
 })
 
 /**
