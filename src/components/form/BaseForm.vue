@@ -31,7 +31,7 @@ import ButtonElem from '../ButtonElem.vue'
 import { reactive, watch } from 'vue'
 import { useForm } from 'vee-validate'
 
-const emit = defineEmits(['form:submit', 'form:clear'])
+const emit = defineEmits(['form:submit', 'form:clear', 'form:validationFail'])
 
 const props = defineProps({
   /**
@@ -70,6 +70,14 @@ const props = defineProps({
    * Function(Optionally, returning a Promosise) to handle form cleanup.
    */
   onClear: {
+    type: Function,
+    default: null
+  },
+
+  /**
+   * Function(Optionally) to handle with form validation fails
+   */
+  onValidationFail: {
     type: Function,
     default: null
   },
@@ -116,23 +124,37 @@ const { handleSubmit } = useForm({
 //   }
 // }
 
-const onFormSubmit = handleSubmit((values) => {
-  compState.submitting = true
+const onFormSubmit = handleSubmit(
+  (values) => {
+    compState.submitting = true
 
-  emit('form:submit', { data: values })
+    emit('form:submit', { data: values })
 
-  if (props.onSubmit) {
-    const promise = props.onSubmit({ data: values })
+    if (props.onSubmit) {
+      const promise = props.onSubmit({ data: values })
 
-    try {
-      promise.finally(() => {
+      try {
+        promise.finally(() => {
+          compState.submitting = false
+        })
+      } catch {
         compState.submitting = false
-      })
-    } catch {
-      compState.submitting = false
+      }
+    }
+  },
+  (errors) => {
+    const errorsData = {
+      errors: errors.errors,
+      count: Object.values(errors.errors).length > 0
+    }
+
+    emit('form:validationFail', errorsData)
+
+    if (props.onValidationFail) {
+      props.onValidationFail(errorsData)
     }
   }
-})
+)
 
 const onFormClear = () => {
   compState.clearing = true

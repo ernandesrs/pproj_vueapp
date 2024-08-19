@@ -5,6 +5,7 @@
     <base-form
       :validation-schema="loginSchema"
       :on-submit="onSubmitLoginForm"
+      :on-validation-fail="onValidationFail"
       button-submit-text="Login"
       button-clear-text=""
     >
@@ -21,6 +22,9 @@ import BaseForm from '@/components/form/BaseForm.vue'
 import FieldForm from '@/components/form/FieldForm.vue'
 import AuthHeader from '@/components/layouts/auth/AuthHeader.vue'
 import { yup } from '@/core/plugins/validators'
+import { useAlertStore } from '@/stores/alert'
+
+const useAlert = useAlertStore()
 
 const loginSchema = yup.object({
   email: yup.string().email().required(),
@@ -29,6 +33,14 @@ const loginSchema = yup.object({
 
 const onSubmitLoginForm = (validatedData) => {
   console.log(validatedData)
+}
+
+const onValidationFail = (errors) => {
+  if (!errors.count) {
+    return
+  }
+
+  useAlert.add('Cheque os dados de login e tente de novo.', 'Dados inválidos', 'danger', 5000)
 }
 </script>
 
