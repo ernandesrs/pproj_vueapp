@@ -4,7 +4,7 @@ const getAuthToken = () => {
     return cookies.get('auth_token')
 }
 
-export const onlyAuthenticated = (to, from, next) => {
+export const onlyAuthenticatedCanAccess = (to, from, next) => {
     let authToken = getAuthToken()
     let route = null
 
@@ -17,7 +17,7 @@ export const onlyAuthenticated = (to, from, next) => {
     next(route)
 }
 
-export const onlyUnauthenticated = (to, from, next) => {
+export const onlyUnauthenticatedCanAccess = (to, from, next) => {
     let authToken = getAuthToken()
     let route = null
 

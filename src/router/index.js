@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import MainLayout from '@/components/layouts/MainLayout.vue'
 import AuthLayout from '@/components/layouts/AuthLayout.vue'
-import { onlyAuthenticated, onlyUnauthenticated } from '@/core/guards/access'
+import { onlyAuthenticatedCanAccess, onlyUnauthenticatedCanAccess } from '@/core/guards/access'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -10,7 +10,7 @@ const router = createRouter({
     {
       path: '/auth',
       component: AuthLayout,
-      beforeEnter: [onlyUnauthenticated],
+      beforeEnter: [onlyUnauthenticatedCanAccess],
       children: [
         {
           path: 'login',
@@ -22,7 +22,7 @@ const router = createRouter({
     {
       path: '/',
       component: MainLayout,
-      beforeEnter: [onlyAuthenticated],
+      beforeEnter: [onlyAuthenticatedCanAccess],
       children: [
         {
           path: '',
@@ -39,6 +39,7 @@ const router = createRouter({
     {
       path: '/development',
       component: MainLayout,
+      beforeEnter: [onlyAuthenticatedCanAccess],
       children: [
         {
           path: 'content-cards',
