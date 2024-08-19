@@ -22,7 +22,9 @@ export const onlyUnauthenticated = (to, from, next) => {
     let route = null
 
     if (authToken) {
-        console.log('is auth')
+        route = {
+            name: 'home'
+        }
     }
 
     next(route)

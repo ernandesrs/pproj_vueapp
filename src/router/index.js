@@ -13,7 +13,7 @@ const router = createRouter({
       beforeEnter: [onlyUnauthenticated],
       children: [
         {
-          path: '',
+          path: 'login',
           name: 'auth.login',
           component: () => import('../views/auth/LoginView.vue'),
         }
