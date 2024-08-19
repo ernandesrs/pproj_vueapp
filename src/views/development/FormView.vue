@@ -153,7 +153,7 @@ import FieldForm from '@/components/form/FieldForm.vue'
 import BaseForm from '@/components/form/BaseForm.vue'
 import { useAppStore } from '@/stores/app'
 import { reactive, ref } from 'vue'
-import { yup } from '@/helpers/validators'
+import { yup } from '@/plugins/validators'
 
 const appStore = useAppStore()
 
