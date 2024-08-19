@@ -21,19 +21,47 @@
 import BaseForm from '@/components/form/BaseForm.vue'
 import FieldForm from '@/components/form/FieldForm.vue'
 import AuthHeader from '@/components/layouts/auth/AuthHeader.vue'
+import cookies from '@/core/plugins/cookies'
 import { apiRequester } from '@/core/plugins/requester'
 import { yup } from '@/core/plugins/validators'
 import { useAlertStore } from '@/stores/alert'
+import { useRouter } from 'vue-router'
 
 const useAlert = useAlertStore()
+
+const router = useRouter()
 
 const loginSchema = yup.object({
   email: yup.string().email().required(),
   password: yup.string().required()
 })
 
-const onSubmitLoginForm = (validatedData) => {
-  console.log(validatedData)
+const onSubmitLoginForm = async (validatedData) => {
+  return await apiRequester
+    .post('/auth/login', {
+      email: validatedData.data.email,
+      password: validatedData.data.password,
+      remember: false
+    })
+    .then((resp) => {
+      const data = resp.data
+      const expirationInMinutesToDays = data.auth.expirationInMinutes
+        ? data.auth.expirationInMinutes / 1440
+        : null
+
+      cookies.set('auth_token', data.auth.fullToken, {
+        expires: expirationInMinutesToDays
+      })
+
+      useAlert.add('Pronto! Seu login foi efetuado com sucesso!', 'Bem vindo(a)!', 'success', 5000)
+
+      router.replace({
+        name: 'home'
+      })
+    })
+    .catch((resp) => {
+      useAlert.add(resp.response.data?.error, 'Login falhou', 'danger', 5000)
+    })
 }
 
 const onValidationFail = (errors) => {
@@ -43,14 +71,6 @@ const onValidationFail = (errors) => {
 
   useAlert.add('Cheque os dados de login e tente de novo.', 'Dados inválidos', 'danger', 5000)
 }
-
-apiRequester.get('/test').then((response) => {
-  console.log('test:', response)
-})
-
-apiRequester.get('/admin/test').then((response) => {
-  console.log('admin test:', response)
-})
 </script>
 
 <style lang="css" scoped></style>
