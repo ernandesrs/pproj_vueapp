@@ -21,6 +21,7 @@
 import BaseForm from '@/components/form/BaseForm.vue'
 import FieldForm from '@/components/form/FieldForm.vue'
 import AuthHeader from '@/components/layouts/auth/AuthHeader.vue'
+import { apiRequester } from '@/core/plugins/requester'
 import { yup } from '@/core/plugins/validators'
 import { useAlertStore } from '@/stores/alert'
 
@@ -42,6 +43,14 @@ const onValidationFail = (errors) => {
 
   useAlert.add('Cheque os dados de login e tente de novo.', 'Dados inválidos', 'danger', 5000)
 }
+
+apiRequester.get('/test').then((response) => {
+  console.log('test:', response)
+})
+
+apiRequester.get('/admin/test').then((response) => {
+  console.log('admin test:', response)
+})
 </script>
 
 <style lang="css" scoped></style>
