@@ -15,24 +15,28 @@
                 v-model="form.name"
                 type="text"
                 label="Nome"
+                name="f_name"
               />
               <field-form
                 class="col-span-12 sm:col-span-6"
                 v-model="form.email"
                 type="email"
                 label="E-mail"
+                name="f_email"
               />
               <field-form
                 class="col-span-12 sm:col-span-6"
                 v-model="form.age"
                 type="number"
                 label="Idade"
+                name="f_age"
               />
               <field-form
                 class="col-span-12 sm:col-span-6"
                 v-model="form.gender"
                 type="select"
                 label="Gênero"
+                name="f_gender"
                 :options="[
                   {
                     label: 'Masculino',
@@ -44,7 +48,13 @@
                   }
                 ]"
               />
-              <field-form class="col-span-12" v-model="form.avatar" type="file" label="Avatar" />
+              <field-form
+                class="col-span-12"
+                v-model="form.avatar"
+                type="file"
+                label="Avatar"
+                name="f_avatar"
+              />
               <div class="col-span-12 mb-3 bg-zinc-100 border p-4">
                 <pre>
                   {{ form }}
@@ -75,24 +85,28 @@
                 v-model="validatedForm.name"
                 type="text"
                 label="Nome"
+                name="name"
               />
               <field-form
                 class="col-span-12 sm:col-span-6"
                 v-model="validatedForm.email"
                 type="email"
                 label="E-mail"
+                name="email"
               />
               <field-form
                 class="col-span-12 sm:col-span-6"
                 v-model="validatedForm.age"
                 type="number"
                 label="Idade"
+                name="age"
               />
               <field-form
                 class="col-span-12 sm:col-span-6"
                 v-model="validatedForm.gender"
                 type="select"
                 label="Gênero"
+                name="gender"
                 :options="[
                   {
                     label: 'Masculino',
@@ -117,6 +131,7 @@
                 v-model="validatedForm.avatar"
                 type="file"
                 label="Avatar"
+                name="avatar"
               />
               <div class="col-span-12 mb-3 bg-zinc-100 border p-4">
                 <pre>
@@ -161,8 +176,9 @@ const validatedForm = reactive({
 })
 
 const validatedFormSchema = yup.object({
-  name: yup.string().required(),
-  email: yup.string().email()
+  name: yup.string().required().min(2).max(10),
+  email: yup.string().required().email(),
+  age: yup.number().required().min(10).max(100)
 })
 
 /**

@@ -22,11 +22,7 @@
         '!border-emerald-400 !text-emerald-500 dark:!border-emerald-600': hasSuccessFeedback
       }"
     >
-      <!--
-      ---------------------------------------
-      custom input file
-      ---------------------------------------
-      -->
+      <!-- custom input file -->
       <div
         v-if="props.type == 'file'"
         class="flex items-center w-full h-full absolute top-0 left-0 pointer-events-none p-1 rounded-lg"
@@ -48,64 +44,27 @@
         :name="compState.elemId"
         class="opacity-0"
       />
+      <!-- /custom input file -->
 
-      <!-- file input clear -->
-      <icon-elem
-        v-if="showFileInputClear"
-        v-on:click="compState.value = null"
-        name="x-lg"
-        class="bg-zinc-50 dark:bg-zinc-900 absolute right-0 px-3 h-full flex items-center text-rose-500 hover:text-rose-800 duration-75"
-        role="button"
-      />
-      <!--
-      ---------------------------------------
-      /custom input file
-      ---------------------------------------
-      -->
-
-      <!--
-      ---------------------------------------
-        input text, file, number, password, date,email
-      ---------------------------------------
-        -->
+      <!-- input text, file, number, password, date,email -->
       <input
         v-if="['text', 'number', 'password', 'date', 'email'].includes(props.type)"
         :type="
           props.type == 'password' ? (compState.passwordShow ? 'text' : 'password') : props.type
         "
-        v-model="compState.value"
+        v-model="fieldValue"
         v-on:focusin="compState.focused = true"
         v-on:focusout="compState.focused = false"
         class="w-full h-full px-4 rounded-lg bg-transparent outline-none"
-        :class="{
-          '': compState.focused || !compState.empty
-        }"
         :id="compState.elemId"
         :name="compState.elemId"
       />
+      <!-- /input text, file, number, password, date,email -->
 
-      <!-- passsword show/hide -->
-      <icon-elem
-        v-if="props.type == 'password'"
-        v-on:click="compState.passwordShow = !compState.passwordShow"
-        :name="compState.passwordShow ? 'eye-slash-fill' : 'eye-fill'"
-        class="absolute right-0 px-3 h-full flex items-center bg-zinc-50 dark:bg-zinc-900"
-        role="button"
-      />
-      <!--
-      ---------------------------------------
-        /input text, number, password, date
-      ---------------------------------------
-      -->
-
-      <!--
-      ---------------------------------------
-        input select
-      ---------------------------------------
-      -->
+      <!-- input select -->
       <select
         v-if="props.type == 'select'"
-        v-model="compState.value"
+        v-model="fieldValue"
         :id="compState.elemId"
         :name="compState.elemId"
         class="w-full h-full px-4 rounded-lg bg-transparent outline-none"
@@ -119,11 +78,25 @@
           :selected="compState.value == i.value"
         ></option>
       </select>
-      <!--
-      ---------------------------------------
-        /input select
-      ---------------------------------------
-      -->
+      <!-- /input select -->
+
+      <!-- passsword show/hide -->
+      <icon-elem
+        v-if="props.type == 'password'"
+        v-on:click="compState.passwordShow = !compState.passwordShow"
+        :name="compState.passwordShow ? 'eye-slash-fill' : 'eye-fill'"
+        class="absolute right-0 px-3 h-full flex items-center bg-zinc-50 dark:bg-zinc-900"
+        role="button"
+      />
+
+      <!-- file input clear -->
+      <icon-elem
+        v-if="showFileInputClear"
+        v-on:click="compState.value = null"
+        name="x-lg"
+        class="bg-zinc-50 dark:bg-zinc-900 absolute right-0 px-3 h-full flex items-center text-rose-500 hover:text-rose-800 duration-75"
+        role="button"
+      />
     </div>
 
     <Transition
@@ -140,9 +113,10 @@
 </template>
 
 <script setup>
-import { computed, reactive, watch } from 'vue'
 import FeedbackForm from './FeedbackForm.vue'
 import IconElem from '../IconElem.vue'
+import { computed, reactive, watch } from 'vue'
+import { useField } from 'vee-validate'
 
 const emit = defineEmits(['update:modelValue'])
 
@@ -161,9 +135,10 @@ const props = defineProps({
    * Element ID. When null, one will be generated automatically.
    *
    */
-  id: {
+  name: {
     type: [Number, String, null],
-    default: null
+    default: null,
+    required: true
   },
 
   /**
@@ -206,9 +181,9 @@ const props = defineProps({
     default: null
   },
 
-  validators: {
-    type: Array,
-    default: () => []
+  rules: {
+    type: Object,
+    default: () => {}
   },
 
   /**
@@ -250,15 +225,13 @@ const compState = reactive({
   value: null
 })
 
+const { value: fieldValue, errorMessage } = useField(props.name, props.rules)
+
 /**
  *
  * Methods
  *
  */
-
-const generateUniqueId = () => {
-  return Date.now().toString() + Math.random().toString(36).substring(2, 9)
-}
 
 const inputFileChange = (event) => {
   compState.value = event.target.files[0]
@@ -278,14 +251,22 @@ const hasSuccessFeedback = computed(() => {
 })
 
 const hasFailFeedback = computed(() => {
-  return props.failFeedback?.length > 0
+  return getErrorsFromVeeValidate.value || props.failFeedback?.length > 0
 })
 
 const getFeedback = computed(() => {
+  if (getErrorsFromVeeValidate.value) {
+    return getErrorsFromVeeValidate.value
+  }
+
   return props.feedback || props.successFeedback || props.failFeedback
 })
 
 const getFeedbackType = computed(() => {
+  if (getErrorsFromVeeValidate.value) {
+    return 'fail'
+  }
+
   return hasDefaultFeedback.value
     ? 'default'
     : hasSuccessFeedback.value
@@ -306,6 +287,8 @@ const getFileName = computed(() => {
       : 'Nada selecionado'
     : 'Nada selecionado'
 })
+
+const getErrorsFromVeeValidate = computed(() => errorMessage.value)
 
 /**
  *
@@ -337,13 +320,21 @@ watch(
   { deep: true }
 )
 
+watch(
+  () => fieldValue,
+  (n) => {
+    compState.value = n
+  },
+  { immediate: true, deep: true }
+)
+
 /**
  *
  * Calls
  *
  */
 
-compState.elemId = props?.id ?? 'form_field_' + props.type + '_' + generateUniqueId()
+compState.elemId = 'form_field_' + props.type + '_' + props.name
 </script>
 
 <style lang="css" scoped></style>
