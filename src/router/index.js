@@ -1,13 +1,28 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import MainLayout from '@/components/layouts/MainLayout.vue'
+import AuthLayout from '@/components/layouts/AuthLayout.vue'
+import { onlyAuthenticated, onlyUnauthenticated } from '@/core/guards/access'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
+      path: '/auth',
+      component: AuthLayout,
+      beforeEnter: [onlyUnauthenticated],
+      children: [
+        {
+          path: '',
+          name: 'auth.login',
+          component: () => import('../views/auth/LoginView.vue'),
+        }
+      ]
+    },
+    {
       path: '/',
       component: MainLayout,
+      beforeEnter: [onlyAuthenticated],
       children: [
         {
           path: '',
