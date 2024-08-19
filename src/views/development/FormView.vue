@@ -179,7 +179,13 @@ const validatedFormSchema = yup.object({
   name: yup.string().required().min(2).max(10),
   email: yup.string().required().email(),
   age: yup.number().required().min(10).max(100),
-  gender: yup.mixed().in(['m', 'f'])
+  gender: yup.mixed().required().inArray(['m', 'f']),
+  avatar: yup
+    .mixed()
+    .nullable()
+    .allowedTypes(['jpg', 'jpeg', 'png'])
+    .minFileSize(0.05)
+    .maxFileSize(1)
 })
 
 /**
