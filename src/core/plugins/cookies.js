@@ -1,3 +1,12 @@
+/**
+ * 
+ * 
+ * Importing 'js-cookie' and abstracting yours
+ * basic methods: set, get, remove
+ * 
+ * 
+ */
+
 import Cookies from "js-cookie"
 
 const KEY_BASE = import.meta.env.VITE_APP_NAME.toLowerCase().split(' ').join('_')

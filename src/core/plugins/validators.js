@@ -1,3 +1,11 @@
+/**
+ * 
+ * 
+ * Importing 'yup' and adding new validator methods
+ * 
+ * 
+ */
+
 import * as yupValidator from 'yup'
 
 /**
