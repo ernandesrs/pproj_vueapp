@@ -14,6 +14,7 @@
       <span class="inline">{{ props?.label }}:</span>
     </label>
     <!-- /label -->
+
     <div
       class="flex flex-col justify-center w-full h-11 border bg-zinc-50 dark:bg-zinc-700 text-zinc-500 dark:text-zinc-200 dark:border-zinc-800 relative rounded-lg overflow-hidden shadow-sm duration-150"
       :class="{
@@ -182,7 +183,7 @@ const props = defineProps({
   },
 
   rules: {
-    type: Object,
+    type: [Object, String],
     default: () => {}
   },
 
