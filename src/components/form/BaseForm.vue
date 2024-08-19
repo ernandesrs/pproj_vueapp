@@ -1,8 +1,5 @@
 <template>
   <form v-on:submit.prevent="onFormSubmit">
-    <div class="bg-red-200 border border-red-500 mb-5">
-      {{ errors }}
-    </div>
     <div class="w-full mb-5">
       <slot />
     </div>
@@ -91,7 +88,8 @@ const compState = reactive({
   clearing: false
 })
 
-const { handleSubmit, errors } = useForm({
+// const { handleSubmit, errors } = useForm({
+const { handleSubmit } = useForm({
   validationSchema: props.validationSchema
 })
 
@@ -119,7 +117,21 @@ const { handleSubmit, errors } = useForm({
 // }
 
 const onFormSubmit = handleSubmit((values) => {
-  console.log('Form Submitted:', values)
+  compState.submitting = true
+
+  emit('form:submit', { data: values })
+
+  if (props.onSubmit) {
+    const promise = props.onSubmit({ data: values })
+
+    try {
+      promise.finally(() => {
+        compState.submitting = false
+      })
+    } catch {
+      compState.submitting = false
+    }
+  }
 })
 
 const onFormClear = () => {

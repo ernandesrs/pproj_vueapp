@@ -195,7 +195,9 @@ const validatedFormSchema = yup.object({
  */
 appStore.updatePageTitle('Form fields')
 
-const submitPromise = () => {
+const submitPromise = (data) => {
+  console.log(data)
+
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve()
