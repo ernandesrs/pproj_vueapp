@@ -37,13 +37,20 @@ const loginSchema = yup.object({
 })
 
 const onSubmitLoginForm = async (validatedData) => {
-  return await apiRequester
-    .post('/auth/login', {
-      email: validatedData.data.email,
-      password: validatedData.data.password,
-      remember: false
-    })
-    .then((resp) => {
+  return apiRequester(
+    // config
+    {
+      method: 'post',
+      url: '/auth/login',
+      data: {
+        email: validatedData.data.email,
+        password: validatedData.data.password,
+        remember: false
+      }
+    },
+
+    // success
+    (resp) => {
       const data = resp.data
       const expirationInMinutesToDays = data.auth.expirationInMinutes
         ? data.auth.expirationInMinutes / 1440
@@ -58,10 +65,8 @@ const onSubmitLoginForm = async (validatedData) => {
       router.replace({
         name: 'home'
       })
-    })
-    .catch((resp) => {
-      useAlert.add(resp.response.data?.error, 'Login falhou', 'danger', 5000)
-    })
+    }
+  )
 }
 
 const onValidationFail = (errors) => {
