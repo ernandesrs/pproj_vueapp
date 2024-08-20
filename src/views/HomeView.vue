@@ -10,9 +10,5 @@
 import MainViewBase from '@/components/layouts/main/MainViewBase.vue'
 import { ref } from 'vue'
 
-const loadingContent = ref(true)
-
-setTimeout(() => {
-  loadingContent.value = false
-}, 2000)
+const loadingContent = ref(false)
 </script>

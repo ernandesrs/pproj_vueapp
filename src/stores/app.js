@@ -1,7 +1,7 @@
 import { computed, reactive } from 'vue'
-import { defineStore } from 'pinia';
+import { defineStore } from 'pinia'
 
-const MOBILE_SIZE = 1024;
+const MOBILE_SIZE = 1024
 
 export const useAppStore = defineStore('app', () => {
   const stateData = reactive({
@@ -9,19 +9,20 @@ export const useAppStore = defineStore('app', () => {
     inMobile: window.innerWidth <= MOBILE_SIZE,
     windowWidth: window.innerWidth,
     theme: 'light',
-    loading: false
-  });
+    loading: false,
+    requesting: false
+  })
 
   /**
    * Check if current window width is from mobile
    */
   const inMobileCheck = () => {
     if (stateData.windowWidth <= MOBILE_SIZE && !stateData.inMobile) {
-      stateData.inMobile = true;
+      stateData.inMobile = true
     } else if (stateData.windowWidth > MOBILE_SIZE && stateData.inMobile) {
-      stateData.inMobile = false;
+      stateData.inMobile = false
     }
-  };
+  }
 
   /**
    * Add a window resize event monitor and
@@ -29,45 +30,45 @@ export const useAppStore = defineStore('app', () => {
    */
   const windowResizeAddEvent = () => {
     window.addEventListener('resize', () => {
-      stateData.windowWidth = window.innerWidth;
-      inMobileCheck();
-    });
-  };
+      stateData.windowWidth = window.innerWidth
+      inMobileCheck()
+    })
+  }
 
   /**
    * Update page title
    * @param {String} title 
    */
   const updatePageTitle = (title) => {
-    document.title = title + ' - ' + stateData.appName;
-  };
+    document.title = title + ' - ' + stateData.appName
+  }
 
   /**
    * Dark mode toggle
    */
   const darkModeToggle = () => {
-    let theme = localStorage.getItem('app_theme');
+    let theme = localStorage.getItem('app_theme')
 
     if (theme == 'light') {
-      theme = 'dark';
+      theme = 'dark'
     } else {
-      theme = 'light';
+      theme = 'light'
     }
 
-    setTheme(theme);
-  };
+    setTheme(theme)
+  }
 
   /**
    * Set theme
    * @param {String} theme 
    */
   const setTheme = (theme = null) => {
-    theme = theme ? theme : localStorage.getItem('app_theme');
+    theme = theme ? theme : localStorage.getItem('app_theme')
 
-    localStorage.setItem('app_theme', theme);
+    localStorage.setItem('app_theme', theme)
     document.documentElement.setAttribute('data-mode', theme)
 
-    stateData.theme = theme;
+    stateData.theme = theme
   }
 
   /**
@@ -75,7 +76,7 @@ export const useAppStore = defineStore('app', () => {
    * @returns Boolean
    */
   const isDarkTheme = computed(() => {
-    return stateData.theme == 'dark';
+    return stateData.theme == 'dark'
   })
 
   return {
@@ -88,4 +89,4 @@ export const useAppStore = defineStore('app', () => {
     setTheme,
     isDarkTheme
   }
-});
+})

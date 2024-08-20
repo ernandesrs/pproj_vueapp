@@ -33,11 +33,39 @@ import CardSection from '@/components/card/CardSection.vue'
 import ThumbnailElem from '@/components/ThumbnailElem.vue'
 import SeparatorElem from '@/components/SeparatorElem.vue'
 import MainViewBase from '@/components/layouts/main/MainViewBase.vue'
-import { ref } from 'vue'
+import { apiRequester } from '@/core/plugins/requester'
+import { reactive, ref } from 'vue'
 
-const loadingContent = ref(true)
+const profile = reactive({
+  data: null
+})
 
-setTimeout(() => {
-  loadingContent.value = false
-}, 3000)
+const loadingContent = ref(false)
+
+const loadProfileData = () => {
+  loadingContent.value = true
+
+  apiRequester(
+    // config
+    {
+      url: '/me',
+      method: 'get'
+    },
+
+    // success
+    (r) => {
+      profile.data = r.data?.me
+    },
+
+    // fail
+    null,
+
+    // finally
+    () => {
+      loadingContent.value = false
+    }
+  )
+}
+
+loadProfileData()
 </script>

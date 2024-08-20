@@ -1,5 +1,6 @@
 <template>
   <div class="w-full h-screen flex text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-900">
+    <LoadbarElem v-if="appStore.stateData.requesting" />
     <!-- menu toggler -->
     <sidebar-toggler
       v-if="appStore.stateData.inMobile && sidebar.show"
@@ -96,9 +97,6 @@
 </template>
 
 <script setup>
-import { useAppStore } from '@/stores/app'
-import { reactive, watch } from 'vue'
-import { RouterLink } from 'vue-router'
 import MainSidebar from '@/components/layouts/main/MainSidebar.vue'
 import SidebarToggler from '@/components/layouts/SidebarToggler.vue'
 import DropdownElem from '../DropdownElem.vue'
@@ -106,6 +104,10 @@ import ButtonElem from '../ButtonElem.vue'
 import ThumbnailElem from '@/components/ThumbnailElem.vue'
 import AppAlert from '@/components/layouts/AppAlert.vue'
 import BackdropElem from '../BackdropElem.vue'
+import LoadbarElem from '../LoadbarElem.vue'
+import { useAppStore } from '@/stores/app'
+import { reactive, watch } from 'vue'
+import { RouterLink } from 'vue-router'
 
 const appStore = useAppStore()
 

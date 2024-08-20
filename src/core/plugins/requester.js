@@ -7,6 +7,7 @@
 import axiosJs from "axios"
 import cookies from "./cookies"
 import { useAlertStore } from "@/stores/alert"
+import { useAppStore } from "@/stores/app"
 
 const serverErrors = {
     'default': 'Houve um erro não identificado: ',
@@ -14,6 +15,8 @@ const serverErrors = {
 }
 
 const alertStore = useAlertStore();
+
+const appStore = useAppStore();
 
 const authToken = cookies.get('auth_token')
 
@@ -37,9 +40,11 @@ if (authToken) {
  * @returns 
  */
 const customInstanceWithAutoResponseHandling = async (config = {}, fnSuccess = null, fnFail = null, fnFinally = null) => {
+    appStore.stateData.requesting = true
+
     return customInstance.request(config).then((response) => {
         if (fnSuccess) {
-            fnSuccess(response);
+            fnSuccess(response)
         }
     }).catch((response) => {
         const errorName = response.response.data.error;
@@ -47,9 +52,12 @@ const customInstanceWithAutoResponseHandling = async (config = {}, fnSuccess = n
         alertStore.add(serverErrors[errorName] ?? (serverErrors['default'] + errorName), null, 'fail', 5000)
 
         if (fnFail) {
-            fnFail(response);
+            fnFail(response)
         }
     }).finally(() => {
+        appStore.stateData.requesting = false
+
+
         if (fnFinally) {
             fnFinally()
         }

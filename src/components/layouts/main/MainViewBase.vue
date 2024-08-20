@@ -60,7 +60,7 @@ const props = defineProps({
    */
   loadingContent: {
     type: Boolean,
-    default: false
+    default: null
   }
 })
 
