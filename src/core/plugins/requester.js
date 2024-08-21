@@ -11,12 +11,9 @@ import { useAppStore } from "@/stores/app"
 
 const serverErrors = {
     'default': 'Houve um erro não identificado: ',
-    'InvalidDataException': 'Os dados enviados são inválidos.'
+    'InvalidDataException': 'Os dados enviados são inválidos.',
+    'UnauthenticatedException': 'Você não está autenticado.'
 }
-
-const alertStore = useAlertStore();
-
-const appStore = useAppStore();
 
 const authToken = cookies.get('auth_token')
 
@@ -25,6 +22,14 @@ const customInstance = axiosJs.create({
     headers: {
         Accept: 'application/json'
     }
+})
+
+customInstance.interceptors.request.use(function (config) {
+    if (authToken) {
+        config.headers.Authorization = authToken
+    }
+
+    return config
 })
 
 if (authToken) {
@@ -40,28 +45,33 @@ if (authToken) {
  * @returns 
  */
 const customInstanceWithAutoResponseHandling = async (config = {}, fnSuccess = null, fnFail = null, fnFinally = null) => {
-    appStore.stateData.requesting = true
+    useAppStore().stateData.requesting = true
 
     return customInstance.request(config).then((response) => {
         if (fnSuccess) {
             fnSuccess(response)
         }
     }).catch((response) => {
-        const errorName = response.response.data.error;
+        const errorName = response.response.data.error
 
-        alertStore.add(serverErrors[errorName] ?? (serverErrors['default'] + errorName), null, 'fail', 5000)
+        if (errorName == 'UnauthenticatedException') {
+            cookies.remove('auth_token')
+            window.location.reload()
+            return
+        }
+
+        useAlertStore().add(serverErrors[errorName] ?? (serverErrors['default'] + errorName), null, 'fail', 5000)
 
         if (fnFail) {
             fnFail(response)
         }
     }).finally(() => {
-        appStore.stateData.requesting = false
-
+        useAppStore().stateData.requesting = false
 
         if (fnFinally) {
             fnFinally()
         }
-    });
+    })
 }
 
 /**

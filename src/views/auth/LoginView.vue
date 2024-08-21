@@ -21,15 +21,13 @@
 import BaseForm from '@/components/form/BaseForm.vue'
 import FieldForm from '@/components/form/FieldForm.vue'
 import AuthHeader from '@/components/layouts/auth/AuthHeader.vue'
-import cookies from '@/core/plugins/cookies'
-import { apiRequester } from '@/core/plugins/requester'
 import { yup } from '@/core/plugins/validators'
 import { useAlertStore } from '@/stores/alert'
-import { useRouter } from 'vue-router'
+import { useUserStore } from '@/stores/user'
 
-const useAlert = useAlertStore()
+const alertStore = useAlertStore()
 
-const router = useRouter()
+const userStore = useUserStore()
 
 const loginSchema = yup.object({
   email: yup.string().email().required(),
@@ -37,36 +35,7 @@ const loginSchema = yup.object({
 })
 
 const onSubmitLoginForm = async (validatedData) => {
-  return apiRequester(
-    // config
-    {
-      method: 'post',
-      url: '/auth/login',
-      data: {
-        email: validatedData.data.email,
-        password: validatedData.data.password,
-        remember: false
-      }
-    },
-
-    // success
-    (resp) => {
-      const data = resp.data
-      const expirationInMinutesToDays = data.auth.expirationInMinutes
-        ? data.auth.expirationInMinutes / 1440
-        : null
-
-      cookies.set('auth_token', data.auth.fullToken, {
-        expires: expirationInMinutesToDays
-      })
-
-      useAlert.add('Pronto! Seu login foi efetuado com sucesso!', 'Bem vindo(a)!', 'success', 5000)
-
-      router.replace({
-        name: 'home'
-      })
-    }
-  )
+  return userStore.login(validatedData.data.email, validatedData.data.password, false)
 }
 
 const onValidationFail = (errors) => {
@@ -74,7 +43,7 @@ const onValidationFail = (errors) => {
     return
   }
 
-  useAlert.add('Cheque os dados de login e tente de novo.', 'Dados inválidos', 'danger', 5000)
+  alertStore.add('Cheque os dados de login e tente de novo.', 'Dados inválidos', 'danger', 5000)
 }
 </script>
 

@@ -57,14 +57,54 @@
                   :to="{ name: 'profile' }"
                   class="flex items-center gap-x-2 shadow border border-zinc-200 dark:border-zinc-800 py-2 px-3 rounded-lg"
                 >
-                  <thumbnail-elem avatar alternative-text="Username" size="xs" />
-                  <span class="inline">Username</span>
+                  <thumbnail-elem
+                    avatar
+                    :alternative-text="userStore?.getFullName"
+                    :url="userStore?.stateData?.user?.avatar_url"
+                    size="xs"
+                  />
+                  <span class="inline" v-text="userStore?.getFullName"></span>
                 </router-link>
               </template>
 
               <template #content>
                 <div class="w-[275px] bg-white dark:bg-zinc-800 shadow-lg p-5 rounded-lg">
-                  Dropdown content
+                  <template v-if="userStore.stateData?.user?.id">
+                    <div class="flex flex-col justify-center items-center">
+                      <thumbnail-elem
+                        size="base"
+                        :alternative-text="userStore?.getFullName"
+                        :url="userStore?.stateData?.user?.avatar_url"
+                        avatar
+                      />
+                      <div
+                        class="text-2xl font-medium truncate mb-1 mt-3 text-zinc-500 dark:text-zinc-200"
+                        v-text="userStore.getFullName"
+                      ></div>
+                      <div
+                        class="text-base font-normal truncate text-zinc-400 dark:text-zinc-500"
+                        v-text="userStore.stateData.user?.email"
+                      ></div>
+                    </div>
+                    <separator-elem class="my-6" />
+                    <div class="flex justify-between items-center">
+                      <router-link :to="{ name: 'profile' }" title="Meu perfil">
+                        <button-elem
+                          type="button"
+                          prepend-icon="person-circle"
+                          text="Perfil"
+                          size="sm"
+                        />
+                      </router-link>
+
+                      <button-elem
+                        v-on:click="logout"
+                        prepend-icon="box-arrow-left"
+                        text="Logout"
+                        size="sm"
+                      />
+                    </div>
+                  </template>
                 </div>
               </template>
             </dropdown-elem>
@@ -105,11 +145,14 @@ import ThumbnailElem from '@/components/ThumbnailElem.vue'
 import AppAlert from '@/components/layouts/AppAlert.vue'
 import BackdropElem from '../BackdropElem.vue'
 import LoadbarElem from '../LoadbarElem.vue'
-import { useAppStore } from '@/stores/app'
+import SeparatorElem from '../SeparatorElem.vue'
 import { reactive, watch } from 'vue'
 import { RouterLink } from 'vue-router'
+import { useAppStore } from '@/stores/app'
+import { useUserStore } from '@/stores/user'
 
 const appStore = useAppStore()
+const userStore = useUserStore()
 
 const sidebar = reactive({
   show: false,
@@ -135,6 +178,10 @@ const sidebarToggle = () => {
 
 const darkModeToggle = () => {
   appStore.darkModeToggle()
+}
+
+const logout = () => {
+  userStore.logout()
 }
 
 /**
