@@ -9,7 +9,11 @@
       <card-section first title="Avatar" subtitle="Your profile avatar">
         <template #content>
           <div class="flex justify-center items-center p-5">
-            <thumbnail-elem avatar />
+            <thumbnail-elem
+              avatar
+              :alternative-text="form.data?.first_name"
+              :url="form.data?.avatar_url"
+            />
           </div>
         </template>
       </card-section>
@@ -21,7 +25,82 @@
 
     <content-card class="col-span-12 md:col-span-7 xl:col-span-8">
       <card-section title="Basic data" subtitle="Your profile basic data">
-        <template #content> Content </template>
+        <template #content>
+          <base-form
+            :validation-schema="form.validationSchema"
+            :on-submit="onSubmit"
+            button-submit-text="Atualizar dados"
+          >
+            <div class="grid grid-cols-12 gap-6">
+              <field-form
+                v-model="form.data.first_name"
+                type="text"
+                label="Nome"
+                name="first_name"
+                class="col-span-12 sm:col-span-6"
+              />
+
+              <field-form
+                v-model="form.data.last_name"
+                type="text"
+                label="Sobrenome"
+                name="last_name"
+                class="col-span-12 sm:col-span-6"
+              />
+
+              <field-form
+                v-model="form.data.username"
+                type="text"
+                label="Usuário"
+                name="username"
+                class="col-span-12 sm:col-span-6"
+              />
+
+              <field-form
+                v-model="form.data.gender"
+                type="select"
+                label="Gênero"
+                name="gender"
+                :options="[
+                  {
+                    value: 'f',
+                    label: 'Feminino'
+                  },
+                  {
+                    value: 'm',
+                    label: 'Masculino'
+                  }
+                ]"
+                class="col-span-12 sm:col-span-6"
+              />
+
+              <field-form
+                v-model="form.data.email"
+                type="email"
+                label="E-mail"
+                name="email"
+                class="col-span-12 pointer-events-none"
+                disabled
+              />
+
+              <field-form
+                v-model="form.data.password"
+                type="password"
+                label="Senha"
+                name="password"
+                class="col-span-12 sm:col-span-6"
+              />
+
+              <field-form
+                v-model="form.data.password_confirmation"
+                type="password"
+                label="Confirmar senha"
+                name="password_confirmation"
+                class="col-span-12 sm:col-span-6"
+              />
+            </div>
+          </base-form>
+        </template>
       </card-section>
     </content-card>
   </main-view-base>
@@ -33,14 +112,34 @@ import CardSection from '@/components/card/CardSection.vue'
 import ThumbnailElem from '@/components/ThumbnailElem.vue'
 import SeparatorElem from '@/components/SeparatorElem.vue'
 import MainViewBase from '@/components/layouts/main/MainViewBase.vue'
+import BaseForm from '@/components/form/BaseForm.vue'
+import FieldForm from '@/components/form/FieldForm.vue'
 import { apiRequester } from '@/core/plugins/requester'
 import { reactive, ref } from 'vue'
+import { yup } from '@/core/plugins/validators'
+import { useAlertStore } from '@/stores/alert'
 
-const profile = reactive({
-  data: null
+const alertStore = useAlertStore()
+
+const form = reactive({
+  data: {},
+  validationSchema: yup.object({
+    first_name: yup.string().required().max(25),
+    last_name: yup.string().required().max(75),
+    username: yup.string().required().max(25),
+    gender: yup.mixed().inArray(['f', 'm']),
+    password: yup.string().nullable(),
+    password_confirmation: yup.string().nullable()
+  })
 })
 
-const loadingContent = ref(false)
+const loadingContent = ref(true)
+
+/**
+ *
+ * Methods
+ *
+ */
 
 const loadProfileData = () => {
   loadingContent.value = true
@@ -54,7 +153,7 @@ const loadProfileData = () => {
 
     // success
     (r) => {
-      profile.data = r.data?.me
+      form.data = r.data?.me
     },
 
     // fail
@@ -63,6 +162,21 @@ const loadProfileData = () => {
     // finally
     () => {
       loadingContent.value = false
+    }
+  )
+}
+
+const onSubmit = (validatedData) => {
+  return apiRequester(
+    {
+      url: '/me',
+      method: 'put',
+      data: validatedData.data
+    },
+    (resp) => {
+      form.data = resp.data?.me
+
+      alertStore.add('Perfil atualizado com sucesso!', null, 'success', 3000)
     }
   )
 }

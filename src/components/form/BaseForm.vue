@@ -40,7 +40,7 @@ const props = defineProps({
    */
   buttonClearText: {
     type: String,
-    default: 'Limpar'
+    default: null
   },
 
   /**
