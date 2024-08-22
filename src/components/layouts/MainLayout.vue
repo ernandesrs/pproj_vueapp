@@ -63,7 +63,7 @@
                     :url="userStore?.stateData?.user?.avatar_url"
                     size="xs"
                   />
-                  <span class="inline" v-text="userStore?.getFullName"></span>
+                  <span class="inline truncate w-[100px]" v-text="userStore?.getFullName"></span>
                 </router-link>
               </template>
 
@@ -78,7 +78,7 @@
                         avatar
                       />
                       <div
-                        class="text-2xl font-medium truncate mb-1 mt-3 text-zinc-500 dark:text-zinc-200"
+                        class="w-full text-2xl font-medium truncate mb-1 mt-3 text-zinc-500 dark:text-zinc-200"
                         v-text="userStore.getFullName"
                       ></div>
                       <div
