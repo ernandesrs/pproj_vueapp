@@ -32,6 +32,7 @@ import { reactive, watch } from 'vue'
 import { useForm } from 'vee-validate'
 import { useAlertStore } from '@/stores/alert'
 import { apiReq } from '@/core/plugins/requester'
+import { getServerMessage } from '@/core/server-messages'
 
 const emit = defineEmits(['formSubmit', 'formClear', 'formValidationFail'])
 
@@ -178,7 +179,7 @@ const formSubmit = handleSubmit(
         }
 
         if (error) {
-          alertStore.add(error, null, 'danger', 5000)
+          alertStore.add(getServerMessage(error), null, 'danger', 5000)
         }
 
         if (props?.onFail) {

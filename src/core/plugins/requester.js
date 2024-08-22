@@ -8,13 +8,7 @@ import axiosJs from "axios"
 import cookies from "./cookies"
 import { useAlertStore } from "@/stores/alert"
 import { useAppStore } from "@/stores/app"
-
-const serverErrors = {
-    'default': 'Houve um erro não identificado: ',
-    'InvalidDataException': 'Os dados enviados são inválidos.',
-    'UnauthenticatedException': 'Você não está autenticado.',
-    'LoginFailException': 'Falha no login! E-mail e/ou senha inválidos.'
-}
+import { getServerMessage } from "./../server-messages"
 
 const authToken = cookies.get('auth_token')
 
@@ -61,7 +55,7 @@ const customInstanceWithAutoResponseHandling = async (config = {}, fnSuccess = n
             return
         }
 
-        useAlertStore().add(serverErrors[errorName] ?? (serverErrors['default'] + errorName), null, 'fail', 5000)
+        useAlertStore().add(getServerMessage(errorName), null, 'fail', 5000)
 
         if (fnFail) {
             fnFail(response)
