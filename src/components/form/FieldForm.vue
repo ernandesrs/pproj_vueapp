@@ -86,7 +86,7 @@
         v-if="props.type == 'password'"
         v-on:click="compState.passwordShow = !compState.passwordShow"
         :name="compState.passwordShow ? 'eye-slash-fill' : 'eye-fill'"
-        class="absolute right-0 px-3 h-full flex items-center bg-zinc-50 dark:bg-zinc-900"
+        class="absolute right-0 px-3 h-full flex items-center bg-zinc-50 dark:bg-zinc-700"
         role="button"
       />
 
