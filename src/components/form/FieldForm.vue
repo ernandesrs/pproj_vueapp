@@ -28,7 +28,8 @@
         v-if="props.type == 'file'"
         class="flex items-center w-full h-full absolute top-0 left-0 pointer-events-none p-1 rounded-lg"
       >
-        <span class="flex items-center h-full bg-zinc-200 px-4 rounded-tl-lg rounded-bl-lg"
+        <span
+          class="flex items-center h-full bg-zinc-200 dark:bg-zinc-800 px-4 rounded-tl-lg rounded-bl-lg"
           >Escolher</span
         >
         <span

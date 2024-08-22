@@ -55,7 +55,9 @@
                 label="Avatar"
                 name="f_avatar"
               />
-              <div class="col-span-12 mb-3 bg-zinc-100 border p-4">
+              <div
+                class="col-span-12 mb-3 bg-zinc-100 dark:bg-zinc-700 border dark:border-zinc-900 rounded-lg p-4"
+              >
                 <pre>
                   {{ form }}
                 </pre>
@@ -133,7 +135,9 @@
                 label="Avatar"
                 name="avatar"
               />
-              <div class="col-span-12 mb-3 bg-zinc-100 border p-4">
+              <div
+                class="col-span-12 mb-3 bg-zinc-100 dark:bg-zinc-700 border dark:border-zinc-900 rounded-lg p-4"
+              >
                 <pre>
                   {{ validatedForm }}
                 </pre>
