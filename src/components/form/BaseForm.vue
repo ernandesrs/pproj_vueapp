@@ -1,5 +1,5 @@
 <template>
-  <form v-on:submit.prevent="onFormSubmit">
+  <form v-on:submit.prevent="formSubmit">
     <div class="w-full mb-5">
       <slot />
     </div>
@@ -31,8 +31,7 @@ import ButtonElem from '../ButtonElem.vue'
 import { reactive, watch } from 'vue'
 import { useForm } from 'vee-validate'
 import { useAlertStore } from '@/stores/alert'
-
-const emit = defineEmits(['form:submit', 'form:clear', 'form:validationFail'])
+import { apiReq } from '@/core/plugins/requester'
 
 const props = defineProps({
   /**
@@ -60,9 +59,53 @@ const props = defineProps({
   },
 
   /**
-   * Function(Ideally returning a Promosise) to handle form submission.
+   * Function(Optionally) to handle with form validation fails
    */
-  onSubmit: {
+  onValidationFail: {
+    type: Function,
+    default: null
+  },
+
+  /**
+   * Validator schema
+   */
+  validationSchema: {
+    type: Object,
+    default: () => {}
+  },
+
+  /**
+   * Method: get, post, put, patch, delete
+   * Default is 'get'
+   */
+  method: {
+    type: String,
+    default: null,
+    required: true
+  },
+
+  /**
+   * Action url
+   */
+  action: {
+    type: String,
+    default: null,
+    required: true
+  },
+
+  /**
+   * A function to handle with request success
+   */
+  onSuccess: {
+    type: Function,
+    default: null,
+    required: true
+  },
+
+  /**
+   * A function to handle with request fail
+   */
+  onFail: {
     type: Function,
     default: null
   },
@@ -76,19 +119,11 @@ const props = defineProps({
   },
 
   /**
-   * Function(Optionally) to handle with form validation fails
+   * Function to handle on request is end
    */
-  onValidationFail: {
+  onFinally: {
     type: Function,
     default: null
-  },
-
-  /**
-   * Validators
-   */
-  validationSchema: {
-    type: Object,
-    default: () => {}
   }
 })
 
@@ -100,7 +135,7 @@ const compState = reactive({
 const alertStore = useAlertStore()
 
 // const { handleSubmit, errors } = useForm({
-const { handleSubmit } = useForm({
+const { handleSubmit, setErrors } = useForm({
   validationSchema: props.validationSchema
 })
 
@@ -109,42 +144,48 @@ const { handleSubmit } = useForm({
  * Methods
  *
  */
-// const onFormSubmit = () => {
-//   compState.submitting = true
 
-//   emit('form:submit')
-
-//   if (props.onSubmit) {
-//     const promise = props.onSubmit()
-
-//     try {
-//       promise.finally(() => {
-//         compState.submitting = false
-//       })
-//     } catch {
-//       compState.submitting = false
-//     }
-//   }
-// }
-
-const onFormSubmit = handleSubmit(
+const formSubmit = handleSubmit(
+  // submit
   (values) => {
     compState.submitting = true
 
-    emit('form:submit', { data: values })
+    apiReq({
+      method: props?.method,
+      url: props?.action,
+      data: values ?? null
+    })
+      .then((resp) => {
+        if (props.onSuccess) {
+          props.onSuccess(resp)
+        }
+      })
+      .catch((resp) => {
+        const errors = resp.response.data?.errors
+        const error = resp.response.data?.error
 
-    if (props.onSubmit) {
-      const promise = props.onSubmit({ data: values })
+        if (errors) {
+          setErrors(errors)
+        }
 
-      try {
-        promise.finally(() => {
-          compState.submitting = false
-        })
-      } catch {
+        if (error) {
+          alertStore.add(error, null, 'danger', 5000)
+        }
+
+        if (props?.onFail) {
+          props?.onFail(resp)
+        }
+      })
+      .finally(() => {
         compState.submitting = false
-      }
-    }
+
+        if (props?.onFinally) {
+          props?.onFinally()
+        }
+      })
   },
+
+  // error
   (errors) => {
     const errorsData = {
       errors: errors.errors,
@@ -158,10 +199,9 @@ const onFormSubmit = handleSubmit(
 const onFormClear = () => {
   compState.clearing = true
 
-  emit('form:clear')
-
   if (props.onClear) {
     const promise = props.onClear()
+
     try {
       promise.finally(() => {
         compState.clearing = false
@@ -173,8 +213,6 @@ const onFormClear = () => {
 }
 
 const onFormValidationFail = (errors) => {
-  emit('form:validationFail', errors)
-
   if (props.onValidationFail) {
     props.onValidationFail(errors)
   } else {

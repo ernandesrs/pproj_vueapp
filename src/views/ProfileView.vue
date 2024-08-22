@@ -27,9 +27,11 @@
       <card-section title="Basic data" subtitle="Your profile basic data">
         <template #content>
           <base-form
-            :validation-schema="form.validationSchema"
-            :on-submit="onSubmit"
             button-submit-text="Atualizar dados"
+            :validation-schema="form.validationSchema"
+            method="put"
+            action="/me"
+            :on-success="submitWithSuccess"
           >
             <div class="grid grid-cols-12 gap-6">
               <field-form
@@ -114,10 +116,10 @@ import SeparatorElem from '@/components/SeparatorElem.vue'
 import MainViewBase from '@/components/layouts/main/MainViewBase.vue'
 import BaseForm from '@/components/form/BaseForm.vue'
 import FieldForm from '@/components/form/FieldForm.vue'
-import { apiRequester } from '@/core/plugins/requester'
 import { reactive, ref } from 'vue'
 import { yup } from '@/core/plugins/validators'
 import { useAlertStore } from '@/stores/alert'
+import { apiRequester } from '@/core/plugins/requester'
 
 const alertStore = useAlertStore()
 
@@ -166,19 +168,10 @@ const loadProfileData = () => {
   )
 }
 
-const onSubmit = (validatedData) => {
-  return apiRequester(
-    {
-      url: '/me',
-      method: 'put',
-      data: validatedData.data
-    },
-    (resp) => {
-      form.data = resp.data?.me
+const submitWithSuccess = (resp) => {
+  form.data = resp.data?.me
 
-      alertStore.add('Perfil atualizado com sucesso!', null, 'success', 3000)
-    }
-  )
+  alertStore.add('Perfil atualizado com sucesso!', null, 'success', 3000)
 }
 
 loadProfileData()
