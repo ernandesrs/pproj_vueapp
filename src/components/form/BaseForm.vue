@@ -30,6 +30,7 @@
 import ButtonElem from '../ButtonElem.vue'
 import { reactive, watch } from 'vue'
 import { useForm } from 'vee-validate'
+import { useAlertStore } from '@/stores/alert'
 
 const emit = defineEmits(['form:submit', 'form:clear', 'form:validationFail'])
 
@@ -96,6 +97,8 @@ const compState = reactive({
   clearing: false
 })
 
+const alertStore = useAlertStore()
+
 // const { handleSubmit, errors } = useForm({
 const { handleSubmit } = useForm({
   validationSchema: props.validationSchema
@@ -148,11 +151,7 @@ const onFormSubmit = handleSubmit(
       count: Object.values(errors.errors).length > 0
     }
 
-    emit('form:validationFail', errorsData)
-
-    if (props.onValidationFail) {
-      props.onValidationFail(errorsData)
-    }
+    onFormValidationFail(errorsData)
   }
 )
 
@@ -170,6 +169,16 @@ const onFormClear = () => {
     } catch {
       compState.clearing = false
     }
+  }
+}
+
+const onFormValidationFail = (errors) => {
+  emit('form:validationFail', errors)
+
+  if (props.onValidationFail) {
+    props.onValidationFail(errors)
+  } else {
+    alertStore.add('Um ou mais dados informados são inválidos.', null, 'fail', 5000)
   }
 }
 
