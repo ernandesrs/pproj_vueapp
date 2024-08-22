@@ -3,11 +3,11 @@
     <auth-header title="Login" subtitle="Acesse sua conta agora mesmo" />
 
     <base-form
+      method="post"
       :validation-schema="loginSchema"
-      :on-submit="onSubmitLoginForm"
-      :on-validation-fail="onValidationFail"
+      v-on:form-validation-submit="onValidationFail"
+      v-on:form-submit="onSubmitLoginForm"
       button-submit-text="Login"
-      button-clear-text=""
     >
       <div class="grid grid-cols-12 gap-y-6">
         <field-form name="email" type="email" label="E-mail" class="col-span-12" />
@@ -35,7 +35,7 @@ const loginSchema = yup.object({
 })
 
 const onSubmitLoginForm = async (validatedData) => {
-  return userStore.login(validatedData.data.email, validatedData.data.password, false)
+  return await userStore.login(validatedData.email, validatedData.password, false)
 }
 
 const onValidationFail = (errors) => {

@@ -12,7 +12,8 @@ import { useAppStore } from "@/stores/app"
 const serverErrors = {
     'default': 'Houve um erro não identificado: ',
     'InvalidDataException': 'Os dados enviados são inválidos.',
-    'UnauthenticatedException': 'Você não está autenticado.'
+    'UnauthenticatedException': 'Você não está autenticado.',
+    'LoginFailException': 'Falha no login! E-mail e/ou senha inválidos.'
 }
 
 const authToken = cookies.get('auth_token')

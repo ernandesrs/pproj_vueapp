@@ -33,6 +33,8 @@ import { useForm } from 'vee-validate'
 import { useAlertStore } from '@/stores/alert'
 import { apiReq } from '@/core/plugins/requester'
 
+const emit = defineEmits(['formSubmit', 'formClear', 'formValidationFail'])
+
 const props = defineProps({
   /**
    * Text to clear button. Hidde when null
@@ -81,7 +83,7 @@ const props = defineProps({
   method: {
     type: String,
     default: null,
-    required: true
+    required: false
   },
 
   /**
@@ -90,7 +92,7 @@ const props = defineProps({
   action: {
     type: String,
     default: null,
-    required: true
+    required: false
   },
 
   /**
@@ -99,7 +101,7 @@ const props = defineProps({
   onSuccess: {
     type: Function,
     default: null,
-    required: true
+    required: false
   },
 
   /**
@@ -148,6 +150,13 @@ const { handleSubmit, setErrors } = useForm({
 const formSubmit = handleSubmit(
   // submit
   (values) => {
+    emit('formSubmit', values)
+
+    if (!props?.action || !props?.method) {
+      // needs a value to action and method prop
+      return
+    }
+
     compState.submitting = true
 
     apiReq({
@@ -192,11 +201,15 @@ const formSubmit = handleSubmit(
       count: Object.values(errors.errors).length > 0
     }
 
-    onFormValidationFail(errorsData)
+    if (errorsData.count) {
+      onFormValidationFail(errorsData)
+    }
   }
 )
 
 const onFormClear = () => {
+  emit('formClear')
+
   compState.clearing = true
 
   if (props.onClear) {
@@ -213,6 +226,8 @@ const onFormClear = () => {
 }
 
 const onFormValidationFail = (errors) => {
+  emit('formValidationFail')
+
   if (props.onValidationFail) {
     props.onValidationFail(errors)
   } else {
