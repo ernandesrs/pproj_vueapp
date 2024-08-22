@@ -1,6 +1,8 @@
-# vueapp
+# VUE APP
 
-This template should help get you started developing with Vue 3 in Vite.
+Vue APP é uma interface web em Vue JS 3 e Tailwind CSS criada para fins de estudo do Vue e consumo de API.
+
+Esta aplicação consome minha API em Laravel 11, [LARA API](https://github.com/ernandesrs/pproj_laraapi).
 
 ## Recommended IDE Setup
 
