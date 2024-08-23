@@ -65,6 +65,15 @@
           :size="props.size"
           square
         />
+        <button-elem
+          append-icon="arrow-right"
+          text="As internal link"
+          :color="props.color"
+          :variant="props.variant"
+          :size="props.size"
+          :to="{ name: 'home' }"
+          disabled
+        />
       </div>
     </template>
   </card-section>

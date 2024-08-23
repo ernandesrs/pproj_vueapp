@@ -1,8 +1,5 @@
 <template>
-  <button
-    class="flex justify-center items-center gap-3 duration-300 disabled:pointer-events-none disabled:text-opacity-75 border"
-    :class="getClass"
-  >
+  <button v-if="!isLink" :class="getClass" v-bind="$attrs">
     <icon-elem
       v-if="props.prependIcon || props.icon"
       :name="props.loading ? 'arrow-clockwise animate-spin' : (props.prependIcon ?? props.icon)"
@@ -15,11 +12,27 @@
       class="pointer-events-none"
     />
   </button>
+
+  <router-link v-else-if="isLink" :class="getClass" v-bind="getLinkAttrs">
+    <icon-elem
+      v-if="props.prependIcon || props.icon"
+      :name="props.loading ? 'arrow-clockwise animate-spin' : (props.prependIcon ?? props.icon)"
+      class="pointer-events-none"
+    />
+    <span v-if="props.text && !props.icon" v-html="props.text" class="pointer-events-none"></span>
+    <icon-elem
+      v-if="props.appendIcon"
+      :name="props.loading ? 'arrow-clockwise animate-spin' : props.appendIcon"
+      class="pointer-events-none"
+    />
+  </router-link>
 </template>
 
 <script setup>
 import IconElem from './IconElem.vue'
-import { computed } from 'vue'
+import { computed, useAttrs } from 'vue'
+
+const attrs = useAttrs()
 
 const props = defineProps({
   /**
@@ -43,6 +56,16 @@ const props = defineProps({
    */
   appendIcon: {
     type: [null, String],
+    default: null
+  },
+
+  to: {
+    type: Object,
+    default: null
+  },
+
+  href: {
+    type: String,
     default: null
   },
 
@@ -103,7 +126,34 @@ const props = defineProps({
   }
 })
 
+const isLink = computed(() => props?.to || props?.href)
+
+const getLinkAttrs = computed(() => {
+  let more = {
+    ...attrs
+  }
+
+  if (props?.to) {
+    more = {
+      ...more,
+      to: props?.to
+    }
+  }
+
+  if (props?.href) {
+    more = {
+      ...more,
+      href: props?.href
+    }
+  }
+
+  return more
+})
+
 const getClass = computed(() => {
+  const baseClass =
+    'flex justify-center items-center gap-3 cursor-pointer duration-300 disabled:pointer-events-none disabled:text-opacity-75 border'
+
   const colors = {
     primary: {
       filled:
@@ -163,16 +213,18 @@ const getClass = computed(() => {
     lg: (props?.icon ? 'w-12 h-12' : 'h-12 px-8') + ' text-lg'
   }
   return (
-    sizes[props.size] +
+    baseClass +
     ' ' +
-    colors[props.color][props.variant] +
-    (props.circle ? ' rounded-full' : props.square ? '' : ' rounded-lg') +
-    (props.loading ? ' animate-pulse pointer-events-none' : '') +
-    (props.variant != 'filled'
-      ? props.variant == 'text'
-        ? ' border-transparent'
-        : ' disabled:border-opacity-50'
-      : ' disabled:bg-opacity-75 shadow')
+    (sizes[props.size] +
+      ' ' +
+      colors[props.color][props.variant] +
+      (props.circle ? ' rounded-full' : props.square ? '' : ' rounded-lg') +
+      (props.loading ? ' animate-pulse pointer-events-none' : '') +
+      (props.variant != 'filled'
+        ? props.variant == 'text'
+          ? ' border-transparent'
+          : ' disabled:border-opacity-50'
+        : ' disabled:bg-opacity-75 shadow'))
   )
 })
 </script>
