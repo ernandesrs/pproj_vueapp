@@ -98,6 +98,12 @@ const navigationGroups = [
         icon: 'file-earmark-text',
         activeIn: ['texts'],
         to: { name: 'texts' }
+      },
+      {
+        label: 'Lists',
+        icon: 'list',
+        activeIn: ['lists'],
+        to: { name: 'lists' }
       }
     ]
   },
