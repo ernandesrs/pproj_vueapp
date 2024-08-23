@@ -1,6 +1,6 @@
 <template>
   <main-view-base
-    page-title="Texts"
+    page-title="Title, paragraphs, ..."
     page-subtitle="All text components"
     page-icon="file-earmark-text"
     :loading-content="loadingContent"
@@ -24,12 +24,12 @@
     <card-section
       bordered
       shadow
-      title="Paragraphs"
-      subtitle="All paragraphs options"
+      title="Texts"
+      subtitle="All texts options"
       class="col-span-12 sm:col-span-6"
     >
       <template #content>
-        <h4-elem text="Normal paragraph" />
+        <h4-elem text="Paragraph" />
         <p-elem
           text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias facere tenetur blanditiis veritatis quisquam assumenda sint error maiores, expedita odit praesentium repellendus aut inventore placeat magni necessitatibus nisi dolorem ab?"
         />
@@ -43,6 +43,8 @@
           unselectable
           text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias facere tenetur blanditiis veritatis quisquam assumenda sint error maiores, expedita odit praesentium repellendus aut inventore placeat magni necessitatibus nisi dolorem ab?"
         />
+        <h4-elem text="Code" />
+        <p-elem code text='<p-elem quoted text="Lorem dolor text" />' />
       </template>
     </card-section>
     <card-section bordered shadow title="Paragraphs" class="col-span-12 sm:col-span-6">
@@ -57,7 +59,7 @@ import H1Elem from '@/components/text/H1Elem.vue'
 import H2Elem from '@/components/text/H2Elem.vue'
 import H3Elem from '@/components/text/H3Elem.vue'
 import H4Elem from '@/components/text/H4Elem.vue'
-import PElem from '@/components/text/PElem.vue'
+import PElem from '@/components/text/TextElem.vue'
 import { ref } from 'vue'
 
 const loadingContent = ref(true)
