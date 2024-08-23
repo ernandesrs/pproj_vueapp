@@ -47,7 +47,56 @@
         <p-elem code text='<p-elem quoted text="Lorem dolor text" />' />
       </template>
     </card-section>
-    <card-section bordered shadow title="Paragraphs" class="col-span-12 sm:col-span-6">
+    <card-section bordered shadow title="List" class="col-span-12 sm:col-span-6">
+      <template #content>
+        <h4-elem text="Simple list" />
+        <simple-list
+          :items="[
+            {
+              text: 'Text to item #1'
+            },
+            {
+              text: 'Text to item #2'
+            },
+            {
+              text: 'Text to item #3'
+            }
+          ]"
+        />
+        <h4-elem text="Simple list with border" />
+        <simple-list
+          :items="[
+            {
+              text: 'Text to item #1'
+            },
+            {
+              text: 'Text to item #2'
+            },
+            {
+              text: 'Text to item #3'
+            }
+          ]"
+          bordered
+        />
+        <h4-elem text="Simple list with prepend text" />
+        <simple-list
+          :items="[
+            {
+              prependText: 'Item #1',
+              text: 'Text to item 1'
+            },
+            {
+              prependText: 'Item #2',
+              text: 'Text to item 2'
+            },
+            {
+              prependText: 'Item #3',
+              text: 'Text to item 3'
+            }
+          ]"
+          bordered
+        />
+      </template>
     </card-section>
   </main-view-base>
 </template>
@@ -60,6 +109,7 @@ import H2Elem from '@/components/text/H2Elem.vue'
 import H3Elem from '@/components/text/H3Elem.vue'
 import H4Elem from '@/components/text/H4Elem.vue'
 import PElem from '@/components/text/TextElem.vue'
+import SimpleList from '@/components/list/SimpleList.vue'
 import { ref } from 'vue'
 
 const loadingContent = ref(true)

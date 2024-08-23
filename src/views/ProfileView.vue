@@ -19,7 +19,26 @@
       </card-section>
       <separator-elem />
       <card-section last title="Details" subtitle="Your profile details">
-        <template #content> Content </template>
+        <template #content>
+          <simple-list
+            class="text-sm"
+            bordered
+            :items="[
+              {
+                prependText: 'Cargo',
+                text: '...'
+              },
+              {
+                prependText: 'Registrado em',
+                text: new Date(form.data?.created_at).toLocaleString('pt-BR')
+              },
+              {
+                prependText: 'Verificado em',
+                text: new Date(form.data?.email_verified_at).toLocaleString('pt-BR')
+              }
+            ]"
+          />
+        </template>
       </card-section>
     </content-card>
 
@@ -120,6 +139,7 @@ import { reactive, ref } from 'vue'
 import { yup } from '@/core/plugins/validators'
 import { useAlertStore } from '@/stores/alert'
 import { apiRequester } from '@/core/plugins/requester'
+import SimpleList from '@/components/list/SimpleList.vue'
 
 const alertStore = useAlertStore()
 
