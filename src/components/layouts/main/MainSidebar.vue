@@ -92,6 +92,12 @@ const navigationGroups = [
         icon: 'textarea-resize',
         activeIn: ['forms'],
         to: { name: 'forms' }
+      },
+      {
+        label: 'Textos',
+        icon: 'file-earmark-text',
+        activeIn: ['texts'],
+        to: { name: 'texts' }
       }
     ]
   },

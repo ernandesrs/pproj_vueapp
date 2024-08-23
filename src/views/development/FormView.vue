@@ -5,32 +5,6 @@
     page-subtitle="Veja exemplos de formulários"
     :loading-content="loadingContent"
   >
-    <card-section bordered class="col-span-12">
-      <template #content>
-        <h1-elem text="Título h1" />
-        <p-elem
-          text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis sequi quam ad harum nam placeat sit neque molestiae, consectetur dignissimos alias possimus incidunt provident, corporis deserunt voluptatibus! Dignissimos, pariatur corporis."
-        />
-        <p-elem
-          text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis sequi quam ad harum nam placeat sit neque molestiae, consectetur dignissimos alias possimus incidunt provident, corporis deserunt voluptatibus! Dignissimos, pariatur corporis."
-        />
-        <p-elem
-          text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis sequi quam ad harum nam placeat sit neque molestiae, consectetur dignissimos alias possimus incidunt provident, corporis deserunt voluptatibus! Dignissimos, pariatur corporis."
-        />
-        <h2-elem text="Título h2" />
-        <p-elem
-          text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis sequi quam ad harum nam placeat sit neque molestiae, consectetur dignissimos alias possimus incidunt provident, corporis deserunt voluptatibus! Dignissimos, pariatur corporis."
-        />
-        <h3-elem text="Título h3" />
-        <p-elem
-          text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis sequi quam ad harum nam placeat sit neque molestiae, consectetur dignissimos alias possimus incidunt provident, corporis deserunt voluptatibus! Dignissimos, pariatur corporis."
-        />
-        <h4-elem text="Título h4" />
-        <p-elem
-          text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis sequi quam ad harum nam placeat sit neque molestiae, consectetur dignissimos alias possimus incidunt provident, corporis deserunt voluptatibus! Dignissimos, pariatur corporis."
-        />
-      </template>
-    </card-section>
     <card-section bordered title="Form" subtitle="Lorem dolor" class="col-span-12 sm:col-span-6">
       <template #content>
         <div class="py-3">
@@ -184,11 +158,6 @@ import BaseForm from '@/components/form/BaseForm.vue'
 import { useAppStore } from '@/stores/app'
 import { reactive, ref } from 'vue'
 import { yup } from '@/core/plugins/validators'
-import H1Elem from '@/components/text/H1Elem.vue'
-import H2Elem from '@/components/text/H2Elem.vue'
-import H3Elem from '@/components/text/H3Elem.vue'
-import H4Elem from '@/components/text/H4Elem.vue'
-import PElem from '@/components/text/PElem.vue'
 
 const appStore = useAppStore()
 

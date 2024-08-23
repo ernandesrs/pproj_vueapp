@@ -1,7 +1,7 @@
 <template>
   <component
     :is="props.tag"
-    class="text-lg font-semibold md:text-xl text-zinc-400 dark:text-zinc-500 my-4"
+    class="text-lg font-semibold md:text-xl text-zinc-700 dark:text-zinc-50 mt-5 mb-2"
   >
     {{ props.text }}
   </component>
