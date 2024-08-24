@@ -94,7 +94,7 @@
           bordered
           title="Menu list default"
           subtitle="A example with text, prepend icon and append icon"
-          class="col-span-12 sm:col-span-6 lg:col-span-4"
+          class="col-span-12 sm:col-span-6"
         >
           <template #content>
             <menu-list :items="listItems">
@@ -113,7 +113,7 @@
           bordered
           title="Menu list with caption"
           subtitle="A example with caption"
-          class="col-span-12 sm:col-span-6 lg:col-span-4"
+          class="col-span-12 sm:col-span-6"
         >
           <template #content>
             <menu-list :items="listItems">
@@ -133,17 +133,31 @@
           bordered
           title="Menu list custom"
           subtitle="A example with custom prepend and append content"
-          class="col-span-12 sm:col-span-6 lg:col-span-4"
+          class="col-span-12 sm:col-span-6"
         >
           <template #content>
             <menu-list :items="listItems">
               <template v-slot="{ itemKey, itemValue }">
                 <menu-item :text="itemValue.text" :caption="itemValue.caption">
                   <template v-if="itemKey % 2 == 0" #prepend>
-                    <button-elem icon="arrow-left" variant="filled" size="sm" />
+                    <button-elem
+                      v-on:click="
+                        listItemButtonClick('Clicou no prepend button de ' + itemValue.text)
+                      "
+                      icon="arrow-left"
+                      variant="filled"
+                      size="sm"
+                    />
                   </template>
                   <template v-else #append>
-                    <button-elem icon="arrow-right" variant="filled" size="sm" />
+                    <button-elem
+                      v-on:click="
+                        listItemButtonClick('Clicou no append button de ' + itemValue.text)
+                      "
+                      icon="arrow-right"
+                      variant="filled"
+                      size="sm"
+                    />
                   </template>
                 </menu-item>
               </template>
@@ -155,7 +169,7 @@
           bordered
           title="Menu list clickable"
           subtitle="A example of a menu list with clickable items"
-          class="col-span-12 sm:col-span-6 lg:col-span-4"
+          class="col-span-12 sm:col-span-6"
         >
           <template #content>
             <menu-list :items="listItemsClickable">
@@ -168,7 +182,14 @@
                   target="_self"
                 >
                   <template #append>
-                    <button-elem icon="arrow-right" variant="filled" size="sm" />
+                    <button-elem
+                      v-on:click="
+                        listItemButtonClick('Clicou no append button de ' + itemValue.text)
+                      "
+                      icon="arrow-right"
+                      variant="filled"
+                      size="sm"
+                    />
                   </template>
                 </menu-item>
               </template>
@@ -224,6 +245,10 @@ const listItemsClickable = [
     title: 'Lorem link title'
   }
 ]
+
+const listItemButtonClick = (txt) => {
+  alert(txt)
+}
 </script>
 
 <style lang="css" scoped></style>
