@@ -150,6 +150,31 @@
             </menu-list>
           </template>
         </card-section>
+
+        <card-section
+          bordered
+          title="Menu list clickable"
+          subtitle="A example of a menu list with clickable items"
+          class="col-span-12 sm:col-span-6 lg:col-span-4"
+        >
+          <template #content>
+            <menu-list :items="listItemsClickable">
+              <template v-slot="{ itemValue }">
+                <menu-item
+                  :to="itemValue.to"
+                  :text="itemValue.text"
+                  :caption="itemValue.caption"
+                  :title="itemValue.title"
+                  target="_self"
+                >
+                  <template #append>
+                    <button-elem icon="arrow-right" variant="filled" size="sm" />
+                  </template>
+                </menu-item>
+              </template>
+            </menu-list>
+          </template>
+        </card-section>
       </div>
     </content-card>
   </main-view-base>
@@ -176,6 +201,27 @@ const listItems = [
   {
     text: 'Item #3',
     caption: 'Item 3 caption'
+  }
+]
+
+const listItemsClickable = [
+  {
+    text: 'Item #1',
+    caption: 'Item 1 caption',
+    to: { name: 'home' },
+    title: 'Lorem link title'
+  },
+  {
+    text: 'Item #2',
+    caption: 'Item 2 caption',
+    to: { name: 'home' },
+    title: 'Lorem link title'
+  },
+  {
+    text: 'Item #3',
+    caption: 'Item 3 caption',
+    to: { name: 'home' },
+    title: 'Lorem link title'
   }
 ]
 </script>
