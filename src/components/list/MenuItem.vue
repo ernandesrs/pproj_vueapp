@@ -1,6 +1,7 @@
 <template>
   <li
     class="flex items-center bg-white hover:bg-zinc-100 duration-200 py-3 px-5 border-b border-zinc-300 dark:bg-zinc-800 dark:hover:bg-zinc-900 dark:border-zinc-700"
+    :class="{ '!border-transparent': props.borderless }"
   >
     <slot name="prepend" />
     <icon-elem v-if="!slots.prepend && props.prependIcon" :name="props.prependIcon" />
@@ -32,6 +33,7 @@ import IconElem from '../IconElem.vue'
 const slots = useSlots()
 
 const props = defineProps({
+  borderless: { type: Boolean, default: false },
   prependIcon: { type: String, default: null, required: false },
   text: { type: String, required: true },
   caption: { type: String, required: false },

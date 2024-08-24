@@ -68,40 +68,61 @@
               </template>
 
               <template #content>
-                <div class="w-[275px] bg-white dark:bg-zinc-800 shadow-lg p-5 rounded-lg">
+                <div class="w-[275px] bg-white dark:bg-zinc-800 shadow-lg rounded-lg">
                   <template v-if="userStore.stateData?.user?.id">
-                    <div class="flex flex-col justify-center items-center">
-                      <thumbnail-elem
-                        size="base"
-                        :alternative-text="userStore?.getFullName"
-                        :url="userStore?.stateData?.user?.avatar_url"
-                        avatar
-                      />
-                      <div
-                        class="w-full text-2xl font-medium truncate mb-1 mt-3 text-zinc-500 dark:text-zinc-200"
-                        v-text="userStore.getFullName"
-                      ></div>
-                      <div
-                        class="text-base font-normal truncate text-zinc-400 dark:text-zinc-500"
-                        v-text="userStore.stateData.user?.email"
-                      ></div>
-                    </div>
-                    <separator-elem class="my-6" />
-                    <div class="flex justify-between items-center">
-                      <router-link :to="{ name: 'profile' }" title="Meu perfil">
-                        <button-elem
-                          type="button"
-                          prepend-icon="person-circle"
-                          text="Perfil"
-                          size="sm"
+                    <div class="p-5">
+                      <div class="flex flex-col justify-center items-center">
+                        <thumbnail-elem
+                          size="base"
+                          :alternative-text="userStore?.getFullName"
+                          :url="userStore?.stateData?.user?.avatar_url"
+                          avatar
                         />
-                      </router-link>
-
+                        <div
+                          class="w-full text-2xl font-medium truncate mb-1 mt-3 text-zinc-500 dark:text-zinc-200"
+                          v-text="userStore.getFullName"
+                        ></div>
+                        <div
+                          class="text-base font-normal truncate text-zinc-400 dark:text-zinc-500"
+                          v-text="userStore.stateData.user?.email"
+                        ></div>
+                      </div>
+                    </div>
+                    <separator-elem />
+                    <div class="px-1 py-1">
+                      <menu-list
+                        borderless
+                        :items="[
+                          {
+                            prependIcon: 'person-circle',
+                            text: 'Meu perfil',
+                            to: { name: 'profile' }
+                          },
+                          {
+                            prependIcon: 'gear-fill',
+                            text: 'Configurações',
+                            to: { name: 'home' }
+                          }
+                        ]"
+                      >
+                        <template v-slot="{ itemValue }">
+                          <menu-item
+                            borderless
+                            :prepend-icon="itemValue.prependIcon"
+                            :text="itemValue.text"
+                            :to="itemValue.to"
+                          />
+                        </template>
+                      </menu-list>
+                    </div>
+                    <separator-elem />
+                    <div class="flex justify-center items-center p-5">
                       <button-elem
                         v-on:click="logout"
                         prepend-icon="box-arrow-left"
                         text="Logout"
                         size="sm"
+                        color="danger"
                       />
                     </div>
                   </template>
@@ -150,6 +171,8 @@ import { reactive, watch } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useAppStore } from '@/stores/app'
 import { useUserStore } from '@/stores/user'
+import MenuList from '../list/MenuList.vue'
+import MenuItem from '../list/MenuItem.vue'
 
 const appStore = useAppStore()
 const userStore = useUserStore()
