@@ -5,7 +5,7 @@
     page-icon="file-earmark-text"
     :loading-content="loadingContent"
   >
-    <card-section bordered shadow title="Titles" subtitle="All title options" class="col-span-12">
+    <card-section bordered title="Titles" subtitle="All title options" class="col-span-12">
       <template #content>
         <h1-elem
           text="H1 lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad nihil debitis fugiat?"
@@ -23,7 +23,6 @@
     </card-section>
     <card-section
       bordered
-      shadow
       title="Texts"
       subtitle="All texts options"
       class="col-span-12 sm:col-span-6"

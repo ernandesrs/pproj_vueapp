@@ -4,7 +4,7 @@
     page-title="Alertas"
     page-subtitle="Veja exemplos de alertas"
   >
-    <card-section bordered shadow class="col-span-12">
+    <card-section bordered class="col-span-12">
       <template #content>
         <div class="p-3 grid grid-cols-12 gap-5">
           <select
