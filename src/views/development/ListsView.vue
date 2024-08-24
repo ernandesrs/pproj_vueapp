@@ -128,6 +128,28 @@
             </menu-list>
           </template>
         </card-section>
+
+        <card-section
+          bordered
+          title="Menu list custom"
+          subtitle="A example with custom prepend and append content"
+          class="col-span-12 sm:col-span-6 lg:col-span-4"
+        >
+          <template #content>
+            <menu-list :items="listItems">
+              <template v-slot="{ itemKey, itemValue }">
+                <menu-item :text="itemValue.text" :caption="itemValue.caption">
+                  <template v-if="itemKey % 2 == 0" #prepend>
+                    <button-elem icon="arrow-left" variant="filled" size="sm" />
+                  </template>
+                  <template v-else #append>
+                    <button-elem icon="arrow-right" variant="filled" size="sm" />
+                  </template>
+                </menu-item>
+              </template>
+            </menu-list>
+          </template>
+        </card-section>
       </div>
     </content-card>
   </main-view-base>
@@ -140,6 +162,7 @@ import CardSection from '@/components/card/CardSection.vue'
 import SimpleList from '@/components/list/SimpleList.vue'
 import MenuList from '@/components/list/MenuList.vue'
 import MenuItem from '@/components/list/MenuItem.vue'
+import ButtonElem from '@/components/ButtonElem.vue'
 
 const listItems = [
   {
