@@ -104,6 +104,12 @@ const navigationGroups = [
         icon: 'list',
         activeIn: ['lists'],
         to: { name: 'lists' }
+      },
+      {
+        label: 'Tables',
+        icon: 'table',
+        activeIn: ['tables'],
+        to: { name: 'tables' }
       }
     ]
   },

@@ -75,6 +75,11 @@ const router = createRouter({
           path: 'lists',
           name: 'lists',
           component: () => import('../views/development/ListsView.vue')
+        },
+        {
+          path: 'tables',
+          name: 'tables',
+          component: () => import('../views/development/TablesView.vue')
         }
       ]
     }
