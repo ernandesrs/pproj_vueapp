@@ -1,6 +1,6 @@
 <template>
   <li
-    class="flex items-center gap-x-2 bg-zinc-100 hover:bg-zinc-50 duration-200 py-3 px-5 border-b border-zinc-300 dark:bg-zinc-800 dark:hover:bg-zinc-900 dark:border-zinc-700"
+    class="flex items-center gap-x-2 bg-white hover:bg-zinc-100 duration-200 py-3 px-5 border-b border-zinc-300 dark:bg-zinc-800 dark:hover:bg-zinc-900 dark:border-zinc-700"
   >
     <icon-elem v-if="props.prependIcon" :name="props.prependIcon" />
     <div class="flex-1 flex flex-col px-3">
