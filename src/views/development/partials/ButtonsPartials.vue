@@ -1,7 +1,6 @@
 <template>
   <card-section
     bordered
-    shadow
     :title="props.title"
     :subtitle="props.subtitle"
     class="col-span-12 sm:col-span-6"
