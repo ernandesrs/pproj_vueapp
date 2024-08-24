@@ -108,6 +108,26 @@
             </menu-list>
           </template>
         </card-section>
+
+        <card-section
+          bordered
+          title="Menu list with caption"
+          subtitle="A example with caption"
+          class="col-span-12 sm:col-span-6 lg:col-span-4"
+        >
+          <template #content>
+            <menu-list :items="listItems">
+              <template v-slot="{ itemValue }">
+                <menu-item
+                  prepend-icon="arrow-left"
+                  append-icon="arrow-right"
+                  :text="itemValue.text"
+                  :caption="itemValue.caption"
+                />
+              </template>
+            </menu-list>
+          </template>
+        </card-section>
       </div>
     </content-card>
   </main-view-base>
