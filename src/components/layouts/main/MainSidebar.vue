@@ -52,9 +52,15 @@ const navigationGroups = [
     links: [
       {
         label: 'Visão geral',
-        icon: 'pie-chart-fill',
+        icon: 'pie-chart',
         activeIn: ['home'],
         to: { name: 'home' }
+      },
+      {
+        label: 'Usuários',
+        icon: 'people',
+        activeIn: ['users'],
+        to: { name: 'users' }
       }
     ]
   },

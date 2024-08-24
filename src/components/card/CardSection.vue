@@ -13,6 +13,7 @@
       ></div>
     </div>
     <div class="flex-1">
+      <slot />
       <slot name="content" />
     </div>
   </div>
